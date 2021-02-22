@@ -6,25 +6,28 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, View, Text, StatusBar} from 'react-native';
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import AsyncStorage from '@react-native-community/async-storage';
+import {persistCache} from 'apollo3-cache-persist';
 import styled, {ThemeProvider, DefaultTheme} from 'styled-components/native';
 import LikeSvg from './src/images/like.svg';
+import SecondScreen from './src/screens/SecondScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {RootStackParams} from './src/routes';
+
+// const Stack = createStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParams>();
+
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+  uri: 'https://localhost:3000/graphql',
+  cache,
+  defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}},
+});
 
 const lightTheme: DefaultTheme = {
   primaryBackground: 'palevioletred',
@@ -40,98 +43,67 @@ const darkTheme: DefaultTheme = {
 const theme = darkTheme || lightTheme;
 
 const App = (): JSX.Element => {
+  const [loadingCache, setLoadingCache] = useState(true);
+
+  useEffect(() => {
+    persistCache({
+      cache,
+      storage: AsyncStorage,
+    }).then(() => setLoadingCache(false));
+  }, []);
+
+  if (loadingCache) {
+    return <Text>Loading App...</Text>;
+  }
+
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <ThemeProvider theme={theme}>
-            <StyledLikeSvg style={{color: 'red'}} />
-            <Header />
-            {((global as unknown) as Record<string, unknown>).HermesInternal ==
-            null ? null : (
-              <View style={styles.engine}>
-                <Text style={styles.footer}>Engine: Hermes</Text>
-              </View>
-            )}
-            <StyledBackground>
-              <StyledText>STYLISH</StyledText>
-            </StyledBackground>
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Step One</Text>
-                <Text style={styles.sectionDescription}>
-                  Edit <Text style={styles.highlight}>App.js</Text> to change
-                  this screen and then come back to see your edits.
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>See Your Changes</Text>
-                <Text style={styles.sectionDescription}>
-                  <ReloadInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Debug</Text>
-                <Text style={styles.sectionDescription}>
-                  <DebugInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Learn More</Text>
-                <Text style={styles.sectionDescription}>
-                  Read the docs to discover what to do next:
-                </Text>
-              </View>
-              <LearnMoreLinks />
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+        <RootStack.Navigator
+          initialRouteName="Second"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#000',
+            },
+            headerTintColor: '#fff',
+          }}>
+          <RootStack.Screen
+            name="Second"
+            component={SecondScreen}
+            options={{title: '📖 The GraphQL Guide'}}
+          />
+          {/* <Stack.Screen
+            name="Chapter"
+            component={ChapterScreen}
+            options={({
+              route: {
+                params: {
+                  chapter: {number, title},
+                },
+              },
+            }) => ({
+              title: number ? `Chapter ${number}: ${title}` : title,
+              gestureResponseDistance: {horizontal: 500},
+            })}
+          /> */}
+        </RootStack.Navigator>
+        <StatusBar barStyle="dark-content" />
+        <ThemeProvider theme={theme}>
+          <SafeAreaView>
+            <View>
+              <StyledLikeSvg style={{color: 'red'}} />
+
+              <StyledBackground>
+                <StyledText>STYLISH</StyledText>
+              </StyledBackground>
             </View>
-          </ThemeProvider>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+          </SafeAreaView>
+        </ThemeProvider>
+      </NavigationContainer>
+    </ApolloProvider>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 const StyledBackground = styled.View`
   padding: 20px;
   background-color: ${(props) => props.theme.primaryBackground};

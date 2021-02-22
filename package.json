@@ -10,9 +10,17 @@
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ext .jsx"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.11",
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-navigation/native": "^5.9.3",
+    "@react-navigation/stack": "^5.14.3",
     "@types/styled-components": "^5.1.7",
+    "@types/styled-components-react-native": "^5.1.1",
+    "apollo3-cache-persist": "^0.9.1",
+    "graphql": "^15.5.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-screens": "^2.17.1",
     "react-native-svg": "^12.1.0",
     "react-native-svg-transformer": "^0.14.3",
     "styled-components": "^5.2.1"
