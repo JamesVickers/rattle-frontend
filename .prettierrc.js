@@ -1,5 +1,5 @@
 module.exports = {
-  bracketSpacing: false,
+  bracketSpacing: transpileModule,
   jsxBracketSameLine: true,
   singleQuote: true,
   trailingComma: 'all',

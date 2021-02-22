@@ -1,22 +1,16 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, StatusBar} from 'react-native';
+import {View, Text, StatusBar} from 'react-native';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import AsyncStorage from '@react-native-community/async-storage';
 import {persistCache} from 'apollo3-cache-persist';
-import styled, {ThemeProvider, DefaultTheme} from 'styled-components/native';
-import LikeSvg from './src/images/like.svg';
+import {ThemeProvider, DefaultTheme} from 'styled-components/native';
 import SecondScreen from './src/screens/SecondScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import {RootStackParams} from './src/routes';
+import {RootStackParams, useStackNavigatorHeaderOptions} from './src/routes';
+import {onNavigationControllerUnmount} from './src/navigation';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {HomeScreen} from './src/screens/HomeScreen';
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -24,6 +18,7 @@ const RootStack = createNativeStackNavigator<RootStackParams>();
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
+  // Change uri for production
   uri: 'https://localhost:3000/graphql',
   cache,
   defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}},
@@ -58,9 +53,27 @@ const App = (): JSX.Element => {
 
   return (
     <ApolloProvider client={client}>
+      <StatusBar barStyle="dark-content" />
+      <ThemeProvider theme={theme}>
+        <SafeAreaProvider>
+          <Navigation />
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </ApolloProvider>
+  );
+};
+
+function Navigation(): JSX.Element {
+  // const isLoggedIn = useCombinedStore((state) => state.login.isLoggedIn);
+  const headerOptions = useStackNavigatorHeaderOptions();
+
+  useEffect(() => onNavigationControllerUnmount, []);
+
+  return (
+    <View style={{flex: 1}}>
       <NavigationContainer>
         <RootStack.Navigator
-          initialRouteName="Second"
+          initialRouteName="Home"
           screenOptions={{
             headerStyle: {
               backgroundColor: '#000',
@@ -68,9 +81,22 @@ const App = (): JSX.Element => {
             headerTintColor: '#fff',
           }}>
           <RootStack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              ...headerOptions,
+              title: 'Home screeeeeen',
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
             name="Second"
             component={SecondScreen}
-            options={{title: '📖 The GraphQL Guide'}}
+            options={{
+              ...headerOptions,
+              title: 'Second screeeeeen',
+              headerShown: false,
+            }}
           />
           {/* <Stack.Screen
             name="Chapter"
@@ -87,33 +113,9 @@ const App = (): JSX.Element => {
             })}
           /> */}
         </RootStack.Navigator>
-        <StatusBar barStyle="dark-content" />
-        <ThemeProvider theme={theme}>
-          <SafeAreaView>
-            <View>
-              <StyledLikeSvg style={{color: 'red'}} />
-
-              <StyledBackground>
-                <StyledText>STYLISH</StyledText>
-              </StyledBackground>
-            </View>
-          </SafeAreaView>
-        </ThemeProvider>
       </NavigationContainer>
-    </ApolloProvider>
+    </View>
   );
-};
-
-const StyledBackground = styled.View`
-  padding: 20px;
-  background-color: ${(props) => props.theme.primaryBackground};
-`;
-const StyledText = styled.Text`
-  font-size: 30px;
-  color: ${(props) => props.theme.primaryBackgroundText};
-`;
-const StyledLikeSvg = styled(LikeSvg)`
-  color: ${(props) => props.theme.primaryBackgroundText};
-`;
+}
 
 export default App;
