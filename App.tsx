@@ -5,10 +5,9 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import AsyncStorage from '@react-native-community/async-storage';
 import {persistCache} from 'apollo3-cache-persist';
 import {ThemeProvider, DefaultTheme} from 'styled-components/native';
-import SecondScreen from './src/screens/SecondScreen';
+import PostsScreen from './src/screens/PostsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStackParams, useStackNavigatorHeaderOptions} from './src/routes';
-import {onNavigationControllerUnmount} from './src/navigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {HomeScreen} from './src/screens/HomeScreen';
 
@@ -19,7 +18,7 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   // Change uri for production
-  uri: 'https://localhost:3000/graphql',
+  uri: 'http://localhost:3000/admin/api',
   cache,
   defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}},
 });
@@ -67,8 +66,6 @@ function Navigation(): JSX.Element {
   // const isLoggedIn = useCombinedStore((state) => state.login.isLoggedIn);
   const headerOptions = useStackNavigatorHeaderOptions();
 
-  useEffect(() => onNavigationControllerUnmount, []);
-
   return (
     <View style={{flex: 1}}>
       <NavigationContainer>
@@ -90,11 +87,11 @@ function Navigation(): JSX.Element {
             }}
           />
           <RootStack.Screen
-            name="Second"
-            component={SecondScreen}
+            name="Posts"
+            component={PostsScreen}
             options={{
               ...headerOptions,
-              title: 'Second screeeeeen',
+              title: 'Posts screeeeeen',
               headerShown: false,
             }}
           />

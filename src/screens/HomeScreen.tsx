@@ -1,19 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-// import {useNavigation} from '@react-navigation/native';
-// import {StackNavigationProp} from '@react-navigation/stack';
 import { Button, StatusBar, Text, View } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
+import { gql, useQuery } from '@apollo/client'
 import styled from 'styled-components/native';
 import LikeSvg from '../images/like.svg';
 import { RootStackParams } from '../routes';
-// import {RootStackParams} from '../routes';
 
 export const HomeScreen = (): JSX.Element => {
   const navigation = useNavigation<
-    StackNavigationProp<RootStackParams, 'Second'>
+    StackNavigationProp<RootStackParams, 'Posts'>
   >();
+
+  // if (loading) {
+  //   return <Text>Loading...</Text>
+  // }
+  
   return (
     <SafeAreaView
       forceInset={{
@@ -22,16 +25,25 @@ export const HomeScreen = (): JSX.Element => {
         right: 'always',
         bottom: 'always',
       }}
-      style={{ backgroundColor: 'yellow' }}>
+      style={{ flex: 1, backgroundColor: 'gold' }}>
       <StatusBar barStyle="dark-content" />
       <View>
         <Text>HomeScreen!!</Text>
         <Button
-          title="go to SecondScreen"
+          title="go to PostsScreen"
           onPress={() => {
-            navigation.navigate('Second');
+            navigation.navigate('Posts');
           }}
         />
+        {/* {data.map((user) => {
+          return (
+            <>
+              <Text>{user.id}</Text>
+              <Text>{user.name}</Text>
+              <Text>{user.email}</Text>
+            </>
+          )
+        })} */}
         <StyledLikeSvg style={{ color: 'red' }} />
         <StyledBackground>
           <StyledText>STYLISH</StyledText>

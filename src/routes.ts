@@ -2,7 +2,7 @@ import { NativeStackNavigationOptions } from 'react-native-screens/lib/typescrip
 
 export type RootStackParams = {
   Home: undefined;
-  Second: undefined;
+  Posts: undefined;
 };
 
 export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationOptions> {
