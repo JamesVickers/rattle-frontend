@@ -14,7 +14,7 @@ post
         <Text>{post.title}</Text>
         <Text>{post.body}</Text>
         <Text>{post.status}</Text>
-        {/* <Text>{post.author}</Text> */}
+        <Text>{post.author.name}</Text>
       </View>
     );
   };

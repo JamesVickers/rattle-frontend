@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Button, Text} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
 import { PostItem } from '../components/post';
 import {RootStackParams} from '../routes';
@@ -47,12 +48,14 @@ const PostsScreen = (): JSX.Element => {
           navigation.navigate('Home');
         }}
       />
-      {data.allPosts.map((post: Post) => {
-        return (
-          <PostItem key={post.id} post={post} />
-        )
-      })
-      }
+      <FlatList 
+        data={data.allPosts} 
+        keyExtractor={(item) => item.id}     
+        renderItem={({ item }) => (
+          <PostItem key={item.id} post={item} />
+          )}
+        />
+    
     </SafeAreaView>
   );
 };
