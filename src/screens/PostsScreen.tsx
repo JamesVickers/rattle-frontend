@@ -5,7 +5,8 @@ import React from 'react';
 import {Button, Text} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
-import { PostItem } from '../components/post';
+import CreatePostItem from '../components/CreatePostItem';
+import PostItem from '../components/PostItem';
 import {RootStackParams} from '../routes';
 
 const ALL_POSTS_QUERY = gql`
@@ -29,7 +30,7 @@ const ALL_POSTS_QUERY = gql`
 }
 `
 
-const PostsScreen = (): JSX.Element => {
+export default function PostsScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, 'Posts'>
   >();
@@ -60,9 +61,8 @@ const PostsScreen = (): JSX.Element => {
           <PostItem key={item.id} post={item} />
           )}
         />
-    
+      <CreatePostItem />
     </SafeAreaView>
   );
 };
 
-export default PostsScreen;

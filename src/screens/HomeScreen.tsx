@@ -8,7 +8,7 @@ import styled from 'styled-components/native';
 import LikeSvg from '../images/like.svg';
 import { RootStackParams } from '../routes';
 
-export const HomeScreen = (): JSX.Element => {
+export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, 'Posts'>
   >();

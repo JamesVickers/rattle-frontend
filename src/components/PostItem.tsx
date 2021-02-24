@@ -3,7 +3,7 @@ import { Image, Text, View } from "react-native";
 import styled from "styled-components/native";
 import { Post } from "../state/post.model";
 
-export function PostItem({
+export default function PostItem({
 post
   }: {
     post: Post;

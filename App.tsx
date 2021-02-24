@@ -9,7 +9,7 @@ import PostsScreen from './src/screens/PostsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStackParams, useStackNavigatorHeaderOptions} from './src/routes';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {HomeScreen} from './src/screens/HomeScreen';
+import HomeScreen from './src/screens/HomeScreen';
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
