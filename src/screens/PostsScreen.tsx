@@ -7,7 +7,6 @@ import { FlatList } from 'react-native-gesture-handler';
 import SafeAreaView from 'react-native-safe-area-view';
 import { PostItem } from '../components/post';
 import {RootStackParams} from '../routes';
-import { Post } from '../state/post.model';
 
 const ALL_POSTS_QUERY = gql`
  query {
@@ -19,6 +18,12 @@ const ALL_POSTS_QUERY = gql`
     author {
       id
       name
+      profileImage {
+        image {
+          id
+          publicUrlTransformed
+        }
+      }
     }
   }
 }
@@ -30,7 +35,7 @@ const PostsScreen = (): JSX.Element => {
   >();
 
   const { data, error, loading } = useQuery(ALL_POSTS_QUERY)
-  console.log(data, error, loading);
+  // console.log(data, error, loading);
 
   return (
     <SafeAreaView

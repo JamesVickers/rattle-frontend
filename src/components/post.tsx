@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import styled from "styled-components/native";
 import { Post } from "../state/post.model";
 
 export function PostItem({
@@ -15,6 +16,21 @@ post
         <Text>{post.body}</Text>
         <Text>{post.status}</Text>
         <Text>{post.author.name}</Text>
+        <ProfileIconPlaceholder source={{
+          uri: post.author.profileImage?.image.publicUrlTransformed,
+        }} />
       </View>
     );
   };
+
+
+  export const ProfileIconPlaceholder = styled(Image)<{
+    height?: number;
+    colour?: string;
+  }>`
+    width: 50px;
+    height: 50px;
+    border-radius: 200px;
+    background-color: #FF6347;
+  `;
+  
