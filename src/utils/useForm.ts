@@ -1,12 +1,14 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-export default function useForm(initial = []) {
-    const [inputs, setInputs] = useState(initial);
+// export default function useForm(initial = []) {
+//     const [inputs,
 
-    function handleChange(event) {
-        setInputs({
-            ...inputs,
-            []
-        })
-    }
-}
+//         setInputs] = useState(initial);
+
+//     function handleChange(event) {
+//         setInputs({
+//             ...inputs,
+//             []
+//         })
+//     }
+// }

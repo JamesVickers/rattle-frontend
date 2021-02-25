@@ -1,4 +1,4 @@
-import { NativeStackNavigationOptions } from 'react-native-screens/lib/typescript';
+import { NativeStackNavigationOptions } from "react-native-screens/lib/typescript";
 
 export type RootStackParams = {
   Home: undefined;
@@ -8,12 +8,12 @@ export type RootStackParams = {
 export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationOptions> {
   return {
     headerStyle: {
-      backgroundColor: '#8f5656',
+      backgroundColor: "#8f5656",
     },
-    headerTintColor: '#b5baf5',
+    headerTintColor: "#b5baf5",
     headerHideShadow: true,
     headerTitleStyle: {
-      color: '#f720e9',
+      color: "#f720e9",
     },
   };
 }

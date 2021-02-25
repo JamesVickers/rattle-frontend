@@ -7,4 +7,3 @@ export interface Post extends ModelBase {
   status: "PUBLISHED" | "UNPUBLISHED";
   author: User;
 }
- 

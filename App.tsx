@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StatusBar} from 'react-native';
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
-import AsyncStorage from '@react-native-community/async-storage';
-import {persistCache} from 'apollo3-cache-persist';
-import {ThemeProvider, DefaultTheme} from 'styled-components/native';
-import PostsScreen from './src/screens/PostsScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import {RootStackParams, useStackNavigatorHeaderOptions} from './src/routes';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import HomeScreen from './src/screens/HomeScreen';
+import React, { useEffect, useState } from "react";
+import { View, Text, StatusBar } from "react-native";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import AsyncStorage from "@react-native-community/async-storage";
+import { persistCache } from "apollo3-cache-persist";
+import { ThemeProvider, DefaultTheme } from "styled-components/native";
+import PostsScreen from "./src/screens/PostsScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import HomeScreen from "./src/screens/HomeScreen";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -18,19 +18,19 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   // Change uri for production
-  uri: 'http://localhost:3000/admin/api',
+  uri: "http://localhost:3000/admin/api",
   cache,
-  defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}},
+  defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
 
 const lightTheme: DefaultTheme = {
-  primaryBackground: 'palevioletred',
-  primaryBackgroundText: 'white',
+  primaryBackground: "palevioletred",
+  primaryBackgroundText: "white",
 };
 
 const darkTheme: DefaultTheme = {
-  primaryBackground: 'maroon',
-  primaryBackgroundText: '#ddd',
+  primaryBackground: "maroon",
+  primaryBackgroundText: "#ddd",
 };
 
 // const theme = lightTheme || darkTheme;
@@ -67,22 +67,22 @@ function Navigation(): JSX.Element {
   const headerOptions = useStackNavigatorHeaderOptions();
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <NavigationContainer>
         <RootStack.Navigator
           initialRouteName="Home"
           screenOptions={{
             headerStyle: {
-              backgroundColor: '#000',
+              backgroundColor: "#000",
             },
-            headerTintColor: '#fff',
+            headerTintColor: "#fff",
           }}>
           <RootStack.Screen
             name="Home"
             component={HomeScreen}
             options={{
               ...headerOptions,
-              title: 'Home screeeeeen',
+              title: "Home screeeeeen",
               headerShown: false,
             }}
           />
@@ -91,7 +91,7 @@ function Navigation(): JSX.Element {
             component={PostsScreen}
             options={{
               ...headerOptions,
-              title: 'Posts screeeeeen',
+              title: "Posts screeeeeen",
               headerShown: false,
             }}
           />

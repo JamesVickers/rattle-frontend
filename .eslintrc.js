@@ -21,5 +21,7 @@ module.exports = {
     ],
     '@typescript-eslint/ban-types': 'warn',
     '@typescript-eslint/no-empty-function': 'warn',
+    // allow inline styles
+    'react-native/no-inline-styles': 0,
   },
 };
