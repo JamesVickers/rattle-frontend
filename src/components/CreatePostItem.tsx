@@ -1,62 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Image, Text, View } from "react-native";
 import { TextInput as RNTextInput } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import useForm from "../utils/useForm";
 
 const TextInput = ({
   name,
   placeholder,
   value,
-  onChangeText,
+  handleChange,
 }: {
   name: string;
   placeholder?: string;
   value: string;
-  onChangeText: (inputName: string, inputValue: string) => void;
+  handleChange: (inputName: string, inputValue: string) => void;
 }) => (
   <RNTextInput
     placeholder={placeholder}
     value={value}
-    onChangeText={(val) => onChangeText(name, val)}
+    onChangeText={(val) => handleChange(name, val)}
   />
 );
 
 export default function CreatePostItem(): JSX.Element {
   // const [submitted, setSubmitted] = useState(false);
-  const [title, setTitle] = useState("");
-  const [bodyText, setBodyText] = useState("");
-  const [author, setAuthor] = useState("");
+  const { inputs, handleChange, clearForm } = useForm();
 
-  const onChangeTitle = (name: string, value: string) => {
-    setTitle(value);
-    console.log(name, value);
-  };
-  const onChangeBodyText = (name: string, value: string) => {
-    setBodyText(value);
-    console.log(name, value);
-  };
-  const onChangeAuthor = (name: string, value: string) => {
-    setAuthor(value);
-    console.log(name, value);
-  };
+  console.log(inputs);
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Text>Create a PostItem:</Text>
       <TextInput
-        value={title}
-        onChangeText={onChangeTitle}
+        value={inputs.title}
+        handleChange={handleChange}
         name={"title"}
         placeholder={"Add the post title"}
       />
       <TextInput
-        value={bodyText}
-        onChangeText={onChangeBodyText}
+        value={inputs.body}
+        handleChange={handleChange}
         name={"body"}
         placeholder={"Add the post body text"}
       />
       <TextInput
-        value={author}
-        onChangeText={onChangeAuthor}
+        value={inputs.author}
+        handleChange={handleChange}
         name={"author"}
         placeholder={"Add the post body text"}
       />
@@ -72,6 +60,7 @@ export default function CreatePostItem(): JSX.Element {
           blurOnSubmit={false}
         /> */}
       <Button title="Post it!" onPress={() => undefined} />
+      <Button title="Clear form" onPress={() => clearForm} />
     </View>
   );
 }
