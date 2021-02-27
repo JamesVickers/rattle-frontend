@@ -24,7 +24,13 @@ const TextInput = ({
 
 export default function CreatePostItem(): JSX.Element {
   // const [submitted, setSubmitted] = useState(false);
-  const { inputs, handleChange, clearForm } = useForm();
+
+  // remove initial state in useForm custom hook if want no initial values and not using resetForm function
+  const { inputs, handleChange, clearForm, resetForm } = useForm({
+    title: "Title example",
+    body: "Body example",
+    author: "Author example",
+  });
 
   console.log(inputs);
   return (
@@ -61,6 +67,7 @@ export default function CreatePostItem(): JSX.Element {
         /> */}
       <Button title="Post it!" onPress={() => undefined} />
       <Button title="Clear form" onPress={clearForm} />
+      <Button title="Reset form" onPress={resetForm} />
     </View>
   );
 }
