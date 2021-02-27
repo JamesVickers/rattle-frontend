@@ -54,13 +54,13 @@ export default function CreatePostItem(): JSX.Element {
           placeholder="Body"
           autoCapitalize="none"
           autoCorrect={false}
-          autoCompleteType="off"
+          autoCompleteType="off" 
           autoFocus
           onSubmitEditing={() => undefined}
           blurOnSubmit={false}
         /> */}
       <Button title="Post it!" onPress={() => undefined} />
-      <Button title="Clear form" onPress={() => clearForm} />
+      <Button title="Clear form" onPress={clearForm} />
     </View>
   );
 }

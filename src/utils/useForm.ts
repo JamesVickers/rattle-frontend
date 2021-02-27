@@ -16,10 +16,7 @@ export default function useForm(initial = {}) {
 
   function clearForm() {
     // turn object into array and empty values
-    const blankStateArray = Object.entries(inputs).map(([key, value]) => [
-      key,
-      "",
-    ]);
+    const blankStateArray = Object.entries(inputs).map(([key]) => [key, ""]);
     // turn array back into an object
     const blankStateObject = Object.fromEntries(blankStateArray);
     setInputs(blankStateObject);
