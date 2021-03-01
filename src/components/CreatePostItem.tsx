@@ -1,3 +1,4 @@
+import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { Button, Image, Text, View } from "react-native";
 import { TextInput as RNTextInput } from "react-native-gesture-handler";
@@ -22,6 +23,33 @@ const TextInput = ({
   />
 );
 
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
+    $title: String!
+    $body: String! # $author: String!
+  ) {
+    createPost(
+      data: {
+        title: $title
+        body: $body
+        # author: $author
+      }
+    ) {
+      id
+      title
+    }
+  }
+`;
+// mutation {
+//   createPost(data:{
+//     title: "titleeee"
+//     body: "bodyyyyy"
+//   }) {
+//     id
+//     title
+//   }
+// }
+
 export default function CreatePostItem(): JSX.Element {
   // const [submitted, setSubmitted] = useState(false);
 
@@ -29,10 +57,15 @@ export default function CreatePostItem(): JSX.Element {
   const { inputs, handleChange, clearForm, resetForm } = useForm({
     title: "Title example",
     body: "Body example",
-    author: "Author example",
+    // author: "JamesVickers",
   });
+  const [createPost, { data, error, loading }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    {
+      variables: inputs,
+    },
+  );
 
-  console.log(inputs);
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <Text>Create a PostItem:</Text>
@@ -48,12 +81,12 @@ export default function CreatePostItem(): JSX.Element {
         name={"body"}
         placeholder={"Add the post body text"}
       />
-      <TextInput
+      {/* <TextInput
         value={inputs.author}
         handleChange={handleChange}
         name={"author"}
         placeholder={"Add the post body text"}
-      />
+      /> */}
       {/* <TextInput
           value={username}
           onChangeText={setUsername}
@@ -65,7 +98,17 @@ export default function CreatePostItem(): JSX.Element {
           onSubmitEditing={() => undefined}
           blurOnSubmit={false}
         /> */}
-      <Button title="Post it!" onPress={() => undefined} />
+      <Button
+        title="Post it!"
+        onPress={async () => {
+          try {
+            const res = await createPost();
+            console.log("res: ", res);
+          } catch {
+            console.log("createPost error: ", error);
+          }
+        }}
+      />
       <Button title="Clear form" onPress={clearForm} />
       <Button title="Reset form" onPress={resetForm} />
     </View>

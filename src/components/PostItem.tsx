@@ -10,12 +10,12 @@ export default function PostItem({ post }: { post: Post }): JSX.Element {
       <Text>{post.title}</Text>
       <Text>{post.body}</Text>
       <Text>{post.status}</Text>
-      <Text>{post.author.name}</Text>
-      <ProfileIconPlaceholder
+      {/* <Text>{post.author.name}</Text> */}
+      {/* <ProfileIconPlaceholder
         source={{
           uri: post.author.profileImage?.image.publicUrlTransformed,
         }}
-      />
+      /> */}
     </View>
   );
 }
