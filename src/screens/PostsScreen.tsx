@@ -9,7 +9,7 @@ import CreatePostItem from "../components/CreatePostItem";
 import PostItem from "../components/PostItem";
 import { RootStackParams } from "../routes";
 
-const ALL_POSTS_QUERY = gql`
+export const ALL_POSTS_QUERY = gql`
   query {
     allPosts {
       id

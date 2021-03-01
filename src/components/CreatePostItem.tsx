@@ -3,6 +3,7 @@ import React from "react";
 import { Button, Image, Text, View } from "react-native";
 import { TextInput as RNTextInput } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { ALL_POSTS_QUERY } from "../screens/PostsScreen";
 import useForm from "../utils/useForm";
 
 const TextInput = ({
@@ -63,6 +64,13 @@ export default function CreatePostItem(): JSX.Element {
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
+      refetchQueries: [
+        {
+          query: ALL_POSTS_QUERY,
+          // can pass variables to the refetchQuery here is needed
+          // variables: { }
+        },
+      ],
     },
   );
 
@@ -102,8 +110,9 @@ export default function CreatePostItem(): JSX.Element {
         title="Post it!"
         onPress={async () => {
           try {
-            const res = await createPost();
-            console.log("res: ", res);
+            // const res =
+            await createPost();
+            clearForm();
           } catch {
             console.log("createPost error: ", error);
           }
