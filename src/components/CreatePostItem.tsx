@@ -2,8 +2,8 @@ import { useMutation } from "@apollo/client";
 import React from "react";
 import { Button, Image, Text, View } from "react-native";
 import styled from "styled-components/native";
-import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
-import { CREATE_POST_MUTATION } from "../queries/CreatePostQuery";
+import { ALL_POSTS_QUERY } from "../gql/AllPostsQuery";
+import { CREATE_POST_MUTATION } from "../gql/CreatePostMutation";
 import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
 
@@ -76,7 +76,7 @@ export default function CreatePostItem(): JSX.Element {
             clearForm();
             // navigation.navigate("PostItem");
           } catch {
-            console.log("createPost error: ", error);
+            console.error("createPost error: ", error);
           }
         }}
       />
