@@ -1,9 +1,10 @@
 import { NativeStackNavigationOptions } from "react-native-screens/lib/typescript";
+import { Id } from "./state/types";
 
 export type RootStackParams = {
   Home: undefined;
   Posts: undefined;
-  PostItem: undefined;
+  UpdatePost: { id: Id };
 };
 
 export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationOptions> {

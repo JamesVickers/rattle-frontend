@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const POST_ITEM_QUERY = gql`
-  query {
-    Post(where: { id: "602e81986e52282eda8fb576" }) {
+  query POST_ITEM_QUERY($id: ID!) {
+    Post(where: { id: $id }) {
       id
       title
       body

@@ -1,11 +1,26 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { Post } from "../state/post.model";
+import { Id } from "../state/types";
 
-export default function PostItem({ post }: { post: Post }): JSX.Element {
+export default function PostItem({
+  post,
+  onPressPost,
+}: {
+  post: Post;
+  onPressPost: (selectedPostId: Id) => void;
+}): JSX.Element {
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <TouchableOpacity
+      onPress={() => onPressPost(post.id)}
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        borderWidth: 1,
+        borderColor: "blue",
+      }}>
       <Text>PostItem!!</Text>
       <Text>{post.title}</Text>
       <Text>{post.body}</Text>
@@ -16,7 +31,7 @@ export default function PostItem({ post }: { post: Post }): JSX.Element {
           uri: post.author.profileImage?.image.publicUrlTransformed,
         }}
       /> */}
-    </View>
+    </TouchableOpacity>
   );
 }
 
