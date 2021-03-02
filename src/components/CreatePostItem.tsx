@@ -1,55 +1,11 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React from "react";
 import { Button, Image, Text, View } from "react-native";
-import { TextInput as RNTextInput } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { ALL_POSTS_QUERY } from "../screens/PostsScreen";
+import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
+import { CREATE_POST_MUTATION } from "../queries/CreatePostQuery";
 import useForm from "../utils/useForm";
-
-const TextInput = ({
-  name,
-  placeholder,
-  value,
-  handleChange,
-}: {
-  name: string;
-  placeholder?: string;
-  value: string;
-  handleChange: (inputName: string, inputValue: string) => void;
-}) => (
-  <RNTextInput
-    placeholder={placeholder}
-    value={value}
-    onChangeText={(val) => handleChange(name, val)}
-  />
-);
-
-const CREATE_POST_MUTATION = gql`
-  mutation CREATE_POST_MUTATION(
-    $title: String!
-    $body: String! # $author: String!
-  ) {
-    createPost(
-      data: {
-        title: $title
-        body: $body
-        # author: $author
-      }
-    ) {
-      id
-      title
-    }
-  }
-`;
-// mutation {
-//   createPost(data:{
-//     title: "titleeee"
-//     body: "bodyyyyy"
-//   }) {
-//     id
-//     title
-//   }
-// }
+import TextInput from "./TextInput";
 
 export default function CreatePostItem(): JSX.Element {
   // const [submitted, setSubmitted] = useState(false);
@@ -60,19 +16,22 @@ export default function CreatePostItem(): JSX.Element {
     body: "Body example",
     // author: "JamesVickers",
   });
-  const [createPost, { data, loading, error }] = useMutation(
-    CREATE_POST_MUTATION,
+  const [
+    createPost,
     {
-      variables: inputs,
-      refetchQueries: [
-        {
-          query: ALL_POSTS_QUERY,
-          // can pass variables to the refetchQuery here is needed
-          // variables: { }
-        },
-      ],
+      // data, loading,
+      error,
     },
-  );
+  ] = useMutation(CREATE_POST_MUTATION, {
+    variables: inputs,
+    refetchQueries: [
+      {
+        query: ALL_POSTS_QUERY,
+        // can pass variables to the refetchQuery here is needed
+        // variables: { }
+      },
+    ],
+  });
 
   // const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 

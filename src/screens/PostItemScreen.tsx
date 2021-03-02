@@ -1,20 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Text, View, Button } from "react-native";
+import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { RootStackParams } from "../routes";
-
-const POST_ITEM_QUERY = gql`
-  query {
-    Post(where: { id: "602e81986e52282eda8fb576" }) {
-      id
-      title
-      body
-      status
-    }
-  }
-`;
 
 export default function PostItemScreen(): JSX.Element {
   const { data, loading, error } = useQuery(POST_ITEM_QUERY);

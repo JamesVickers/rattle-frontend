@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
@@ -7,28 +7,8 @@ import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import CreatePostItem from "../components/CreatePostItem";
 import PostItem from "../components/PostItem";
+import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { RootStackParams } from "../routes";
-
-export const ALL_POSTS_QUERY = gql`
-  query {
-    allPosts {
-      id
-      title
-      body
-      status
-      author {
-        id
-        name
-        profileImage {
-          image {
-            id
-            publicUrlTransformed
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default function PostsScreen(): JSX.Element {
   const navigation = useNavigation<
