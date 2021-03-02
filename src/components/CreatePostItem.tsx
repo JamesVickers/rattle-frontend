@@ -24,8 +24,8 @@ const TextInput = ({
   />
 );
 
-const CREATE_PRODUCT_MUTATION = gql`
-  mutation CREATE_PRODUCT_MUTATION(
+const CREATE_POST_MUTATION = gql`
+  mutation CREATE_POST_MUTATION(
     $title: String!
     $body: String! # $author: String!
   ) {
@@ -60,8 +60,8 @@ export default function CreatePostItem(): JSX.Element {
     body: "Body example",
     // author: "JamesVickers",
   });
-  const [createPost, { data, error, loading }] = useMutation(
-    CREATE_PRODUCT_MUTATION,
+  const [createPost, { data, loading, error }] = useMutation(
+    CREATE_POST_MUTATION,
     {
       variables: inputs,
       refetchQueries: [
@@ -73,6 +73,8 @@ export default function CreatePostItem(): JSX.Element {
       ],
     },
   );
+
+  // const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -113,6 +115,7 @@ export default function CreatePostItem(): JSX.Element {
             // const res =
             await createPost();
             clearForm();
+            // navigation.navigate("PostItem");
           } catch {
             console.log("createPost error: ", error);
           }
