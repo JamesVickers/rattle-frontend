@@ -8,6 +8,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import CreatePostItem from "../components/CreatePostItem";
 import PostItem from "../components/PostItem";
 import { ALL_POSTS_QUERY } from "../gql/AllPostsQuery";
+import { COUNT_POST_QUERY } from "../gql/CountPostsQuery";
 import { RootStackParams } from "../routes";
 import { Id } from "../state/types";
 
@@ -20,6 +21,13 @@ export default function PostsScreen(): JSX.Element {
     data,
     // , error, loading
   } = useQuery(ALL_POSTS_QUERY);
+
+  const {
+    data: postCountData,
+    // loading,
+    // error
+  } = useQuery(COUNT_POST_QUERY);
+  const { count: postsCount } = postCountData._allPostsMeta;
 
   const goToPostItemScreen = useCallback(
     (selectedPostId: Id) => {
@@ -36,7 +44,7 @@ export default function PostsScreen(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1, backgroundColor: "grey" }}>
+      style={{ flex: 1, backgroundColor: "lightcyan" }}>
       <Text>PostsScreen!!</Text>
       <Button
         title="go to HomeScreen"
@@ -44,6 +52,10 @@ export default function PostsScreen(): JSX.Element {
           navigation.navigate("Home");
         }}
       />
+      <Text>
+        Post count: <Text style={{ fontWeight: "bold" }}>{postsCount}. </Text>
+        Found using GraphQL meta query!
+      </Text>
       <FlatList
         data={data.allPosts}
         keyExtractor={(item) => item.id}
