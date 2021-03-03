@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useForm(initial = {}) {
   const [inputs, setInputs] = useState(initial);
+  // used to check when initial values goes from nothing to something
+  const initialValues = Object.values(initial).join("");
+
+  useEffect(() => {
+    setInputs(initial);
+    // cannot useEffect on initial, as that would cause an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialValues]);
 
   function handleChange(name: string, value: string) {
     setInputs({

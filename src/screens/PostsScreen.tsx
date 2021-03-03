@@ -23,7 +23,7 @@ export default function PostsScreen(): JSX.Element {
 
   const goToPostItemScreen = useCallback(
     (selectedPostId: Id) => {
-      navigation.navigate("UpdatePost", { id: selectedPostId });
+      navigation.navigate("SinglePost", { id: selectedPostId });
     },
     [navigation],
   );

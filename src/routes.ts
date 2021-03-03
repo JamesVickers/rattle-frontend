@@ -4,7 +4,7 @@ import { Id } from "./state/types";
 export type RootStackParams = {
   Home: undefined;
   Posts: undefined;
-  UpdatePost: { id: Id };
+  SinglePost: { id: Id };
 };
 
 export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationOptions> {

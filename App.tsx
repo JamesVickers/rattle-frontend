@@ -10,7 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
-import UpdatePostScreen from "./src/screens/UpdatePostScreen";
+import SinglePostScreen from "./src/screens/SinglePostScreen";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -97,8 +97,8 @@ function Navigation(): JSX.Element {
             }}
           />
           <RootStack.Screen
-            name="UpdatePost"
-            component={UpdatePostScreen}
+            name="SinglePost"
+            component={SinglePostScreen}
             options={{
               ...headerOptions,
               title: "Update Post screen",
