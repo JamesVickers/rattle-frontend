@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { Button } from "react-native";
+import { ALL_POSTS_QUERY } from "../gql/AllPostsQuery";
 import { Id } from "../state/types";
 
 const HARD_DELETE_POST_MUTATION = gql`
@@ -16,7 +17,12 @@ export default function HardDeletePostItem({ id }: { id: Id }): JSX.Element {
   const [deletePost, { loading, error }] = useMutation(
     HARD_DELETE_POST_MUTATION,
     {
-      variables: id,
+      variables: { id },
+      refetchQueries: [
+        {
+          query: ALL_POSTS_QUERY,
+        },
+      ],
     },
   );
 
