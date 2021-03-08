@@ -1,9 +1,14 @@
+import { useQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Button, StatusBar, Text, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import styled from "styled-components/native";
+import { useUser } from "../components/User";
+import UserItem from "../components/UserItem";
+import { ALL_USERS_QUERY } from "../gql/AllUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
 
@@ -12,9 +17,15 @@ export default function HomeScreen(): JSX.Element {
     StackNavigationProp<RootStackParams, "Posts">
   >();
 
-  // if (loading) {
-  //   return <Text>Loading...</Text>
-  // }
+  const {
+    data,
+    // , error, loading
+  } = useQuery(ALL_USERS_QUERY);
+
+  const user = useUser();
+
+  console.log("data: ", data);
+  console.log("user: ", user);
 
   return (
     <SafeAreaView
@@ -34,19 +45,15 @@ export default function HomeScreen(): JSX.Element {
             navigation.navigate("Posts");
           }}
         />
-        {/* {data.map((user) => {
-          return (
-            <>
-              <Text>{user.id}</Text>
-              <Text>{user.name}</Text>
-              <Text>{user.email}</Text>
-            </>
-          )
-        })} */}
         <StyledLikeSvg style={{ color: "red" }} />
         <StyledBackground>
           <StyledText>STYLISH</StyledText>
         </StyledBackground>
+        <FlatList
+          data={data.allUsers}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <UserItem key={item.id} user={item} />}
+        />
       </View>
     </SafeAreaView>
   );
