@@ -23,9 +23,12 @@ export const CURRENT_USER_QUERY = gql`
 // `;
 
 export function useUser() {
-  const { data } = useQuery(CURRENT_USER_QUERY);
+  const {
+    data,
+    // , loading, error
+  } = useQuery(CURRENT_USER_QUERY);
 
-  console.log("currentUser data: ", data);
+  console.log("useUser data: ", data);
   // if there is data return the authenticatedItem, if not return undefined
   return data?.authenticatedUser;
 }
