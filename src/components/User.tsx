@@ -6,21 +6,11 @@ export const CURRENT_USER_QUERY = gql`
       #   ... on User {
       id
       name
+      # query other info about the user here e.g. user's posts
       #   }
     }
   }
 `;
-
-// export const CURRENT_USER_QUERY = gql`
-//   query {
-//     authenticatedUser {
-//       id
-//       name
-//       email
-//       # query other info about the user here e.g. user's posts
-//     }
-//   }
-// `;
 
 export function useUser() {
   const {
@@ -28,7 +18,8 @@ export function useUser() {
     // , loading, error
   } = useQuery(CURRENT_USER_QUERY);
 
-  console.log("useUser data: ", data);
+  // console.log("useUser data.authenticatedUser: ", data.authenticatedUser);
+
   // if there is data return the authenticatedItem, if not return undefined
   return data?.authenticatedUser;
 }

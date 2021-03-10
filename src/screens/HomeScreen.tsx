@@ -25,8 +25,6 @@ export default function HomeScreen(): JSX.Element {
 
   const user = useUser();
 
-  console.log("user: ", user);
-
   return (
     <SafeAreaView
       forceInset={{
@@ -45,6 +43,11 @@ export default function HomeScreen(): JSX.Element {
             navigation.navigate("Posts");
           }}
         />
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+          {user
+            ? `Hi ${user.name}, you are logged in!!`
+            : "Nope, not logged in.."}
+        </Text>
         <StyledLikeSvg style={{ color: "red" }} />
         <StyledBackground>
           <StyledText>STYLISH</StyledText>

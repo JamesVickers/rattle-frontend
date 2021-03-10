@@ -21,7 +21,8 @@ export default function SignIn(): JSX.Element {
   const {
     inputs,
     handleChange,
-    // clearForm, resetForm
+    // clearForm,
+    resetForm,
   } = useForm({
     email: "",
     password: "",
@@ -39,15 +40,18 @@ export default function SignIn(): JSX.Element {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
+  console.log("error: ", error);
+
   const onSubmit = useCallback(async () => {
     // console.log(inputs);
     try {
-      const resOnSubmit = await signin();
-      console.log(resOnSubmit);
+      await signin();
+      // console.log(resOnSubmit);
     } catch {
-      console.error(error);
+      // console.error(error);
     }
-  }, [error, signin]);
+    resetForm();
+  }, [resetForm, signin]);
 
   return (
     <View style={{ backgroundColor: "white" }}>
@@ -59,12 +63,18 @@ export default function SignIn(): JSX.Element {
         placeholder={"Email"}
       />
       <TextInput
+        secureTextEntry
         value={inputs.password}
         handleChange={handleChange}
         name={"password"}
         placeholder={"Password"}
       />
       <Button title="Sign in!" onPress={onSubmit} />
+      {error && (
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+          Authentication failed :(
+        </Text>
+      )}
     </View>
   );
 }
