@@ -1,21 +1,10 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useCallback } from "react";
 import { Button, Text, View } from "react-native";
+import { SIGN_IN_MUTATION } from "../gql/SignInMutation";
 import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
 import { CURRENT_USER_QUERY } from "./User";
-
-const SIGN_IN_MUTATION = gql`
-  mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      item {
-        id
-        name
-        email
-      }
-    }
-  }
-`;
 
 export default function SignIn(): JSX.Element {
   const {
@@ -39,8 +28,6 @@ export default function SignIn(): JSX.Element {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
-
-  console.log("error: ", error);
 
   const onSubmit = useCallback(async () => {
     // console.log(inputs);
@@ -72,7 +59,7 @@ export default function SignIn(): JSX.Element {
       <Button title="Sign in!" onPress={onSubmit} />
       {error && (
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          Authentication failed :(
+          Authentication failed, please try again :(
         </Text>
       )}
     </View>
