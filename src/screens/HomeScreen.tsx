@@ -8,6 +8,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import styled from "styled-components/native";
 import SignIn from "../components/SignIn";
 import SignOutButton from "../components/SignOutButton";
+import SignUp from "../components/SignUp";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
 import { ALL_USERS_QUERY } from "../gql/AllUsersQuery";
@@ -66,7 +67,10 @@ export default function HomeScreen(): JSX.Element {
             />
           </>
         ) : (
-          <SignIn />
+          <>
+            <SignUp />
+            <SignIn />
+          </>
         )}
       </View>
     </SafeAreaView>
