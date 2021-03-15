@@ -6,6 +6,7 @@ import { Button, StatusBar, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import styled from "styled-components/native";
+import SearchBar from "../components/SearchBar";
 import SignIn from "../components/SignIn";
 import SignOutButton from "../components/SignOutButton";
 import SignUp from "../components/SignUp";
@@ -26,8 +27,6 @@ export default function HomeScreen(): JSX.Element {
   } = useQuery(ALL_USERS_QUERY);
 
   const user = useUser();
-
-  console.log("user from HomeScreen: ", user);
 
   return (
     <SafeAreaView
@@ -65,11 +64,13 @@ export default function HomeScreen(): JSX.Element {
               renderItem={({ item }) => <UserItem key={item.id} user={item} />}
               ListHeaderComponent={<Text>allUsers listHeader:</Text>}
             />
+            <SearchBar />
           </>
         ) : (
           <>
             <SignUp />
             <SignIn />
+            {/* <RequestPasswordReset /> */}
           </>
         )}
       </View>
