@@ -1,10 +1,11 @@
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Button, StatusBar, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
+import debounce from "lodash.debounce";
 import styled from "styled-components/native";
 import SearchBar from "../components/SearchBar";
 import SignIn from "../components/SignIn";
@@ -12,7 +13,6 @@ import SignOutButton from "../components/SignOutButton";
 import SignUp from "../components/SignUp";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
-import { ALL_USERS_QUERY } from "../gql/AllUsersQuery";
 import { SEARCH_USERS_QUERY } from "../gql/SearchUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
@@ -22,12 +22,14 @@ export default function HomeScreen(): JSX.Element {
     StackNavigationProp<RootStackParams, "Posts">
   >();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchString, setSearchString] = useState("");
 
-  const {
-    data,
-    // , error, loading
-  } = useQuery(ALL_USERS_QUERY);
+  const user = useUser();
+
+  // const {
+  //   data,
+  //   // , error, loading
+  // } = useQuery(ALL_USERS_QUERY);
 
   const [
     findUsers,
@@ -36,17 +38,24 @@ export default function HomeScreen(): JSX.Element {
       // loading,
       error: findUsersError,
     },
-  ] = useLazyQuery(SEARCH_USERS_QUERY, {
-    variables: { searchTerm },
-    fetchPolicy: "no-cache",
-  });
+  ] = useLazyQuery(SEARCH_USERS_QUERY, {});
 
-  const user = useUser();
+  const debounceAndFindUsers = useCallback(
+    debounce((searchTerm: string) => {
+      findUsers({
+        variables: { searchTerm },
+      });
+    }, 500),
+    [],
+  );
 
-  useEffect(() => {
-    console.log("findingUsers...");
-    findUsers();
-  }, [searchTerm, findUsers]);
+  const onChangeText = useCallback(
+    (text: string) => {
+      setSearchString(text);
+      debounceAndFindUsers(text);
+    },
+    [debounceAndFindUsers],
+  );
 
   return (
     <SafeAreaView
@@ -86,19 +95,16 @@ export default function HomeScreen(): JSX.Element {
             /> */}
             <SearchBar
               error={findUsersError}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
+              searchString={searchString}
+              setSearchString={onChangeText}
             />
-            {findUsersData && (
+            {findUsersData && searchString !== "" && (
               <FlatList
                 data={findUsersData.allUsers}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                   <UserItem key={item.id} user={item} />
                 )}
-                ListHeaderComponent={
-                  <Text>findUsers search results listHeader:</Text>
-                }
                 ListEmptyComponent={<Text>No user matched found</Text>}
               />
             )}

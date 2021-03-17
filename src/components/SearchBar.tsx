@@ -4,27 +4,19 @@ import { Text, TextInput, View } from "react-native";
 
 export default function Searchbar({
   error,
-  searchTerm,
-  setSearchTerm,
+  searchString,
+  setSearchString,
 }: {
   error?: ApolloError | undefined;
-  searchTerm: string;
-  setSearchTerm: (newText: string) => void;
+  searchString: string;
+  setSearchString: (string: string) => void;
 }): JSX.Element {
-  // const onSearch = useCallback(async () => {
-  //   try {
-  //     await findUsers();
-  //   } catch {
-  //     console.error(error);
-  //   }
-  // }, [error, findUsers]);
-
   return (
     <View style={{ backgroundColor: "white" }}>
       <Text>Search for a post:</Text>
       <TextInput
-        value={searchTerm}
-        onChangeText={setSearchTerm}
+        value={searchString}
+        onChangeText={(string) => setSearchString(string)}
         placeholder={"Search"}
       />
       {/* <Button title="Search" onPress={onSearch} /> */}
