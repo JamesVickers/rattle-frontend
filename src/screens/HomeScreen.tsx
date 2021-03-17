@@ -23,6 +23,7 @@ export default function HomeScreen(): JSX.Element {
   >();
 
   const [searchString, setSearchString] = useState("");
+  const [debouncing, setDebouncing] = useState(false);
 
   const user = useUser();
 
@@ -33,11 +34,7 @@ export default function HomeScreen(): JSX.Element {
 
   const [
     findUsers,
-    {
-      data: findUsersData,
-      // loading,
-      error: findUsersError,
-    },
+    { data: findUsersData, loading: findUsersLoading, error: findUsersError },
   ] = useLazyQuery(SEARCH_USERS_QUERY, {});
 
   const debounceAndFindUsers = useCallback(
@@ -45,13 +42,15 @@ export default function HomeScreen(): JSX.Element {
       findUsers({
         variables: { searchTerm },
       });
-    }, 500),
+      setDebouncing(false);
+    }, 3000),
     [],
   );
 
   const onChangeText = useCallback(
     (text: string) => {
       setSearchString(text);
+      setDebouncing(true);
       debounceAndFindUsers(text);
     },
     [debounceAndFindUsers],
@@ -98,16 +97,23 @@ export default function HomeScreen(): JSX.Element {
               searchString={searchString}
               setSearchString={onChangeText}
             />
-            {findUsersData && searchString !== "" && (
-              <FlatList
-                data={findUsersData.allUsers}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <UserItem key={item.id} user={item} />
-                )}
-                ListEmptyComponent={<Text>No user matched found</Text>}
-              />
-            )}
+            {searchString !== "" &&
+              (findUsersLoading || debouncing ? (
+                <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+                  Searching...
+                </Text>
+              ) : findUsersData ? (
+                <FlatList
+                  data={findUsersData.allUsers}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <UserItem key={item.id} user={item} />
+                  )}
+                  ListEmptyComponent={<Text>No user matched found</Text>}
+                />
+              ) : (
+                <></>
+              ))}
           </>
         ) : (
           <>
