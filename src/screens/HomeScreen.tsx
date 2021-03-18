@@ -1,7 +1,7 @@
 import { useLazyQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Button, StatusBar, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
@@ -16,11 +16,19 @@ import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../gql/SearchUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
+import { ExampleContext } from "../utils/exampleContext";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "Posts">
   >();
+
+  const {
+    isOpen,
+    // , toggleOpen, openExample, closeExample
+  } = useContext(ExampleContext);
+
+  console.log("isOpen: ", isOpen);
 
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
@@ -35,7 +43,7 @@ export default function HomeScreen(): JSX.Element {
   const [
     findUsers,
     { data: findUsersData, loading: findUsersLoading, error: findUsersError },
-  ] = useLazyQuery(SEARCH_USERS_QUERY, {});
+  ] = useLazyQuery(SEARCH_USERS_QUERY, { fetchPolicy: "no-cache" });
 
   const debounceAndFindUsers = useCallback(
     debounce((searchTerm: string) => {
@@ -43,7 +51,7 @@ export default function HomeScreen(): JSX.Element {
         variables: { searchTerm },
       });
       setDebouncing(false);
-    }, 3000),
+    }, 400),
     [],
   );
 

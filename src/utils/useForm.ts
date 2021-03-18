@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 
-export default function useForm(initial = {}) {
+export default function useForm(
+  initial = {},
+): {
+  inputs: unknown; // TODO: change inpute type
+  handleChange: (name: string, value: string) => void;
+  resetForm: () => void;
+  clearForm: () => void;
+} {
   const [inputs, setInputs] = useState(initial);
   // used to check when initial values goes from nothing to something
   const initialValues = Object.values(initial).join("");

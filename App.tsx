@@ -11,6 +11,7 @@ import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
+import ExampleProvider from "./src/utils/exampleContext";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -53,12 +54,14 @@ const App = (): JSX.Element => {
 
   return (
     <ApolloProvider client={client}>
-      <StatusBar barStyle="dark-content" />
-      <ThemeProvider theme={theme}>
-        <SafeAreaProvider>
-          <Navigation />
-        </SafeAreaProvider>
-      </ThemeProvider>
+      <ExampleProvider>
+        <StatusBar barStyle="dark-content" />
+        <ThemeProvider theme={theme}>
+          <SafeAreaProvider>
+            <Navigation />
+          </SafeAreaProvider>
+        </ThemeProvider>
+      </ExampleProvider>
     </ApolloProvider>
   );
 };
