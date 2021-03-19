@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 export type ExampleContextState = {
   // items: string[];
@@ -13,9 +13,9 @@ const contextDefaultValues: ExampleContextState = {
   // items: [],
   // addItem: () => {},
   isOpen: false,
-  toggleOpen: () => {},
-  openExample: () => {},
-  closeExample: () => {},
+  toggleOpen: () => undefined,
+  openExample: () => undefined,
+  closeExample: () => undefined,
 };
 
 export const ExampleContext = createContext<ExampleContextState>(

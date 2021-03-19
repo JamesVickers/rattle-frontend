@@ -23,12 +23,9 @@ export default function HomeScreen(): JSX.Element {
     StackNavigationProp<RootStackParams, "Posts">
   >();
 
-  const {
-    isOpen,
-    // , toggleOpen, openExample, closeExample
-  } = useContext(ExampleContext);
-
-  console.log("isOpen: ", isOpen);
+  const { isOpen, toggleOpen, openExample, closeExample } = useContext(
+    ExampleContext,
+  );
 
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
@@ -92,7 +89,10 @@ export default function HomeScreen(): JSX.Element {
             </Text>
             <StyledLikeSvg style={{ color: "red" }} />
             <StyledBackground>
-              <StyledText>STYLISH</StyledText>
+              <Button title="toggleOpen" onPress={toggleOpen} />
+              <Button title="openExample" onPress={openExample} />
+              <Button title="closeExample" onPress={closeExample} />
+              {isOpen && <StyledText>OPEN</StyledText>}
             </StyledBackground>
             {/* <FlatList
               data={data.allUsers}

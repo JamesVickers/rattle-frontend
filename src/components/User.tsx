@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { User } from "../state/user.model";
 
 export const CURRENT_USER_QUERY = gql`
   query {
@@ -12,7 +13,9 @@ export const CURRENT_USER_QUERY = gql`
   }
 `;
 
-export function useUser() {
+export function useUser(): {
+  authenticatedUser: User;
+} {
   const {
     data,
     // , loading, error
