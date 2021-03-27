@@ -11,7 +11,7 @@ import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
-import ExampleProvider from "./src/components/exampleContext";
+import AppProvider from "./src/components/AppContext";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -92,14 +92,14 @@ const App = (): JSX.Element => {
 
   return (
     <ApolloProvider client={client}>
-      <ExampleProvider>
+      <AppProvider>
         <StatusBar barStyle="dark-content" />
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
           <SafeAreaProvider>
             <Navigation />
           </SafeAreaProvider>
         </ThemeProvider>
-      </ExampleProvider>
+      </AppProvider>
     </ApolloProvider>
   );
 };

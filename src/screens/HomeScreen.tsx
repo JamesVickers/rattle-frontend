@@ -16,7 +16,8 @@ import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../gql/SearchUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
-import { ExampleContext } from "../components/exampleContext";
+import { AppContext } from "../components/AppContext";
+import { ThemeContext } from "styled-components/native";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -24,8 +25,11 @@ export default function HomeScreen(): JSX.Element {
   >();
 
   const { isOpen, toggleOpen, openExample, closeExample } = useContext(
-    ExampleContext,
+    AppContext,
   );
+
+  const { colours } = useContext(ThemeContext);
+  console.log(colours);
 
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
@@ -143,5 +147,5 @@ const StyledText = styled.Text`
   color: ${(props) => props.theme.colours.font};
 `;
 const StyledLikeSvg = styled(LikeSvg)`
-  color: ${(props) => props.theme.primaryBackgroundText};
+  color: ${(props) => props.theme.colours.screen};
 `;

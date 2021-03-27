@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 
-export type ExampleContextState = {
+export type AppContextState = {
   // items: string[];
   // addItem: (name: string) => void;
   isOpen: boolean;
@@ -9,7 +9,7 @@ export type ExampleContextState = {
   closeExample: () => void;
 };
 
-const contextDefaultValues: ExampleContextState = {
+const contextDefaultValues: AppContextState = {
   // items: [],
   // addItem: () => {},
   isOpen: false,
@@ -18,16 +18,14 @@ const contextDefaultValues: ExampleContextState = {
   closeExample: () => undefined,
 };
 
-export const ExampleContext = createContext<ExampleContextState>(
-  contextDefaultValues,
-);
+export const AppContext = createContext<AppContextState>(contextDefaultValues);
 
-export default function ExampleProvider({
+export default function AppProvider({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  // const ExampleProvider: FC = ({ children }) => {
+  // const AppProvider: FC = ({ children }) => {
   // const [items, setItems] = useState<string[]>(contextDefaultValues.items);
   const [isOpen, setIsOpen] = useState<boolean>(contextDefaultValues.isOpen);
 
@@ -37,7 +35,7 @@ export default function ExampleProvider({
   const closeExample = () => setIsOpen(false);
 
   return (
-    <ExampleContext.Provider
+    <AppContext.Provider
       value={{
         // items,
         // addItem,
@@ -47,19 +45,19 @@ export default function ExampleProvider({
         closeExample,
       }}>
       {children}
-    </ExampleContext.Provider>
+    </AppContext.Provider>
   );
 }
 
 // // Custome hook for accessing 'Example' local state
-// // saves importing useContext and ExampleContext everytime we want to access the 'Example' local state
+// // saves importing useContext and AppContext everytime we want to access the 'Example' local state
 // function useExample(
 //   all,
 // ): {
-//   all: ExampleContextState;
+//   all: AppContextState;
 // } {
-//   const all = useContext(ExampleContext);
+//   const all = useContext(AppContext);
 //   return all;
 // }
 
-// export { ExampleProvider, useExample };
+// export { AppProvider, useExample };
