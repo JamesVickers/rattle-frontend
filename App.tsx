@@ -11,7 +11,7 @@ import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
-import ExampleProvider from "./src/utils/exampleContext";
+import ExampleProvider from "./src/components/exampleContext";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -26,20 +26,58 @@ const client = new ApolloClient({
 });
 
 const lightTheme: DefaultTheme = {
-  primaryBackground: "palevioletred",
-  primaryBackgroundText: "white",
+  colours: {
+    // black
+    font: "#171717",
+    // lightGrey
+    screen: "#efefef",
+    // darkGrey
+    icon: "#383838",
+    // midGrey
+    midGrey: "#cfcfcf",
+    // white
+    border: "#ffffff",
+    // primary
+    primary: "#ffe000",
+    // lightBlue
+    secondary: "#8cd4ff",
+    // midBlue
+    midBlue: "#71add1",
+    // danger
+    danger: "#fa2a2a",
+  },
 };
 
 const darkTheme: DefaultTheme = {
-  primaryBackground: "maroon",
-  primaryBackgroundText: "#ddd",
+  colours: {
+    // white
+    font: "#ffffff",
+    // darkGrey
+    screen: "#383838",
+    icon: "#efefef",
+    // midGrey
+    midGrey: "#cfcfcf",
+    // black
+    border: "#171717",
+    // primary
+    primary: "#ffe000",
+    // lightBlue
+    secondary: "#8cd4ff",
+    // midBlue
+    midBlue: "#71add1",
+    // danger
+    danger: "#fa2a2a",
+  },
 };
 
 // const theme = lightTheme || darkTheme;
-const theme = darkTheme || lightTheme;
 
 const App = (): JSX.Element => {
   const [loadingCache, setLoadingCache] = useState(true);
+  const [theme, setTheme] = useState("light");
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
 
   useEffect(() => {
     persistCache({
@@ -56,7 +94,7 @@ const App = (): JSX.Element => {
     <ApolloProvider client={client}>
       <ExampleProvider>
         <StatusBar barStyle="dark-content" />
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
           <SafeAreaProvider>
             <Navigation />
           </SafeAreaProvider>

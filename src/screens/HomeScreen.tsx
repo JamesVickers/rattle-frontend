@@ -16,7 +16,7 @@ import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../gql/SearchUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
-import { ExampleContext } from "../utils/exampleContext";
+import { ExampleContext } from "../components/exampleContext";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -136,11 +136,11 @@ export default function HomeScreen(): JSX.Element {
 }
 const StyledBackground = styled.View`
   padding: 20px;
-  background-color: ${(props) => props.theme.primaryBackground};
+  background-color: ${(props) => props.theme.colours.screen};
 `;
 const StyledText = styled.Text`
   font-size: 30px;
-  color: ${(props) => props.theme.primaryBackgroundText};
+  color: ${(props) => props.theme.colours.font};
 `;
 const StyledLikeSvg = styled(LikeSvg)`
   color: ${(props) => props.theme.primaryBackgroundText};

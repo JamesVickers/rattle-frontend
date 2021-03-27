@@ -3,7 +3,7 @@
     "titleBar.activeForeground": "#000",
     "titleBar.inactiveForeground": "#000000CC",
     "titleBar.activeBackground": "#726300",
-    "titleBar.inactiveBackground": "#726300CC"
+    "titleBar.inactiveBackground": "#726300CC",
   },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
