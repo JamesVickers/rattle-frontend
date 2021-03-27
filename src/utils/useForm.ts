@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { SilentAny } from "../state/types";
 
 export default function useForm(
   initial = {},
 ): {
-  inputs: unknown; // TODO: change inpute type
+  inputs: SilentAny;
   handleChange: (name: string, value: string) => void;
   resetForm: () => void;
   clearForm: () => void;
