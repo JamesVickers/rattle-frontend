@@ -7,8 +7,8 @@ import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import CreatePostItem from "../components/CreatePostItem";
 import PostItem from "../components/PostItem";
-import { ALL_POSTS_QUERY } from "../gql/AllPostsQuery";
-import { COUNT_POST_QUERY } from "../gql/CountPostsQuery";
+import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
+import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { RootStackParams } from "../routes";
 import { Id } from "../state/types";
 

@@ -6,8 +6,8 @@ import { Text, Button } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import HardDeletePostItem from "../components/HardDeletePostItem";
 import TextInput from "../components/TextInput";
-import { POST_ITEM_QUERY } from "../gql/PostItemQuery";
-import { UPDATE_POST_MUTATION } from "../gql/UpdatePostMutation";
+import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
+import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
 

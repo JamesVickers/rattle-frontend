@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { useCallback } from "react";
 import { Button, Text, View } from "react-native";
-import { SIGN_IN_MUTATION } from "../gql/SignInMutation";
+import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
 import { CURRENT_USER_QUERY } from "./User";

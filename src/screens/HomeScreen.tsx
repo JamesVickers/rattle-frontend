@@ -13,11 +13,12 @@ import SignOutButton from "../components/SignOutButton";
 import SignUp from "../components/SignUp";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
-import { SEARCH_USERS_QUERY } from "../gql/SearchUsersQuery";
+import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
 import { AppContext } from "../components/AppContext";
 import { ThemeContext } from "styled-components/native";
+import { useDarkTheme } from "../utils/useDarkTheme";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -27,9 +28,6 @@ export default function HomeScreen(): JSX.Element {
   const { isOpen, toggleOpen, openExample, closeExample } = useContext(
     AppContext,
   );
-
-  const { colours } = useContext(ThemeContext);
-  console.log(colours);
 
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);

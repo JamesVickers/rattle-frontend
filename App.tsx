@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StatusBar } from "react-native";
+import { View, Text, StatusBar, Button } from "react-native";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -26,7 +26,7 @@ const client = new ApolloClient({
 });
 
 const lightTheme: DefaultTheme = {
-  colours: {
+  colour: {
     // black
     font: "#171717",
     // lightGrey
@@ -49,7 +49,7 @@ const lightTheme: DefaultTheme = {
 };
 
 const darkTheme: DefaultTheme = {
-  colours: {
+  colour: {
     // white
     font: "#ffffff",
     // darkGrey
@@ -75,7 +75,7 @@ const darkTheme: DefaultTheme = {
 const App = (): JSX.Element => {
   const [loadingCache, setLoadingCache] = useState(true);
   const [theme, setTheme] = useState("light");
-  const themeToggler = () => {
+  const toggleTheme = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
@@ -96,6 +96,8 @@ const App = (): JSX.Element => {
         <StatusBar barStyle="dark-content" />
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
           <SafeAreaProvider>
+            {/* <Button onPress={toggleTheme} title="toggle theme" />
+            <Text>theme: {theme}</Text> */}
             <Navigation />
           </SafeAreaProvider>
         </ThemeProvider>

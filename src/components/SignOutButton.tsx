@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { useCallback } from "react";
 import { Button, Text } from "react-native";
-import { SIGN_OUT_MUTATION } from "../gql/SignOutMutation";
+import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
 import { CURRENT_USER_QUERY } from "./User";
 
 export default function SignOutButton(): JSX.Element {
