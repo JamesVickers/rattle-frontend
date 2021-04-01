@@ -14,6 +14,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
 import AppProvider from "./src/components/AppContext";
 import { modes, theme as baseTheme } from "./src/styles/theme";
+import { colorModeStorage } from "./src/utils/colourModeStorage";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -37,7 +38,22 @@ const App = (): JSX.Element => {
     }).then(() => setLoadingCache(false));
   }, []);
 
-  const [mode, setMode] = React.useState(modes[0]);
+  const [mode, setMode] = React.useState<string | null>(modes[0]);
+
+  // Fetch the user’s colour theme mode preference from AsyncStorage and setting it to state
+  useEffect(() => {
+    async function getMode() {
+      const stored = await colorModeStorage.get();
+      setMode(stored);
+    }
+    getMode();
+  }, []);
+
+  //  Set the new colour theme mode to AsyncStorage each time it’s updated
+  useEffect(() => {
+    if (!mode) return;
+    colorModeStorage.set(mode);
+  }, [mode]);
 
   const toggleMode = () => {
     const i = (modes.indexOf(mode) + 1) % modes.length;
