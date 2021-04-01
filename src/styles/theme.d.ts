@@ -2,8 +2,8 @@ import "styled-components/native";
 
 declare module "styled-components/native" {
   export interface DefaultThemeColours {
-    font: string;
-    screen: string;
+    foreground: string;
+    background: string;
     icon: string;
     midGrey: string;
     border: string;

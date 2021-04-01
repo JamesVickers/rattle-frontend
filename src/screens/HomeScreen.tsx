@@ -17,8 +17,6 @@ import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
 import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
 import { AppContext } from "../components/AppContext";
-import { ThemeContext } from "styled-components/native";
-import { useDarkTheme } from "../utils/useDarkTheme";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -89,7 +87,7 @@ export default function HomeScreen(): JSX.Element {
                 ? `Hi ${user.name}, you are logged in!!`
                 : "Nope, not logged in.."}
             </Text>
-            <StyledLikeSvg style={{ color: "red" }} />
+            <StyledLikeSvg />
             <StyledBackground>
               <Button title="toggleOpen" onPress={toggleOpen} />
               <Button title="openExample" onPress={openExample} />
@@ -138,12 +136,12 @@ export default function HomeScreen(): JSX.Element {
 }
 const StyledBackground = styled.View`
   padding: 20px;
-  background-color: ${(props) => props.theme.colours.screen};
+  background-color: ${(props) => props.theme.colour.background};
 `;
 const StyledText = styled.Text`
   font-size: 30px;
-  color: ${(props) => props.theme.colours.font};
+  color: ${(props) => props.theme.colour.foreground};
 `;
 const StyledLikeSvg = styled(LikeSvg)`
-  color: ${(props) => props.theme.colours.screen};
+  color: ${(props) => props.theme.colour.foreground};
 `;

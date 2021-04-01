@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
 import { persistCache } from "apollo3-cache-persist";
-import { ThemeProvider, DefaultTheme } from "styled-components/native";
+import { ThemeProvider } from "styled-components/native";
 import PostsScreen from "./src/screens/PostsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
@@ -12,6 +12,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
 import AppProvider from "./src/components/AppContext";
+import { darkTheme, lightTheme } from "./src/styles/theme";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -24,51 +25,6 @@ const client = new ApolloClient({
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
-
-const lightTheme: DefaultTheme = {
-  colour: {
-    // black
-    font: "#171717",
-    // lightGrey
-    screen: "#efefef",
-    // darkGrey
-    icon: "#383838",
-    // midGrey
-    midGrey: "#cfcfcf",
-    // white
-    border: "#ffffff",
-    // primary
-    primary: "#ffe000",
-    // lightBlue
-    secondary: "#8cd4ff",
-    // midBlue
-    midBlue: "#71add1",
-    // danger
-    danger: "#fa2a2a",
-  },
-};
-
-const darkTheme: DefaultTheme = {
-  colour: {
-    // white
-    font: "#ffffff",
-    // darkGrey
-    screen: "#383838",
-    icon: "#efefef",
-    // midGrey
-    midGrey: "#cfcfcf",
-    // black
-    border: "#171717",
-    // primary
-    primary: "#ffe000",
-    // lightBlue
-    secondary: "#8cd4ff",
-    // midBlue
-    midBlue: "#71add1",
-    // danger
-    danger: "#fa2a2a",
-  },
-};
 
 // const theme = lightTheme || darkTheme;
 
@@ -96,9 +52,9 @@ const App = (): JSX.Element => {
         <StatusBar barStyle="dark-content" />
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
           <SafeAreaProvider>
-            {/* <Button onPress={toggleTheme} title="toggle theme" />
-            <Text>theme: {theme}</Text> */}
             <Navigation />
+            <Button onPress={toggleTheme} title="toggle theme" />
+            <Text>theme: {theme}</Text>
           </SafeAreaProvider>
         </ThemeProvider>
       </AppProvider>
