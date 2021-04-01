@@ -44,7 +44,7 @@ const App = (): JSX.Element => {
     setMode(modes[i]);
   };
 
-  const getTheme = (modeArg) =>
+  const getTheme = (modeArg: string) =>
     merge({}, baseTheme, {
       colors: get(baseTheme.colors.modes, modeArg, baseTheme.colors),
     });

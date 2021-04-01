@@ -34,6 +34,17 @@ const theme: DefaultTheme = {
         midBlue: "#71add1",
         danger: "#fa2a2a",
       },
+      tropical: {
+        foreground: "#fbff12",
+        background: "#99d9ff",
+        icon: "#efefef",
+        midGrey: "#cfcfcf",
+        border: "#171717",
+        primary: "#ffe000",
+        secondary: "#8cd4ff",
+        midBlue: "#71add1",
+        danger: "#fa2a2a",
+      },
     },
   },
 };

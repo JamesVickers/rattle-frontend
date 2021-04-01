@@ -23,6 +23,17 @@ declare module "styled-components/native" {
         midBlue: string;
         danger: string;
       };
+      tropical: {
+        foreground: string;
+        background: string;
+        icon: string;
+        midGrey: string;
+        border: string;
+        primary: string;
+        secondary: string;
+        midBlue: string;
+        danger: string;
+      };
     };
   }
 
