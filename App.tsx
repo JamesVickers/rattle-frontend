@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StatusBar, Button } from "react-native";
+import { View, Text, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
 import { persistCache } from "apollo3-cache-persist";
 import { ThemeProvider } from "styled-components/native";
+import { get, merge } from "lodash";
 import PostsScreen from "./src/screens/PostsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
@@ -12,7 +13,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
 import AppProvider from "./src/components/AppContext";
-import { darkTheme, lightTheme } from "./src/styles/theme";
+import { modes, theme as baseTheme } from "./src/styles/theme";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -26,14 +27,8 @@ const client = new ApolloClient({
   defaultOptions: { watchQuery: { fetchPolicy: "cache-and-network" } },
 });
 
-// const theme = lightTheme || darkTheme;
-
 const App = (): JSX.Element => {
   const [loadingCache, setLoadingCache] = useState(true);
-  const [theme, setTheme] = useState("light");
-  const toggleTheme = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
 
   useEffect(() => {
     persistCache({
@@ -42,22 +37,36 @@ const App = (): JSX.Element => {
     }).then(() => setLoadingCache(false));
   }, []);
 
+  const [mode, setMode] = React.useState(modes[0]);
+
+  const toggleMode = () => {
+    const i = (modes.indexOf(mode) + 1) % modes.length;
+    setMode(modes[i]);
+  };
+
+  const getTheme = (modeArg) =>
+    merge({}, baseTheme, {
+      colors: get(baseTheme.colors.modes, modeArg, baseTheme.colors),
+    });
+
+  const theme = getTheme(mode);
+
   if (loadingCache) {
     return <Text>Loading App...</Text>;
   }
 
   return (
     <ApolloProvider client={client}>
-      <AppProvider>
-        <StatusBar barStyle="dark-content" />
-        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme}>
+        <AppProvider mode={mode} toggleMode={toggleMode}>
+          <StatusBar barStyle="dark-content" />
           <SafeAreaProvider>
             <Navigation />
-            <Button onPress={toggleTheme} title="toggle theme" />
-            <Text>theme: {theme}</Text>
+            {/* <Button onPress={toggleTheme} title="toggle theme" />
+            <Text>theme: {theme}</Text> */}
           </SafeAreaProvider>
-        </ThemeProvider>
-      </AppProvider>
+        </AppProvider>
+      </ThemeProvider>
     </ApolloProvider>
   );
 };

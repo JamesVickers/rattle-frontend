@@ -1,9 +1,9 @@
 import { DefaultTheme } from "styled-components/native";
 
-export const lightTheme: DefaultTheme = {
-  id: 1,
-  darkOrLight: "light",
-  colour: {
+const theme: DefaultTheme = {
+  // id: 1,
+  // isSmallScreen: boolean;
+  colors: {
     // black
     foreground: "#171717",
     // lightGrey
@@ -22,29 +22,24 @@ export const lightTheme: DefaultTheme = {
     midBlue: "#71add1",
     // danger
     danger: "#fa2a2a",
+    modes: {
+      dark: {
+        foreground: "#ffffff",
+        background: "#383838",
+        icon: "#efefef",
+        midGrey: "#cfcfcf",
+        border: "#171717",
+        primary: "#ffe000",
+        secondary: "#8cd4ff",
+        midBlue: "#71add1",
+        danger: "#fa2a2a",
+      },
+    },
   },
 };
 
-export const darkTheme: DefaultTheme = {
-  id: 2,
-  darkOrLight: "dark",
-  colour: {
-    // white
-    foreground: "#ffffff",
-    // darkGrey
-    background: "#383838",
-    icon: "#efefef",
-    // midGrey
-    midGrey: "#cfcfcf",
-    // black
-    border: "#171717",
-    // primary
-    primary: "#ffe000",
-    // lightBlue
-    secondary: "#8cd4ff",
-    // midBlue
-    midBlue: "#71add1",
-    // danger
-    danger: "#fa2a2a",
-  },
-};
+const modes = Object.keys(theme.colors.modes).map((key) => key);
+
+modes.unshift("default");
+
+export { theme, modes };

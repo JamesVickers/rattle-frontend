@@ -61,6 +61,9 @@ export default function HomeScreen(): JSX.Element {
     [debounceAndFindUsers],
   );
 
+  const { mode, toggleMode } = React.useContext(AppContext);
+  // const { mode, toggleMode } = useAppContext();
+
   return (
     <SafeAreaView
       forceInset={{
@@ -73,6 +76,8 @@ export default function HomeScreen(): JSX.Element {
       <StatusBar barStyle="dark-content" />
       <View>
         <Text>Rattle HomeScreen</Text>
+        <Text>Theme: {mode}</Text>
+        <Button title="toggleTheme" onPress={toggleMode} />
         {user ? (
           <>
             <SignOutButton />
@@ -136,12 +141,12 @@ export default function HomeScreen(): JSX.Element {
 }
 const StyledBackground = styled.View`
   padding: 20px;
-  background-color: ${(props) => props.theme.colour.background};
+  background-color: ${(props) => props.theme.colors.background};
 `;
 const StyledText = styled.Text`
   font-size: 30px;
-  color: ${(props) => props.theme.colour.foreground};
+  color: ${(props) => props.theme.colors.foreground};
 `;
 const StyledLikeSvg = styled(LikeSvg)`
-  color: ${(props) => props.theme.colour.foreground};
+  color: ${(props) => props.theme.colors.foreground};
 `;

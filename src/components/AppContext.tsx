@@ -5,6 +5,8 @@ export type AppContextType = {
   // addItem: (name: string) => void;
   // themePref: "light" | "dark";
   // toggleThemePref: () => void;
+  mode: string;
+  toggleMode: () => void;
   isOpen: boolean;
   toggleOpen: () => void;
   openExample: () => void;
@@ -16,6 +18,8 @@ const contextDefaultValues: AppContextType = {
   // addItem: () => {},
   // themePref: "light",
   // toggleThemePref: () => undefined,
+  mode: "default",
+  toggleMode: () => undefined,
   isOpen: false,
   toggleOpen: () => undefined,
   openExample: () => undefined,
@@ -24,14 +28,19 @@ const contextDefaultValues: AppContextType = {
 
 export const AppContext = createContext<AppContextType>(contextDefaultValues);
 
+// custom hook to save repeating React.useContext(AppContext)
+// just use this instear --> const { mode, toggleMode } = useAppContext()
+// export const useAppContext = (): AppContextType => React.useContext(AppContext);
+
 export default function AppProvider({
   children,
+  mode,
+  toggleMode,
 }: {
   children: React.ReactNode;
+  mode: string;
+  toggleMode: () => void;
 }): JSX.Element {
-  // const AppProvider: FC = ({ children }) => {
-  // const [items, setItems] = useState<string[]>(contextDefaultValues.items);
-  // const [themePref, setThemePref] = useState(contextDefaultValues.themePref);
   const [isOpen, setIsOpen] = useState<boolean>(contextDefaultValues.isOpen);
 
   // const addItem = (newItem: string) => setItems((items) => [...items, newItem]);
@@ -42,10 +51,8 @@ export default function AppProvider({
   return (
     <AppContext.Provider
       value={{
-        // items,
-        // addItem,
-        // themePref,
-        // toggleThemePref,
+        mode,
+        toggleMode,
         isOpen,
         toggleOpen,
         openExample,
@@ -55,16 +62,3 @@ export default function AppProvider({
     </AppContext.Provider>
   );
 }
-
-// // Custome hook for accessing 'Example' local state
-// // saves importing useContext and AppContext everytime we want to access the 'Example' local state
-// function useExample(
-//   all,
-// ): {
-//   all: AppContextType;
-// } {
-//   const all = useContext(AppContext);
-//   return all;
-// }
-
-// export { AppProvider, useExample };
