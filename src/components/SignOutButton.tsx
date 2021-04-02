@@ -15,7 +15,7 @@ export default function SignOutButton(): JSX.Element {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
-  const onSubmit = useCallback(async () => {
+  const onSignOut = useCallback(async () => {
     // console.log(inputs);
     try {
       await signout();
@@ -27,7 +27,7 @@ export default function SignOutButton(): JSX.Element {
 
   return (
     <>
-      <Button title="Sign out" onPress={onSubmit} />
+      <Button title="Sign out" onPress={onSignOut} />
       {error && (
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>
           We had an issue signing you out, please try again :(

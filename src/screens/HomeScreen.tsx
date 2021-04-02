@@ -10,7 +10,6 @@ import styled from "styled-components/native";
 import SearchBar from "../components/SearchBar";
 import SignIn from "../components/SignIn";
 import SignOutButton from "../components/SignOutButton";
-import SignUp from "../components/SignUp";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
@@ -61,6 +60,10 @@ export default function HomeScreen(): JSX.Element {
     [debounceAndFindUsers],
   );
 
+  const gotToCreateAccountScreen = useCallback(() => {
+    navigation.navigate("CreateAccount");
+  }, [navigation]);
+
   const { mode, toggleMode } = React.useContext(AppContext);
   // const { mode, toggleMode } = useAppContext();
 
@@ -72,7 +75,7 @@ export default function HomeScreen(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1, backgroundColor: "gold" }}>
+      style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <View>
         <Text>Rattle HomeScreen</Text>
@@ -130,8 +133,8 @@ export default function HomeScreen(): JSX.Element {
           </>
         ) : (
           <>
-            <SignUp />
             <SignIn />
+            <Button title="Create Account" onPress={gotToCreateAccountScreen} />
             {/* <RequestPasswordReset /> */}
           </>
         )}

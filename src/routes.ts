@@ -3,6 +3,7 @@ import { Id } from "./state/types";
 
 export type RootStackParams = {
   Home: undefined;
+  CreateAccount: undefined;
   Posts: undefined;
   SinglePost: { id: Id };
 };

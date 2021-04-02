@@ -15,6 +15,7 @@ import SinglePostScreen from "./src/screens/SinglePostScreen";
 import AppProvider from "./src/components/AppContext";
 import { modes, theme as baseTheme } from "./src/styles/theme";
 import { colorModeStorage } from "./src/utils/colourModeStorage";
+import CreateAccountScreen from "./src/screens/CreateAccountScreen";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -108,6 +109,15 @@ function Navigation(): JSX.Element {
             options={{
               ...headerOptions,
               title: "Home screeeeeen",
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="CreateAccount"
+            component={CreateAccountScreen}
+            options={{
+              ...headerOptions,
+              title: "Create Account Screen",
               headerShown: false,
             }}
           />

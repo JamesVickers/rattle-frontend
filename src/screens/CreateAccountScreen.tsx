@@ -1,11 +1,19 @@
 import { useMutation } from "@apollo/client";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button, Text, View } from "react-native";
+import { Button, Text } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import TextInput from "../components/TextInput";
 import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
+import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
-import TextInput from "./TextInput";
 
-export default function SignUp(): JSX.Element {
+export default function CreateAccountScreen(): JSX.Element {
+  const navigation = useNavigation<
+    StackNavigationProp<RootStackParams, "CreateAccount">
+  >();
+
   const {
     inputs,
     handleChange,
@@ -29,7 +37,7 @@ export default function SignUp(): JSX.Element {
     variables: inputs,
   });
 
-  const onSubmit = useCallback(async () => {
+  const onSignUp = useCallback(async () => {
     // console.log(inputs);
     try {
       await signup();
@@ -40,8 +48,19 @@ export default function SignUp(): JSX.Element {
     resetForm();
   }, [resetForm, signup]);
 
+  const onCancel = useCallback(async () => {
+    navigation.navigate("Home");
+  }, [navigation]);
+
   return (
-    <View style={{ backgroundColor: "white" }}>
+    <SafeAreaView
+      forceInset={{
+        left: "always",
+        top: "always",
+        right: "always",
+        bottom: "always",
+      }}
+      style={{ flex: 1 }}>
       <Text>Sign up for an account:</Text>
       <TextInput
         value={inputs.name}
@@ -62,7 +81,8 @@ export default function SignUp(): JSX.Element {
         name={"password"}
         placeholder={"Password"}
       />
-      <Button title="Sign up!" onPress={onSubmit} />
+      <Button title="Sign up!" onPress={onSignUp} />
+      <Button title="Cancel" onPress={onCancel} />
       {data?.createUser && (
         <>
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>
@@ -78,6 +98,6 @@ export default function SignUp(): JSX.Element {
           Sign up failed, please try again :(
         </Text>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
