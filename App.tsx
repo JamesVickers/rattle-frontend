@@ -42,13 +42,13 @@ const App = (): JSX.Element => {
     }).then(() => setLoadingCache(false));
   }, []);
 
-  const [mode, setMode] = React.useState<string | null>(modes[0]);
+  const [mode, setMode] = React.useState<string>(modes[0]);
 
   // Fetch the user’s colour theme mode preference from AsyncStorage and setting it to state
   useEffect(() => {
     async function getMode() {
       const stored = await colorModeStorage.get();
-      setMode(stored);
+      setMode(stored || "default");
     }
     getMode();
   }, []);
