@@ -2,8 +2,10 @@ import { NativeStackNavigationOptions } from "react-native-screens/lib/typescrip
 import { Id } from "./state/types";
 
 export type RootStackParams = {
-  Home: undefined;
+  Splash: undefined;
+  SignIn: undefined;
   CreateAccount: undefined;
+  Home: undefined;
   Posts: undefined;
   SinglePost: { id: Id };
 };

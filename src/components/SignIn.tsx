@@ -1,12 +1,19 @@
 import { useMutation } from "@apollo/client";
-import React, { useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import React, { useCallback, useEffect } from "react";
 import { Button, Text, View } from "react-native";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
+import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
-import { CURRENT_USER_QUERY } from "./User";
+import { CURRENT_USER_QUERY, useUser } from "./User";
 
 export default function SignIn(): JSX.Element {
+  const navigation = useNavigation<
+    StackNavigationProp<RootStackParams, "SignIn">
+  >();
+
   const {
     inputs,
     handleChange,
@@ -28,6 +35,14 @@ export default function SignIn(): JSX.Element {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
+
+  const user = useUser();
+
+  useEffect(() => {
+    if (user) {
+      navigation.replace("Home");
+    }
+  }, [user, navigation]);
 
   const onSubmit = useCallback(async () => {
     // console.log(inputs);

@@ -16,6 +16,8 @@ import AppProvider from "./src/components/AppContext";
 import { modes, theme as baseTheme } from "./src/styles/theme";
 import { colorModeStorage } from "./src/utils/colourModeStorage";
 import CreateAccountScreen from "./src/screens/CreateAccountScreen";
+import SplashScreen from "./src/screens/SplashScreen";
+import SignInScreen from "./src/screens/SignInScreen";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -96,7 +98,7 @@ function Navigation(): JSX.Element {
     <View style={{ flex: 1 }}>
       <NavigationContainer>
         <RootStack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Splash"
           screenOptions={{
             headerStyle: {
               backgroundColor: "#000",
@@ -104,11 +106,20 @@ function Navigation(): JSX.Element {
             headerTintColor: "#fff",
           }}>
           <RootStack.Screen
-            name="Home"
-            component={HomeScreen}
+            name="Splash"
+            component={SplashScreen}
             options={{
               ...headerOptions,
-              title: "Home screeeeeen",
+              title: "Splash Screen",
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{
+              ...headerOptions,
+              title: "Sign In Screen",
               headerShown: false,
             }}
           />
@@ -118,6 +129,15 @@ function Navigation(): JSX.Element {
             options={{
               ...headerOptions,
               title: "Create Account Screen",
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              ...headerOptions,
+              title: "Home screeeeeen",
               headerShown: false,
             }}
           />

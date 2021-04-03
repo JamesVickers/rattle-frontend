@@ -8,7 +8,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import debounce from "lodash.debounce";
 import styled from "styled-components/native";
 import SearchBar from "../components/SearchBar";
-import SignIn from "../components/SignIn";
 import SignOutButton from "../components/SignOutButton";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
@@ -19,7 +18,7 @@ import { AppContext } from "../components/AppContext";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
-    StackNavigationProp<RootStackParams, "Posts">
+    StackNavigationProp<RootStackParams, "Home">
   >();
 
   const { isOpen, toggleOpen, openExample, closeExample } = useContext(
@@ -30,11 +29,6 @@ export default function HomeScreen(): JSX.Element {
   const [debouncing, setDebouncing] = useState(false);
 
   const user = useUser();
-
-  // const {
-  //   data,
-  //   // , error, loading
-  // } = useQuery(ALL_USERS_QUERY);
 
   const [
     findUsers,
@@ -60,10 +54,6 @@ export default function HomeScreen(): JSX.Element {
     [debounceAndFindUsers],
   );
 
-  const gotToCreateAccountScreen = useCallback(() => {
-    navigation.navigate("CreateAccount");
-  }, [navigation]);
-
   const { mode, toggleMode } = React.useContext(AppContext);
   // const { mode, toggleMode } = useAppContext();
 
@@ -81,63 +71,50 @@ export default function HomeScreen(): JSX.Element {
         <Text>Rattle HomeScreen</Text>
         <Text>Theme: {mode}</Text>
         <Button title="toggleTheme" onPress={toggleMode} />
-        {user ? (
-          <>
-            <SignOutButton />
-            <Button
-              title="go to PostsScreen"
-              onPress={() => {
-                navigation.navigate("Posts");
-              }}
-            />
-            <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-              {user
-                ? `Hi ${user.name}, you are logged in!!`
-                : "Nope, not logged in.."}
-            </Text>
-            <StyledLikeSvg />
-            <StyledBackground>
-              <Button title="toggleOpen" onPress={toggleOpen} />
-              <Button title="openExample" onPress={openExample} />
-              <Button title="closeExample" onPress={closeExample} />
-              {isOpen && <StyledText>OPEN</StyledText>}
-            </StyledBackground>
-            {/* <FlatList
+
+        <SignOutButton />
+        <Button
+          title="go to PostsScreen"
+          onPress={() => {
+            navigation.navigate("Posts");
+          }}
+        />
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+          {user && `Hi ${user.name}, you are logged in!!`}
+        </Text>
+        <StyledLikeSvg />
+        <StyledBackground>
+          <Button title="toggleOpen" onPress={toggleOpen} />
+          <Button title="openExample" onPress={openExample} />
+          <Button title="closeExample" onPress={closeExample} />
+          {isOpen && <StyledText>OPEN</StyledText>}
+        </StyledBackground>
+        {/* <FlatList
               data={data.allUsers}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => <UserItem key={item.id} user={item} />}
               ListHeaderComponent={<Text>allUsers listHeader:</Text>}
             /> */}
-            <SearchBar
-              error={findUsersError}
-              searchString={searchString}
-              setSearchString={onChangeText}
+        <SearchBar
+          error={findUsersError}
+          searchString={searchString}
+          setSearchString={onChangeText}
+        />
+        {searchString !== "" &&
+          (findUsersLoading || debouncing ? (
+            <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+              Searching...
+            </Text>
+          ) : findUsersData ? (
+            <FlatList
+              data={findUsersData.allUsers}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <UserItem key={item.id} user={item} />}
+              ListEmptyComponent={<Text>No user matched found</Text>}
             />
-            {searchString !== "" &&
-              (findUsersLoading || debouncing ? (
-                <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-                  Searching...
-                </Text>
-              ) : findUsersData ? (
-                <FlatList
-                  data={findUsersData.allUsers}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => (
-                    <UserItem key={item.id} user={item} />
-                  )}
-                  ListEmptyComponent={<Text>No user matched found</Text>}
-                />
-              ) : (
-                <></>
-              ))}
-          </>
-        ) : (
-          <>
-            <SignIn />
-            <Button title="Create Account" onPress={gotToCreateAccountScreen} />
-            {/* <RequestPasswordReset /> */}
-          </>
-        )}
+          ) : (
+            <></>
+          ))}
       </View>
     </SafeAreaView>
   );
