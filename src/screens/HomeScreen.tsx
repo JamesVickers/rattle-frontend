@@ -1,14 +1,13 @@
 import { useLazyQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Button, StatusBar, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import debounce from "lodash.debounce";
 import styled from "styled-components/native";
 import SearchBar from "../components/SearchBar";
-import SignOutButton from "../components/SignOutButton";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
@@ -21,9 +20,15 @@ export default function HomeScreen(): JSX.Element {
     StackNavigationProp<RootStackParams, "Home">
   >();
 
-  const { isOpen, toggleOpen, openExample, closeExample } = useContext(
-    AppContext,
-  );
+  const {
+    mode,
+    toggleMode,
+    isOpen,
+    toggleOpen,
+    openExample,
+    closeExample,
+  } = React.useContext(AppContext);
+  // const { mode, toggleMode } = useAppContext();
 
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
@@ -54,8 +59,9 @@ export default function HomeScreen(): JSX.Element {
     [debounceAndFindUsers],
   );
 
-  const { mode, toggleMode } = React.useContext(AppContext);
-  // const { mode, toggleMode } = useAppContext();
+  const goToSignOutScreen = useCallback(async () => {
+    navigation.navigate("SignOut");
+  }, [navigation]);
 
   return (
     <SafeAreaView
@@ -72,7 +78,7 @@ export default function HomeScreen(): JSX.Element {
         <Text>Theme: {mode}</Text>
         <Button title="toggleTheme" onPress={toggleMode} />
 
-        <SignOutButton />
+        <Button title="Sign Out" onPress={goToSignOutScreen} />
         <Button
           title="go to PostsScreen"
           onPress={() => {

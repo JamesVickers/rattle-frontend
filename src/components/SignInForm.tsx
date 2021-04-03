@@ -9,7 +9,7 @@ import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
 import { CURRENT_USER_QUERY, useUser } from "./User";
 
-export default function SignIn(): JSX.Element {
+export default function SignInForm(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignIn">
   >();

@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { Button, StatusBar } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import SignIn from "../components/SignIn";
+import SignInForm from "../components/SignInForm";
 import { RootStackParams } from "../routes";
 
 export default function SignInScreen(): JSX.Element {
@@ -25,7 +25,7 @@ export default function SignInScreen(): JSX.Element {
       }}
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
-      <SignIn />
+      <SignInForm />
       <Button title="Create Account" onPress={onCreateAccount} />
       {/* <RequestPasswordReset /> */}
     </SafeAreaView>

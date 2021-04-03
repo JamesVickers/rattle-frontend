@@ -4,6 +4,7 @@ import { Id } from "./state/types";
 export type RootStackParams = {
   Splash: undefined;
   SignIn: undefined;
+  SignOut: undefined;
   CreateAccount: undefined;
   Home: undefined;
   Posts: undefined;

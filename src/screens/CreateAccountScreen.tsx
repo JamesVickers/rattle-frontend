@@ -52,7 +52,7 @@ export default function CreateAccountScreen(): JSX.Element {
     navigation.goBack();
   }, [navigation]);
 
-  const goBackToSignIn = useCallback(async () => {
+  const goBackToSignInScreen = useCallback(async () => {
     navigation.navigate("SignIn");
   }, [navigation]);
 
@@ -95,7 +95,7 @@ export default function CreateAccountScreen(): JSX.Element {
           <Text style={{ fontSize: 30, fontWeight: "bold" }}>
             You can now sign in to Rattle
           </Text>
-          <Button title="Back to Sign In" onPress={goBackToSignIn} />
+          <Button title="Back to Sign In" onPress={goBackToSignInScreen} />
         </>
       )}
       {error && (

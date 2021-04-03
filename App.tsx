@@ -18,6 +18,7 @@ import { colorModeStorage } from "./src/utils/colourModeStorage";
 import CreateAccountScreen from "./src/screens/CreateAccountScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import SignInScreen from "./src/screens/SignInScreen";
+import SignOutScreen from "./src/screens/SignOutScreen";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -120,6 +121,15 @@ function Navigation(): JSX.Element {
             options={{
               ...headerOptions,
               title: "Sign In Screen",
+              headerShown: false,
+            }}
+          />
+          <RootStack.Screen
+            name="SignOut"
+            component={SignOutScreen}
+            options={{
+              ...headerOptions,
+              title: "Sign Out Screen",
               headerShown: false,
             }}
           />
