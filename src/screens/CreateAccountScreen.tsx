@@ -20,7 +20,8 @@ export default function CreateAccountScreen(): JSX.Element {
     // clearForm,
     resetForm,
   } = useForm({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     // author: "JamesVickers",
@@ -67,10 +68,16 @@ export default function CreateAccountScreen(): JSX.Element {
       style={{ flex: 1 }}>
       <Text>Sign up for an account:</Text>
       <TextInput
-        value={inputs.name}
+        value={inputs.firstName}
         handleChange={handleChange}
-        name={"name"}
-        placeholder={"Name"}
+        name={"firstName"}
+        placeholder={"First Name"}
+      />
+      <TextInput
+        value={inputs.lastName}
+        handleChange={handleChange}
+        name={"lastName"}
+        placeholder={"Last Name"}
       />
       <TextInput
         value={inputs.email}

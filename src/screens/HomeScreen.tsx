@@ -86,7 +86,7 @@ export default function HomeScreen(): JSX.Element {
           }}
         />
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          {user && `Hi ${user.name}, you are logged in!!`}
+          {user && `Hi ${user.firstName}, you are logged in!!`}
         </Text>
         <StyledLikeSvg />
         <StyledBackground>

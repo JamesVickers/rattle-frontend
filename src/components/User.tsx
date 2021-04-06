@@ -6,7 +6,8 @@ export const CURRENT_USER_QUERY = gql`
     authenticatedUser {
       #   ... on User {
       id
-      name
+      firstName
+      lastName
       # query other info about the user here e.g. user's posts
       #   }
     }

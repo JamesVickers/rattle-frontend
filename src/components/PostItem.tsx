@@ -25,7 +25,7 @@ export default function PostItem({
       <Text>{post.title}</Text>
       <Text>{post.body}</Text>
       <Text>{post.status}</Text>
-      {/* <Text>{post.author.name}</Text> */}
+      {/* <Text>{post.author.firstName} {post.author.lastName}</Text> */}
       {/* <ProfileIconPlaceholder
         source={{
           uri: post.author.profileImage?.image.publicUrlTransformed,

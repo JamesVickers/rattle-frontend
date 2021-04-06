@@ -5,7 +5,8 @@ export const SIGN_IN_MUTATION = gql`
     authenticateUserWithPassword(email: $email, password: $password) {
       item {
         id
-        name
+        firstName
+        lastName
         email
       }
     }

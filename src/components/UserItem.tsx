@@ -12,7 +12,9 @@ export default function UserItem({ user }: { user: User }): JSX.Element {
         borderWidth: 1,
         borderColor: "blue",
       }}>
-      <Text>{user.name}</Text>
+      <Text>
+        {user.firstName} {user.lastName}
+      </Text>
       <ProfileIconPlaceholder
         source={{
           uri: user.profileImage?.image.publicUrlTransformed,

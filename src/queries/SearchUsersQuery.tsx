@@ -11,7 +11,8 @@ export const SEARCH_USERS_QUERY = gql`
       }
     ) {
       id
-      name
+      firstName
+      lastName
       profileImage {
         image {
           id
