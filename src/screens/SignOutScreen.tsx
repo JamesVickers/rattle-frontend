@@ -34,7 +34,7 @@ export default function SignOutScreen(): JSX.Element {
     }
   }, [navigation, signout]);
 
-  const onCancel = useCallback(async () => {
+  const onCancel = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 

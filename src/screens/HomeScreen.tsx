@@ -59,7 +59,7 @@ export default function HomeScreen(): JSX.Element {
     [debounceAndFindUsers],
   );
 
-  const goToSignOutScreen = useCallback(async () => {
+  const goToSignOutScreen = useCallback(() => {
     navigation.navigate("SignOut");
   }, [navigation]);
 

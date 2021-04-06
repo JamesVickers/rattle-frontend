@@ -48,11 +48,11 @@ export default function CreateAccountScreen(): JSX.Element {
     resetForm();
   }, [resetForm, signup]);
 
-  const onCancel = useCallback(async () => {
+  const onCancel = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
-  const goBackToSignInScreen = useCallback(async () => {
+  const goBackToSignInScreen = useCallback(() => {
     navigation.navigate("SignIn");
   }, [navigation]);
 
