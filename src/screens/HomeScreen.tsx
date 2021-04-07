@@ -6,29 +6,17 @@ import { Button, StatusBar, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import debounce from "lodash.debounce";
-import styled from "styled-components/native";
 import SearchBar from "../components/SearchBar";
 import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
-import LikeSvg from "../images/like.svg";
 import { RootStackParams } from "../routes";
-import { AppContext } from "../components/AppContext";
+import ToggleOpen from "../components/ToggleOpen";
 
 export default function HomeScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "Home">
   >();
-
-  const {
-    mode,
-    toggleMode,
-    isOpen,
-    toggleOpen,
-    openExample,
-    closeExample,
-  } = React.useContext(AppContext);
-  // const { mode, toggleMode } = useAppContext();
 
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
@@ -74,10 +62,8 @@ export default function HomeScreen(): JSX.Element {
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <View>
-        <Text>Rattle HomeScreen</Text>
-        <Text>Theme: {mode}</Text>
-        <Button title="toggleTheme" onPress={toggleMode} />
-
+        {/* <ToggleThemeMode /> */}
+        <ToggleOpen />
         <Button title="Sign Out" onPress={goToSignOutScreen} />
         <Button
           title="go to PostsScreen"
@@ -88,13 +74,7 @@ export default function HomeScreen(): JSX.Element {
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>
           {user && `Hi ${user.firstName}, you are logged in!!`}
         </Text>
-        <StyledLikeSvg />
-        <StyledBackground>
-          <Button title="toggleOpen" onPress={toggleOpen} />
-          <Button title="openExample" onPress={openExample} />
-          <Button title="closeExample" onPress={closeExample} />
-          {isOpen && <StyledText>OPEN</StyledText>}
-        </StyledBackground>
+
         {/* <FlatList
               data={data.allUsers}
               keyExtractor={(item) => item.id}
@@ -125,14 +105,3 @@ export default function HomeScreen(): JSX.Element {
     </SafeAreaView>
   );
 }
-const StyledBackground = styled.View`
-  padding: 20px;
-  background-color: ${(props) => props.theme.colors.background};
-`;
-const StyledText = styled.Text`
-  font-size: 30px;
-  color: ${(props) => props.theme.colors.foreground};
-`;
-const StyledLikeSvg = styled(LikeSvg)`
-  color: ${(props) => props.theme.colors.foreground};
-`;

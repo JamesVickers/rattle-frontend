@@ -5,8 +5,8 @@ export const SEARCH_USERS_QUERY = gql`
     allUsers(
       where: {
         OR: [
-          { name_contains_i: $searchTerm }
-          # { name_contains_i: $searchTerm },
+          { firstName_contains_i: $searchTerm }
+          { lastName_contains_i: $searchTerm }
         ]
       }
     ) {

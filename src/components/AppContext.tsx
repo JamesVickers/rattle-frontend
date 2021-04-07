@@ -37,7 +37,7 @@ export default function AppProvider({
   mode,
   toggleMode,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   mode: string;
   toggleMode: () => void;
 }): JSX.Element {
