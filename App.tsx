@@ -10,7 +10,6 @@ import PostsScreen from "./src/screens/PostsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import HomeScreen from "./src/screens/HomeScreen";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
 import AppProvider from "./src/components/AppContext";
 import { modes, theme as baseTheme } from "./src/styles/theme";
@@ -19,6 +18,8 @@ import CreateAccountScreen from "./src/screens/CreateAccountScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import SignOutScreen from "./src/screens/SignOutScreen";
+import { useUser } from "./src/components/User";
+import ChatTabsNavigation from "./src/ChatTabsNavigation";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -92,7 +93,7 @@ const App = (): JSX.Element => {
 };
 
 function Navigation(): JSX.Element {
-  // const isLoggedIn = useCombinedStore((state) => state.login.isLoggedIn);
+  const user = useUser();
   const headerOptions = useStackNavigatorHeaderOptions();
 
   return (
@@ -106,6 +107,17 @@ function Navigation(): JSX.Element {
             },
             headerTintColor: "#fff",
           }}>
+          {user && (
+            <RootStack.Screen
+              name="ChatTabs"
+              component={ChatTabsNavigation}
+              options={{
+                ...headerOptions,
+                title: "Home screeeeeen",
+                headerShown: false,
+              }}
+            />
+          )}
           <RootStack.Screen
             name="Splash"
             component={SplashScreen}
@@ -139,15 +151,6 @@ function Navigation(): JSX.Element {
             options={{
               ...headerOptions,
               title: "Create Account Screen",
-              headerShown: false,
-            }}
-          />
-          <RootStack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              ...headerOptions,
-              title: "Home screeeeeen",
               headerShown: false,
             }}
           />

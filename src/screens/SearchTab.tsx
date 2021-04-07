@@ -1,27 +1,16 @@
 import { useLazyQuery } from "@apollo/client";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useState } from "react";
-import { Button, StatusBar, Text, View } from "react-native";
+import { StatusBar, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import debounce from "lodash.debounce";
 import SearchBar from "../components/SearchBar";
-import { useUser } from "../components/User";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
-import { RootStackParams } from "../routes";
-import ToggleOpen from "../components/ToggleOpen";
 
-export default function HomeScreen(): JSX.Element {
-  const navigation = useNavigation<
-    StackNavigationProp<RootStackParams, "Home">
-  >();
-
+export default function SearchTab(): JSX.Element {
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
-
-  const user = useUser();
 
   const [
     findUsers,
@@ -47,10 +36,6 @@ export default function HomeScreen(): JSX.Element {
     [debounceAndFindUsers],
   );
 
-  const goToSignOutScreen = useCallback(() => {
-    navigation.navigate("SignOut");
-  }, [navigation]);
-
   return (
     <SafeAreaView
       forceInset={{
@@ -62,25 +47,7 @@ export default function HomeScreen(): JSX.Element {
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <View>
-        {/* <ToggleThemeMode /> */}
-        <ToggleOpen />
-        <Button title="Sign Out" onPress={goToSignOutScreen} />
-        <Button
-          title="go to PostsScreen"
-          onPress={() => {
-            navigation.navigate("Posts");
-          }}
-        />
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          {user && `Hi ${user.firstName}, you are logged in!!`}
-        </Text>
-
-        {/* <FlatList
-              data={data.allUsers}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => <UserItem key={item.id} user={item} />}
-              ListHeaderComponent={<Text>allUsers listHeader:</Text>}
-            /> */}
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>SearchTab :)</Text>
         <SearchBar
           error={findUsersError}
           searchString={searchString}

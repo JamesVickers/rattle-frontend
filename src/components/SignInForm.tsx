@@ -40,7 +40,7 @@ export default function SignInForm(): JSX.Element {
 
   useEffect(() => {
     if (user) {
-      navigation.replace("Home");
+      navigation.replace("ChatTabs");
     }
   }, [user, navigation]);
 

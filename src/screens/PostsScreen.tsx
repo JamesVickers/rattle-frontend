@@ -49,7 +49,7 @@ export default function PostsScreen(): JSX.Element {
       <Button
         title="go to HomeScreen"
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("ChatTabs");
         }}
       />
       <Text>

@@ -6,9 +6,15 @@ export type RootStackParams = {
   SignIn: undefined;
   SignOut: undefined;
   CreateAccount: undefined;
-  Home: undefined;
+  ChatTabs: undefined;
   Posts: undefined;
   SinglePost: { id: Id };
+};
+
+export type ChatTabsParams = {
+  Home: undefined;
+  Search: undefined;
+  Profile: undefined;
 };
 
 export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationOptions> {
