@@ -1,8 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Platform, Text } from "react-native";
+import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme } from "styled-components";
 import { ChatTabsParams } from "./routes";
+import HomeSvg from "./images/home-outline.svg";
+import SearchSvg from "./images/search-outline.svg";
+import PersonSvg from "./images/person-circle-outline.svg";
 import HomeScreen from "./screens/HomeTab";
 import ProfileTab from "./screens/ProfileTab";
 import SearchTab from "./screens/SearchTab";
@@ -11,6 +15,10 @@ const ChatTabs = createBottomTabNavigator<ChatTabsParams>();
 
 export default function ChatTabsNavigation(): JSX.Element {
   const safeAreaInsets = useSafeAreaInsets();
+  const theme = useTheme();
+
+  const iconSize = 40;
+  const iconStrokeWidth = 20;
 
   return (
     <>
@@ -37,9 +45,21 @@ export default function ChatTabsNavigation(): JSX.Element {
             tabBarIcon: ({ focused }) => {
               return focused ? (
                 // <HomeSvgActive width={tabIconSpacing} height={tabIconSpacing} />
-                <Text>Home y</Text>
+                <HomeSvg
+                  width={iconSize}
+                  height={iconSize}
+                  stroke={theme.colors.foreground}
+                  strokeWidth={iconStrokeWidth}
+                  // fill={theme.colors.primary}
+                />
               ) : (
-                <Text>Home n</Text>
+                <HomeSvg
+                  width={iconSize}
+                  height={iconSize}
+                  stroke={theme.colors.midGrey}
+                  strokeWidth={iconStrokeWidth}
+                  // fill={theme.colors.primary}
+                />
               );
             },
           }}
@@ -49,7 +69,21 @@ export default function ChatTabsNavigation(): JSX.Element {
           component={SearchTab}
           options={{
             tabBarIcon: ({ focused }) => {
-              return focused ? <Text>Search y</Text> : <Text>Search n</Text>;
+              return focused ? (
+                <SearchSvg
+                  width={iconSize}
+                  height={iconSize}
+                  stroke={theme.colors.foreground}
+                  strokeWidth={iconStrokeWidth}
+                />
+              ) : (
+                <SearchSvg
+                  width={iconSize}
+                  height={iconSize}
+                  stroke={theme.colors.midGrey}
+                  strokeWidth={iconStrokeWidth}
+                />
+              );
             },
           }}
         />
@@ -58,7 +92,21 @@ export default function ChatTabsNavigation(): JSX.Element {
           component={ProfileTab}
           options={{
             tabBarIcon: ({ focused }) => {
-              return focused ? <Text>Profile y</Text> : <Text>Profile n</Text>;
+              return focused ? (
+                <PersonSvg
+                  width={iconSize}
+                  height={iconSize}
+                  stroke={theme.colors.foreground}
+                  strokeWidth={iconStrokeWidth}
+                />
+              ) : (
+                <PersonSvg
+                  width={iconSize}
+                  height={iconSize}
+                  stroke={theme.colors.midGrey}
+                  strokeWidth={iconStrokeWidth}
+                />
+              );
             },
           }}
         />

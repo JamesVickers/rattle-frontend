@@ -35,7 +35,7 @@ const theme: DefaultTheme = {
         danger: "#fa2a2a",
       },
       tropical: {
-        foreground: "#fbff12",
+        foreground: "#171717",
         background: "#99d9ff",
         icon: "#efefef",
         midGrey: "#cfcfcf",
