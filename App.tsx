@@ -6,7 +6,6 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { persistCache } from "apollo3-cache-persist";
 import { ThemeProvider } from "styled-components/native";
 import { get, merge } from "lodash";
-import PostsScreen from "./src/screens/PostsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -151,15 +150,6 @@ function Navigation(): JSX.Element {
             options={{
               ...headerOptions,
               title: "Create Account Screen",
-              headerShown: false,
-            }}
-          />
-          <RootStack.Screen
-            name="Posts"
-            component={PostsScreen}
-            options={{
-              ...headerOptions,
-              title: "Posts screeeeeen",
               headerShown: false,
             }}
           />

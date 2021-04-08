@@ -1,7 +1,8 @@
 import { Id, ModelBase } from "./types";
 
 export interface User extends ModelBase {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   profileImage?: {
     id: Id;

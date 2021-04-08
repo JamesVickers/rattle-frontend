@@ -24,6 +24,7 @@ export default function ChatTabsNavigation(): JSX.Element {
     <>
       <ChatTabs.Navigator
         tabBarOptions={{
+          showLabel: false,
           // activeTintColor: theme.foreground.tabBarActive,
           // activeBackgroundColor: theme.colour.tabBarActive,
           // inactiveTintColor: theme.foreground.tabBar,
@@ -31,10 +32,10 @@ export default function ChatTabsNavigation(): JSX.Element {
           style: {
             // backgroundColor: theme.colour.tabBar,
             // borderTopColor: theme.colour.divider,
-            height: safeAreaInsets.bottom + 64,
+            height: safeAreaInsets.bottom + 50,
           },
-          labelStyle: { paddingBottom: 8 },
-          tabStyle: { paddingTop: 2 },
+          // labelStyle: { paddingBottom: 8 },
+          // tabStyle: { paddingTop: 2 },
           safeAreaInsets,
           keyboardHidesTabBar: Platform.OS === "android",
         }}>

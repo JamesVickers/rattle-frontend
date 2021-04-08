@@ -21,11 +21,12 @@ export default function PostItem({
         borderWidth: 1,
         borderColor: "blue",
       }}>
-      <Text>PostItem!!</Text>
+      {/* <Text>
+        {post.author.firstName} {post.author.lastName}
+      </Text> */}
       <Text>{post.title}</Text>
       <Text>{post.body}</Text>
       <Text>{post.status}</Text>
-      {/* <Text>{post.author.firstName} {post.author.lastName}</Text> */}
       {/* <ProfileIconPlaceholder
         source={{
           uri: post.author.profileImage?.image.publicUrlTransformed,

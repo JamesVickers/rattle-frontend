@@ -9,7 +9,8 @@ export const ALL_POSTS_QUERY = gql`
       status
       author {
         id
-        name
+        firstName
+        lastName
         profileImage {
           image {
             id

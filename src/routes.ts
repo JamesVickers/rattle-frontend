@@ -7,7 +7,6 @@ export type RootStackParams = {
   SignOut: undefined;
   CreateAccount: undefined;
   ChatTabs: undefined;
-  Posts: undefined;
   SinglePost: { id: Id };
 };
 

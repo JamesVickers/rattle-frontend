@@ -4,10 +4,17 @@ import {
 } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button, StatusBar, Text, View } from "react-native";
+import { Button, StatusBar, Text } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
 import { ChatTabsParams, RootStackParams } from "../routes";
+import CreatePostItem from "../components/CreatePostItem";
+import PostItem from "../components/PostItem";
+import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
+import { useQuery } from "@apollo/client";
+import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
+import { Id } from "../state/types";
 
 export default function HomeTab(): JSX.Element {
   const navigation = useNavigation<
@@ -18,9 +25,28 @@ export default function HomeTab(): JSX.Element {
   >();
   const user = useUser();
 
+  const {
+    data,
+    // , error, loading
+  } = useQuery(ALL_POSTS_QUERY);
+
+  const {
+    data: postCountData,
+    // loading,
+    // error
+  } = useQuery(COUNT_POST_QUERY);
+  const { count: postsCount } = postCountData._allPostsMeta;
+
   const goToSignOutScreen = useCallback(() => {
     navigation.navigate("SignOut");
   }, [navigation]);
+
+  const goToPostItemScreen = useCallback(
+    (selectedPostId: Id) => {
+      navigation.navigate("SinglePost", { id: selectedPostId });
+    },
+    [navigation],
+  );
 
   return (
     <SafeAreaView
@@ -32,21 +58,30 @@ export default function HomeTab(): JSX.Element {
       }}
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
-      <View>
-        {/* <ToggleThemeMode /> */}
-        {/* <ToggleOpen /> */}
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>HomeTab :)</Text>
-        <Button title="Sign Out" onPress={goToSignOutScreen} />
-        <Button
-          title="go to PostsScreen"
-          onPress={() => {
-            navigation.navigate("Posts");
-          }}
-        />
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          {user && `Hi ${user.firstName}, you are logged in!!`}
-        </Text>
-      </View>
+
+      {/* <ToggleThemeMode /> */}
+      {/* <ToggleOpen /> */}
+      <Text style={{ fontSize: 30, fontWeight: "bold" }}>HomeTab :)</Text>
+      <Button title="Sign Out" onPress={goToSignOutScreen} />
+      <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+        {user && `${user.firstName}`}
+      </Text>
+      <Text>
+        Post count: <Text style={{ fontWeight: "bold" }}>{postsCount}. </Text>
+        Found using GraphQL meta query!
+      </Text>
+      <FlatList
+        data={data.allPosts}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <PostItem
+            key={item.id}
+            post={item}
+            onPressPost={goToPostItemScreen}
+          />
+        )}
+      />
+      <CreatePostItem />
     </SafeAreaView>
   );
 }
