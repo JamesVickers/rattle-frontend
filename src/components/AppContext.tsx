@@ -3,9 +3,6 @@ import React, { createContext, useState } from "react";
 export type AppContextType = {
   // items: string[];
   // addItem: (name: string) => void;
-  // themePref: "light" | "dark";
-  // toggleThemePref: () => void;
-  mode: string;
   toggleMode: () => void;
   isOpen: boolean;
   toggleOpen: () => void;
@@ -16,9 +13,6 @@ export type AppContextType = {
 const contextDefaultValues: AppContextType = {
   // items: [],
   // addItem: () => {},
-  // themePref: "light",
-  // toggleThemePref: () => undefined,
-  mode: "default",
   toggleMode: () => undefined,
   isOpen: false,
   toggleOpen: () => undefined,
@@ -29,16 +23,14 @@ const contextDefaultValues: AppContextType = {
 export const AppContext = createContext<AppContextType>(contextDefaultValues);
 
 // custom hook to save repeating React.useContext(AppContext)
-// just use this instear --> const { mode, toggleMode } = useAppContext()
+// just use this instead --> const { mode, toggleMode } = useAppContext()
 // export const useAppContext = (): AppContextType => React.useContext(AppContext);
 
 export default function AppProvider({
   children,
-  mode,
   toggleMode,
 }: {
   children?: React.ReactNode;
-  mode: string;
   toggleMode: () => void;
 }): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(contextDefaultValues.isOpen);
@@ -51,7 +43,6 @@ export default function AppProvider({
   return (
     <AppContext.Provider
       value={{
-        mode,
         toggleMode,
         isOpen,
         toggleOpen,

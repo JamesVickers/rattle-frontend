@@ -11,30 +11,6 @@ declare module "styled-components/native" {
     secondary: string;
     midBlue: string;
     danger: string;
-    modes: {
-      dark: {
-        foreground: string;
-        background: string;
-        icon: string;
-        midGrey: string;
-        border: string;
-        primary: string;
-        secondary: string;
-        midBlue: string;
-        danger: string;
-      };
-      tropical: {
-        foreground: string;
-        background: string;
-        icon: string;
-        midGrey: string;
-        border: string;
-        primary: string;
-        secondary: string;
-        midBlue: string;
-        danger: string;
-      };
-    };
   }
 
   // export interface DefaultThemeFontData<T> {
@@ -63,6 +39,7 @@ declare module "styled-components/native" {
   export interface DefaultTheme {
     // id?: string;
     // isSmallScreen: boolean;
+    lightOrDark: "light" | "dark";
     colors: DefaultThemeColours;
   }
 }

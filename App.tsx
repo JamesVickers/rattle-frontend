@@ -5,20 +5,19 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
 import { persistCache } from "apollo3-cache-persist";
 import { ThemeProvider } from "styled-components/native";
-import { get, merge } from "lodash";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import SinglePostScreen from "./src/screens/SinglePostScreen";
 import AppProvider from "./src/components/AppContext";
-import { modes, theme as baseTheme } from "./src/styles/theme";
-import { colorModeStorage } from "./src/utils/colourModeStorage";
 import CreateAccountScreen from "./src/screens/CreateAccountScreen";
 import SplashScreen from "./src/screens/SplashScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import SignOutScreen from "./src/screens/SignOutScreen";
 import { useUser } from "./src/components/User";
 import ChatTabsNavigation from "./src/ChatTabsNavigation";
+import { darkTheme, lightTheme } from "./src/styles/theme";
+import { useDarkMode } from "./src/utils/useDarkMode";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -42,34 +41,9 @@ const App = (): JSX.Element => {
     }).then(() => setLoadingCache(false));
   }, []);
 
-  const [mode, setMode] = React.useState<string>(modes[0]);
+  const { theme, toggleTheme } = useDarkMode();
 
-  // Fetch the user’s colour theme mode preference from AsyncStorage and setting it to state
-  useEffect(() => {
-    async function getMode() {
-      const stored = await colorModeStorage.get();
-      setMode(stored || "default");
-    }
-    getMode();
-  }, []);
-
-  //  Set the new colour theme mode to AsyncStorage each time it’s updated
-  useEffect(() => {
-    if (!mode) return;
-    colorModeStorage.set(mode);
-  }, [mode]);
-
-  const toggleMode = () => {
-    const i = (modes.indexOf(mode) + 1) % modes.length;
-    setMode(modes[i]);
-  };
-
-  const getTheme = (modeArg: string) =>
-    merge({}, baseTheme, {
-      colors: get(baseTheme.colors.modes, modeArg, baseTheme.colors),
-    });
-
-  const theme = getTheme(mode);
+  const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   if (loadingCache) {
     return <Text>Loading App...</Text>;
@@ -77,8 +51,8 @@ const App = (): JSX.Element => {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <AppProvider mode={mode} toggleMode={toggleMode}>
+      <ThemeProvider theme={themeMode}>
+        <AppProvider toggleMode={toggleTheme}>
           <StatusBar barStyle="dark-content" />
           <SafeAreaProvider>
             <Navigation />
