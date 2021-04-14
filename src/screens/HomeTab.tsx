@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button, StatusBar, Text } from "react-native";
+import { StatusBar, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
@@ -37,10 +37,6 @@ export default function HomeTab(): JSX.Element {
   } = useQuery(COUNT_POST_QUERY);
   const { count: postsCount } = postCountData._allPostsMeta;
 
-  const goToSignOutScreen = useCallback(() => {
-    navigation.navigate("SignOut");
-  }, [navigation]);
-
   const goToPostItemScreen = useCallback(
     (selectedPostId: Id) => {
       navigation.navigate("SinglePost", { id: selectedPostId });
@@ -58,8 +54,6 @@ export default function HomeTab(): JSX.Element {
       }}
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
-      <Text style={{ fontSize: 30, fontWeight: "bold" }}>HomeTab :)</Text>
-      <Button title="Sign Out" onPress={goToSignOutScreen} />
       <Text style={{ fontSize: 30, fontWeight: "bold" }}>
         {user && `${user.firstName}`}
       </Text>

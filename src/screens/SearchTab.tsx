@@ -47,7 +47,6 @@ export default function SearchTab(): JSX.Element {
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <View>
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>SearchTab :)</Text>
         <SearchBar
           error={findUsersError}
           searchString={searchString}
