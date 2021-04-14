@@ -2,8 +2,12 @@ import React from "react";
 import { StatusBar, Text, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import ToggleThemeMode from "../components/ToggleThemeMode";
+import { useUser } from "../components/User";
+import ProfileImage from "../components/ProfileImage";
 
 export default function ProfileTab(): JSX.Element {
+  const user = useUser();
+
   return (
     <SafeAreaView
       forceInset={{
@@ -17,6 +21,7 @@ export default function ProfileTab(): JSX.Element {
       <View>
         <ToggleThemeMode />
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>ProfileTab :)</Text>
+        <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />
       </View>
     </SafeAreaView>
   );

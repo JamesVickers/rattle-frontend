@@ -1,7 +1,7 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
-import styled from "styled-components/native";
+import { Text, View } from "react-native";
 import { User } from "../state/user.model";
+import ProfileImage from "./ProfileImage";
 
 export default function UserItem({ user }: { user: User }): JSX.Element {
   return (
@@ -15,21 +15,7 @@ export default function UserItem({ user }: { user: User }): JSX.Element {
       <Text>
         {user.firstName} {user.lastName}
       </Text>
-      <ProfileIconPlaceholder
-        source={{
-          uri: user.profileImage?.image.publicUrlTransformed,
-        }}
-      />
+      <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />
     </View>
   );
 }
-
-export const ProfileIconPlaceholder = styled(Image)<{
-  height?: number;
-  colour?: string;
-}>`
-  width: 50px;
-  height: 50px;
-  border-radius: 200px;
-  background-color: #ff6347;
-`;

@@ -1,18 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { User } from "../state/user.model";
-
-export const CURRENT_USER_QUERY = gql`
-  query {
-    authenticatedUser {
-      #   ... on User {
-      id
-      firstName
-      lastName
-      # query other info about the user here e.g. user's posts
-      #   }
-    }
-  }
-`;
+import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 
 export function useUser(): {
   authenticatedUser: User;

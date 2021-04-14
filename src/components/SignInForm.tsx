@@ -3,11 +3,12 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
 import { Button, Text, View } from "react-native";
+import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
-import { CURRENT_USER_QUERY, useUser } from "./User";
+import { useUser } from "./User";
 
 export default function SignInForm(): JSX.Element {
   const navigation = useNavigation<

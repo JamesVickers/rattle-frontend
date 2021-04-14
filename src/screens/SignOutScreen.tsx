@@ -4,7 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { Button, Text } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { CURRENT_USER_QUERY } from "../components/User";
+import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
 import { RootStackParams } from "../routes";
 
