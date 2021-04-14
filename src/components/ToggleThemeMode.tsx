@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
-import { Button, View } from "react-native";
+import { Button } from "react-native";
 import { AppContext } from "../components/AppContext";
+import { Card } from "./Card";
 
 export default function ToggleThemeMode(): JSX.Element {
   const { toggleMode } = useContext(AppContext);
 
   return (
-    <View style={{ backgroundColor: "white" }}>
+    <Card>
       <Button title="toggleTheme" onPress={toggleMode} />
-    </View>
+    </Card>
   );
 }

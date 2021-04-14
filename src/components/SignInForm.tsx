@@ -2,11 +2,12 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
-import { Button, Text, View } from "react-native";
+import { Button, Text } from "react-native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
+import { Card } from "./Card";
 import TextInput from "./TextInput";
 import { useUser } from "./User";
 
@@ -49,7 +50,7 @@ export default function SignInForm(): JSX.Element {
   }, [error, resetForm, signin]);
 
   return (
-    <View style={{ backgroundColor: "white" }}>
+    <Card>
       <Text>Sign in to your account:</Text>
       <TextInput
         value={inputs.email}
@@ -70,6 +71,6 @@ export default function SignInForm(): JSX.Element {
           Authentication failed, please try again :(
         </Text>
       )}
-    </View>
+    </Card>
   );
 }

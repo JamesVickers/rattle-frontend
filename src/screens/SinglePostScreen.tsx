@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Text, Button } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { Card } from "../components/Card";
 import HardDeletePostItem from "../components/HardDeletePostItem";
 import TextInput from "../components/TextInput";
 import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
@@ -48,22 +49,24 @@ export default function SinglePostcreen(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1, backgroundColor: "lightBlue" }}>
+      style={{ flex: 1 }}>
       <Text>SinglePostItemScreen</Text>
       <Button title="goBack" onPress={() => navigation.goBack()} />
       <Text>Post id to update is: {id}</Text>
-      <TextInput
-        value={inputs.title}
-        handleChange={handleChange}
-        name={"title"}
-        placeholder={"Add the post title"}
-      />
-      <TextInput
-        value={inputs.body}
-        handleChange={handleChange}
-        name={"body"}
-        placeholder={"Add the post body text"}
-      />
+      <Card>
+        <TextInput
+          value={inputs.title}
+          handleChange={handleChange}
+          name={"title"}
+          placeholder={"Add the post title"}
+        />
+        <TextInput
+          value={inputs.body}
+          handleChange={handleChange}
+          name={"body"}
+          placeholder={"Add the post body text"}
+        />
+      </Card>
       <Button
         title="Update"
         onPress={async () => {

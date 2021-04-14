@@ -7,6 +7,8 @@ export const lightTheme: DefaultTheme = {
     foreground: "#171717",
     // lightGrey
     background: "#efefef",
+    // white
+    card: "#ffffff",
     // darkGrey
     icon: "#383838",
     // midGrey
@@ -29,6 +31,7 @@ export const darkTheme: DefaultTheme = {
   colors: {
     foreground: "#ffffff",
     background: "#383838",
+    card: "#171717",
     icon: "#efefef",
     midGrey: "#cfcfcf",
     border: "#171717",

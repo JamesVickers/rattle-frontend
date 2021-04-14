@@ -4,6 +4,7 @@ declare module "styled-components/native" {
   export interface DefaultThemeColours {
     foreground: string;
     background: string;
+    card: string;
     icon: string;
     midGrey: string;
     border: string;

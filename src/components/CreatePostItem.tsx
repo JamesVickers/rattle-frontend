@@ -1,10 +1,11 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
-import { Button, Image, Text, View } from "react-native";
+import { Button, Image, Text } from "react-native";
 import styled from "styled-components/native";
 import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
 import useForm from "../utils/useForm";
+import { Card } from "./Card";
 import TextInput from "./TextInput";
 
 export default function CreatePostItem(): JSX.Element {
@@ -33,7 +34,7 @@ export default function CreatePostItem(): JSX.Element {
   const canCreatePost = inputs.title !== "" && inputs.body !== "";
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <Card>
       <Text>Create a PostItem:</Text>
       <TextInput
         value={inputs.title}
@@ -60,7 +61,7 @@ export default function CreatePostItem(): JSX.Element {
         }}
       />
       <Button title="Clear form" onPress={clearForm} />
-    </View>
+    </Card>
   );
 }
 

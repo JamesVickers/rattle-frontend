@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput as RNTextInput } from "react-native-gesture-handler";
+import styled, { useTheme } from "styled-components/native";
 
 export default function TextInput({
   name,
@@ -14,9 +15,11 @@ export default function TextInput({
   secureTextEntry?: boolean;
   handleChange: (inputName: string, inputValue: string) => void;
 }): JSX.Element {
+  const theme = useTheme();
   return (
-    <RNTextInput
+    <RNTextInputStyles
       placeholder={placeholder}
+      placeholderTextColor={theme.colors.foreground}
       value={value}
       secureTextEntry={secureTextEntry}
       autoCapitalize="none"
@@ -24,3 +27,7 @@ export default function TextInput({
     />
   );
 }
+const RNTextInputStyles = styled(RNTextInput)`
+  color: ${(props) => props.theme.colors.foreground};
+  background-color: ${(props) => props.theme.colors.card};
+`;

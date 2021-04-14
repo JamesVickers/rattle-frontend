@@ -30,8 +30,8 @@ export default function ChatTabsNavigation(): JSX.Element {
           // inactiveTintColor: theme.foreground.tabBar,
           // inactiveBackgroundColor: theme.colour.tabBar,
           style: {
-            // backgroundColor: theme.colour.tabBar,
-            // borderTopColor: theme.colour.divider,
+            backgroundColor: theme.colors.background,
+            borderTopColor: theme.colors.background,
             height: safeAreaInsets.bottom + 50,
           },
           // labelStyle: { paddingBottom: 8 },

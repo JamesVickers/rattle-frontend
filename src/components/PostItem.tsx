@@ -1,9 +1,9 @@
 import React from "react";
-import { Image, Text } from "react-native";
+import { Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import styled from "styled-components/native";
 import { Post } from "../state/post.model";
 import { Id } from "../state/types";
+import { Card } from "./Card";
 
 export default function PostItem({
   post,
@@ -13,35 +13,15 @@ export default function PostItem({
   onPressPost: (selectedPostId: Id) => void;
 }): JSX.Element {
   return (
-    <TouchableOpacity
-      onPress={() => onPressPost(post.id)}
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        borderWidth: 1,
-        borderColor: "blue",
-      }}>
-      {/* <Text>
+    <TouchableOpacity onPress={() => onPressPost(post.id)}>
+      <Card>
+        {/* <Text>
         {post.author.firstName} {post.author.lastName}
       </Text> */}
-      <Text>{post.title}</Text>
-      <Text>{post.body}</Text>
-      <Text>{post.status}</Text>
-      {/* <ProfileIconPlaceholder
-        source={{
-          uri: post.author.profileImage?.image.publicUrlTransformed,
-        }}
-      /> */}
+        <Text>{post.title}</Text>
+        <Text>{post.body}</Text>
+        <Text>{post.status}</Text>
+      </Card>
     </TouchableOpacity>
   );
 }
-
-export const ProfileIconPlaceholder = styled(Image)<{
-  height?: number;
-  colour?: string;
-}>`
-  width: 50px;
-  height: 50px;
-  border-radius: 200px;
-  background-color: #ff6347;
-`;
