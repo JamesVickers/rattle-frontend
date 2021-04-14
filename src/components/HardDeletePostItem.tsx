@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { Button } from "react-native";
-import { Id } from "../state/types";
+import { Id, SilentAny } from "../state/types";
 
 const HARD_DELETE_POST_MUTATION = gql`
   mutation HARD_DELETE_POST_MUTATION($id: ID!) {
@@ -12,9 +12,9 @@ const HARD_DELETE_POST_MUTATION = gql`
   }
 `;
 
-function update(cache, payload) {
-  console.log(payload);
-  console.log("running update after deletePost mutation");
+function update(cache: SilentAny, payload: SilentAny) {
+  // console.log(payload);
+  // console.log("running update after deletePost mutation");
   cache.evict(cache.identify(payload.data.deletePost));
 }
 
