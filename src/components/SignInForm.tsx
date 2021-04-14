@@ -14,15 +14,9 @@ export default function SignInForm(): JSX.Element {
     StackNavigationProp<RootStackParams, "SignIn">
   >();
 
-  const {
-    inputs,
-    handleChange,
-    // clearForm,
-    resetForm,
-  } = useForm({
+  const { inputs, handleChange, resetForm } = useForm({
     email: "",
     password: "",
-    // author: "JamesVickers",
   });
 
   const [
@@ -45,15 +39,13 @@ export default function SignInForm(): JSX.Element {
   }, [user, navigation]);
 
   const onSubmit = useCallback(async () => {
-    // console.log(inputs);
     try {
       await signin();
-      // console.log(resOnSubmit);
     } catch {
-      // console.error(error);
+      console.error(error);
     }
     resetForm();
-  }, [resetForm, signin]);
+  }, [error, resetForm, signin]);
 
   return (
     <View style={{ backgroundColor: "white" }}>

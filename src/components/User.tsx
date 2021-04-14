@@ -22,7 +22,7 @@ export function useUser(): {
     // , loading, error
   } = useQuery(CURRENT_USER_QUERY);
 
-  // console.log("useUser data.authenticatedUser: ", data.authenticatedUser);
+  console.log("useUser data.authenticatedUser: ", data.authenticatedUser);
 
   // if there is data return the authenticatedItem, if not return undefined
   return data?.authenticatedUser;

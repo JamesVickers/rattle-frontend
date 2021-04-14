@@ -15,8 +15,6 @@ import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { useQuery } from "@apollo/client";
 import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
-import ToggleOpen from "../components/ToggleOpen";
-import ToggleThemeMode from "../components/ToggleThemeMode";
 
 export default function HomeTab(): JSX.Element {
   const navigation = useNavigation<
@@ -60,9 +58,6 @@ export default function HomeTab(): JSX.Element {
       }}
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
-
-      <ToggleThemeMode />
-      <ToggleOpen />
       <Text style={{ fontSize: 30, fontWeight: "bold" }}>HomeTab :)</Text>
       <Button title="Sign Out" onPress={goToSignOutScreen} />
       <Text style={{ fontSize: 30, fontWeight: "bold" }}>

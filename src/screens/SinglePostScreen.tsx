@@ -33,14 +33,9 @@ export default function SinglePostcreen(): JSX.Element {
     },
   ] = useMutation(UPDATE_POST_MUTATION);
 
-  const {
-    inputs,
-    handleChange,
-    // clearForm, resetForm
-  } = useForm({
+  const { inputs, handleChange } = useForm({
     title: data?.Post.title,
     body: data?.Post.body,
-    // author: "JamesVickers",
   });
 
   if (loading) return <Text>Loading...</Text>;
@@ -56,7 +51,7 @@ export default function SinglePostcreen(): JSX.Element {
       style={{ flex: 1, backgroundColor: "lightBlue" }}>
       <Text>SinglePostItemScreen</Text>
       <Button title="goBack" onPress={() => navigation.goBack()} />
-      <Text>Post id to pudate is: {id}</Text>
+      <Text>Post id to update is: {id}</Text>
       <TextInput
         value={inputs.title}
         handleChange={handleChange}

@@ -19,7 +19,6 @@ export default function Searchbar({
         onChangeText={(string) => setSearchString(string)}
         placeholder={"Search"}
       />
-      {/* <Button title="Search" onPress={onSearch} /> */}
       {error && (
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>
           Search failed, please try again :(

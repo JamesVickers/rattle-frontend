@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar, Text, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import ToggleThemeMode from "../components/ToggleThemeMode";
 
 export default function ProfileTab(): JSX.Element {
   return (
@@ -14,6 +15,7 @@ export default function ProfileTab(): JSX.Element {
       style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <View>
+        <ToggleThemeMode />
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>ProfileTab :)</Text>
       </View>
     </SafeAreaView>

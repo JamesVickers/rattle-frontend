@@ -24,15 +24,13 @@ export default function SignOutScreen(): JSX.Element {
   });
 
   const onSignOut = useCallback(async () => {
-    // console.log(inputs);
     try {
       await signout();
       navigation.navigate("Splash");
-      // console.log(resOnSubmit);
     } catch {
-      // console.error(error);
+      console.error(error);
     }
-  }, [navigation, signout]);
+  }, [error, navigation, signout]);
 
   const onCancel = useCallback(() => {
     navigation.goBack();

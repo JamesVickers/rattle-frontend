@@ -39,15 +39,13 @@ export default function CreateAccountScreen(): JSX.Element {
   });
 
   const onSignUp = useCallback(async () => {
-    // console.log(inputs);
     try {
       await signup();
-      // console.log(resOnSubmit);
     } catch {
-      // console.error(error);
+      console.error(error);
     }
     resetForm();
-  }, [resetForm, signup]);
+  }, [error, resetForm, signup]);
 
   const onCancel = useCallback(() => {
     navigation.goBack();

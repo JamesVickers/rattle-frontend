@@ -8,13 +8,10 @@ import useForm from "../utils/useForm";
 import TextInput from "./TextInput";
 
 export default function CreatePostItem(): JSX.Element {
-  // const [submitted, setSubmitted] = useState(false);
-
   // remove initial state in useForm custom hook if want no initial values and not using resetForm function
-  const { inputs, handleChange, clearForm, resetForm } = useForm({
-    title: "Title example",
-    body: "Body example",
-    // author: "JamesVickers",
+  const { inputs, handleChange, clearForm } = useForm({
+    title: "",
+    body: "",
   });
   const [
     createPost,
@@ -33,7 +30,7 @@ export default function CreatePostItem(): JSX.Element {
     ],
   });
 
-  // const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+  const canCreatePost = inputs.title !== "" && inputs.body !== "";
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -50,38 +47,19 @@ export default function CreatePostItem(): JSX.Element {
         name={"body"}
         placeholder={"Add the post body text"}
       />
-      {/* <TextInput
-        value={inputs.author}
-        handleChange={handleChange}
-        name={"author"}
-        placeholder={"Add the post body text"}
-      /> */}
-      {/* <TextInput
-          value={username}
-          onChangeText={setUsername}
-          placeholder="Body"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoCompleteType="off" 
-          autoFocus
-          onSubmitEditing={() => undefined}
-          blurOnSubmit={false}
-        /> */}
       <Button
         title="Post it!"
+        disabled={!canCreatePost}
         onPress={async () => {
           try {
-            // const res =
             await createPost();
             clearForm();
-            // navigation.navigate("PostItem");
           } catch {
             console.error("createPost error: ", error);
           }
         }}
       />
       <Button title="Clear form" onPress={clearForm} />
-      <Button title="Reset form" onPress={resetForm} />
     </View>
   );
 }

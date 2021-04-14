@@ -38,9 +38,7 @@ export default function HardDeletePostItem({ id }: { id: Id }): JSX.Element {
       disabled={loading}
       onPress={async () => {
         try {
-          // const res =
-          const res = await deletePost();
-          console.log("deletePost res: ", res);
+          await deletePost();
         } catch {
           console.error("deletePost error: ", error);
         }
