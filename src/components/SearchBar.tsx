@@ -1,6 +1,7 @@
 import { ApolloError } from "@apollo/client";
 import React from "react";
-import { Text, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
+import Text from "./Text";
 
 export default function Searchbar({
   error,
@@ -19,11 +20,7 @@ export default function Searchbar({
         onChangeText={(string) => setSearchString(string)}
         placeholder={"Search"}
       />
-      {error && (
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          Search failed, please try again :(
-        </Text>
-      )}
+      {error && <Text>Search failed, please try again :(</Text>}
     </View>
   );
 }

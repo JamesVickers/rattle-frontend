@@ -1,9 +1,10 @@
 // import { useMutation } from "@apollo/client";
 // import React from "react";
-// import { Button, Text, View } from "react-native";
+// import { Button, View } from "react-native";
 // import { SIGN_UP_MUTATION } from "../gql/SignUpMutation";
 // import useForm from "../utils/useForm";
 // import TextInput from "./TextInput";
+// import Text from "./Text";
 
 // export default function RequestPasswordReset(): JSX.Element {
 //   const {
@@ -48,7 +49,7 @@
 //       />
 //       <Button title="Request password reset" onPress={() => null} />
 //       {error && (
-//         <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+//         <Text>
 //           Password reset request failed, please try again :(
 //         </Text>
 //       )}

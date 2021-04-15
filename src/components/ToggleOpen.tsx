@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
 import styled from "styled-components";
 import LikeSvg from "../images/like.svg";
 import { AppContext } from "../components/AppContext";
 import { Card } from "./Card";
+import Text from "./Text";
 
 export default function ToggleOpen(): JSX.Element {
   const { isOpen, toggleOpen, openExample, closeExample } = useContext(

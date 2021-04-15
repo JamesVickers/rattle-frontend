@@ -2,8 +2,9 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import Text from "../components/Text";
 import TextInput from "../components/TextInput";
 import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
 import { RootStackParams } from "../routes";
@@ -94,20 +95,12 @@ export default function CreateAccountScreen(): JSX.Element {
       <Button title="Cancel" onPress={onCancel} />
       {data?.createUser && (
         <>
-          <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-            Sign up successful with {data.createUser.email}
-          </Text>
-          <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-            You can now sign in to Rattle
-          </Text>
+          <Text>Sign up successful with {data.createUser.email}</Text>
+          <Text>You can now sign in to Rattle</Text>
           <Button title="Back to Sign In" onPress={goBackToSignInScreen} />
         </>
       )}
-      {error && (
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          Sign up failed, please try again :(
-        </Text>
-      )}
+      {error && <Text>Sign up failed, please try again :(</Text>}
     </SafeAreaView>
   );
 }

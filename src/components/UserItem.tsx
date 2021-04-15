@@ -1,8 +1,8 @@
 import React from "react";
-import { Text } from "react-native";
 import { User } from "../state/user.model";
 import { Card } from "./Card";
 import ProfileImage from "./ProfileImage";
+import Text from "./Text";
 
 export default function UserItem({ user }: { user: User }): JSX.Element {
   return (

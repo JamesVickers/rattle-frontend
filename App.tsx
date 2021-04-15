@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StatusBar } from "react-native";
+import { View, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -18,6 +18,7 @@ import { useUser } from "./src/components/User";
 import ChatTabsNavigation from "./src/ChatTabsNavigation";
 import { darkTheme, lightTheme } from "./src/styles/theme";
 import { useDarkMode } from "./src/utils/useDarkMode";
+import Text from "./src/components/Text";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();

@@ -1,9 +1,9 @@
 import React from "react";
-import { Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Post } from "../state/post.model";
 import { Id } from "../state/types";
 import { Card } from "./Card";
+import Text from "./Text";
 
 export default function PostItem({
   post,

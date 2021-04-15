@@ -2,12 +2,13 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
 import { Card } from "./Card";
+import Text from "./Text";
 import TextInput from "./TextInput";
 import { useUser } from "./User";
 
@@ -66,11 +67,7 @@ export default function SignInForm(): JSX.Element {
         placeholder={"Password"}
       />
       <Button title="Sign in!" onPress={onSubmit} />
-      {error && (
-        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
-          Authentication failed, please try again :(
-        </Text>
-      )}
+      {error && <Text>Authentication failed, please try again :(</Text>}
     </Card>
   );
 }

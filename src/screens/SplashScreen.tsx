@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect } from "react";
-import { Text } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import Text from "../components/Text";
 import { useUser } from "../components/User";
 import { RootStackParams } from "../routes";
 
