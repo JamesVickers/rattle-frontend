@@ -5,7 +5,7 @@ import {
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { StatusBar } from "react-native";
-import { FlatList, TextInput } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
 import { ChatTabsParams, RootStackParams } from "../routes";

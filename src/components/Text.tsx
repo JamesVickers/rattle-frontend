@@ -5,7 +5,8 @@ import {
   TextProps as RNTextProps,
   TextStyle,
 } from "react-native";
-import styled, { DefaultThemeColours } from "styled-components/native";
+// import styled, { DefaultThemeColours } from "styled-components/native";
+import styled from "styled-components/native";
 
 export default function Text({
   children,
@@ -15,7 +16,8 @@ export default function Text({
 }: {
   children: React.ReactNode;
   styles?: StyleProp<TextStyle>;
-  colour?: keyof DefaultThemeColours;
+  // colour?: keyof DefaultThemeColours;
+  colour?: string;
 } & Omit<RNTextProps, "style">): JSX.Element {
   return (
     <RNTextStyles style={[styles]} colour={colour}>
@@ -23,6 +25,9 @@ export default function Text({
     </RNTextStyles>
   );
 }
-const RNTextStyles = styled(RNText)<{ colour: keyof DefaultThemeColours }>`
-  color: ${(props) => props.theme.colors[props.colour]};
+// const RNTextStyles = styled(RNText)<{ colour: keyof DefaultThemeColours }>`
+//   color: ${(props) => props.theme.colors[props.colour]};
+// `;
+const RNTextStyles = styled(RNText)<{ colour: string }>`
+  color: red;
 `;
