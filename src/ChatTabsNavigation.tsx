@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTheme } from "styled-components";
+import { useTheme } from "styled-components/native";
 import { ChatTabsParams } from "./routes";
 import HomeSvg from "./images/home-outline.svg";
 import SearchSvg from "./images/search-outline.svg";
