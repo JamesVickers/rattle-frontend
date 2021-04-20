@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { Button, StatusBar, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useTheme } from "styled-components/native";
 import ToggleThemeMode from "../components/ToggleThemeMode";
 import { useUser } from "../components/User";
 import ProfileImage from "../components/ProfileImage";
@@ -18,7 +19,7 @@ export default function ProfileTab(): JSX.Element {
       StackNavigationProp<ChatTabsParams, "Profile">
     >
   >();
-
+  const theme = useTheme();
   const user = useUser();
 
   const goToSignOutScreen = useCallback(() => {
@@ -33,7 +34,7 @@ export default function ProfileTab(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1 }}>
+      style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <StatusBar barStyle="dark-content" />
       <View>
         <Button title="Sign Out" onPress={goToSignOutScreen} />

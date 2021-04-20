@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { Button } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useTheme } from "styled-components/native";
 import Text from "../components/Text";
 import TextInput from "../components/TextInput";
 import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
@@ -14,6 +15,7 @@ export default function CreateAccountScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "CreateAccount">
   >();
+  const theme = useTheme();
 
   const {
     inputs,
@@ -64,7 +66,7 @@ export default function CreateAccountScreen(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1 }}>
+      style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Text>Sign up for an account:</Text>
       <TextInput
         value={inputs.firstName}

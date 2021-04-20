@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Button } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useTheme } from "styled-components/native";
 import { Card } from "../components/Card";
 import HardDeletePostItem from "../components/HardDeletePostItem";
 import Text from "../components/Text";
@@ -15,6 +16,7 @@ import useForm from "../utils/useForm";
 
 export default function SinglePostcreen(): JSX.Element {
   const route = useRoute<RouteProp<RootStackParams, "SinglePost">>();
+  const theme = useTheme();
   const { id } = route.params;
   const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
@@ -50,7 +52,7 @@ export default function SinglePostcreen(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1 }}>
+      style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Text>SinglePostItemScreen</Text>
       <Button title="goBack" onPress={() => navigation.goBack()} />
       <Text>Post id to update is: {id}</Text>

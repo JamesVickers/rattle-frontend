@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { Button, Text } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useTheme } from "styled-components/native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
 import { RootStackParams } from "../routes";
@@ -12,6 +13,7 @@ export default function SignOutScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignOut">
   >();
+  const theme = useTheme();
 
   const [
     signout,
@@ -44,7 +46,7 @@ export default function SignOutScreen(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1 }}>
+      style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Button title="Sign out" onPress={onSignOut} />
       <Button title="Cancel" onPress={onCancel} />
       {error && (

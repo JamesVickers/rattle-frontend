@@ -16,6 +16,7 @@ import { useQuery } from "@apollo/client";
 import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
 import Text from "../components/Text";
+import { useTheme } from "styled-components/native";
 
 export default function HomeTab(): JSX.Element {
   const navigation = useNavigation<
@@ -24,6 +25,7 @@ export default function HomeTab(): JSX.Element {
       StackNavigationProp<ChatTabsParams, "Home">
     >
   >();
+  const theme = useTheme();
   const user = useUser();
 
   const {
@@ -53,7 +55,7 @@ export default function HomeTab(): JSX.Element {
         right: "always",
         bottom: "always",
       }}
-      style={{ flex: 1 }}>
+      style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <StatusBar barStyle="dark-content" />
       <Text>{user && `${user.firstName}`}</Text>
       <Text>

@@ -31,8 +31,8 @@ export const darkTheme: DefaultTheme = {
   lightOrDark: "dark",
   colors: {
     foreground: "#ffffff",
-    background: "#383838",
-    card: "#171717",
+    background: "#171717",
+    card: "#2e2e2e",
     icon: "#efefef",
     midGrey: "#cfcfcf",
     border: "#171717",

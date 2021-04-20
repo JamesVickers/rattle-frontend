@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import AsyncStorage from "@react-native-community/async-storage";
 import { persistCache } from "apollo3-cache-persist";
-import { ThemeProvider } from "styled-components/native";
+import { ThemeProvider, useTheme } from "styled-components/native";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -69,6 +69,7 @@ const App = (): JSX.Element => {
 function Navigation(): JSX.Element {
   const user = useUser();
   const headerOptions = useStackNavigatorHeaderOptions();
+  const theme = useTheme();
 
   return (
     <View style={{ flex: 1 }}>
@@ -77,9 +78,9 @@ function Navigation(): JSX.Element {
           initialRouteName="Splash"
           screenOptions={{
             headerStyle: {
-              backgroundColor: "#000",
+              backgroundColor: theme.colors.background,
             },
-            headerTintColor: "#fff",
+            headerTintColor: theme.colors.foreground,
           }}>
           {user && (
             <RootStack.Screen

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect } from "react";
 import SafeAreaView from "react-native-safe-area-view";
@@ -10,6 +11,7 @@ export default function SplashScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "Splash">
   >();
+  const theme = useTheme();
 
   // if user exists then logged in
   const user = useUser();
@@ -41,7 +43,8 @@ export default function SplashScreen(): JSX.Element {
         top: "always",
         right: "always",
         bottom: "always",
-      }}>
+      }}
+      style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Text>Splash screen</Text>
       <Text>Splash screen</Text>
       <Text>Splash screen</Text>
