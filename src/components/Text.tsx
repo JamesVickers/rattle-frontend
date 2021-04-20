@@ -7,17 +7,18 @@ import {
 } from "react-native";
 // import styled, { DefaultThemeColours } from "styled-components/native";
 import styled from "styled-components/native";
+import { MyColours } from "../styles/myTheme";
 
 export default function Text({
   children,
   styles,
   // colour = "foreground",
-  colour = "secondary",
+  colour = "foreground",
 }: {
   children: React.ReactNode;
   styles?: StyleProp<TextStyle>;
   // colour?: keyof DefaultThemeColours;
-  colour?: string;
+  colour?: keyof MyColours;
 } & Omit<RNTextProps, "style">): JSX.Element {
   return (
     <RNTextStyles style={[styles]} colour={colour}>
@@ -28,6 +29,6 @@ export default function Text({
 // const RNTextStyles = styled(RNText)<{ colour: keyof DefaultThemeColours }>`
 //   color: ${(props) => props.theme.colors[props.colour]};
 // `;
-const RNTextStyles = styled(RNText)<{ colour: string }>`
-  color: red;
+const RNTextStyles = styled(RNText)<{ colour: keyof MyColours }>`
+  color: ${(props) => props.theme.colors[props.colour]};
 `;
