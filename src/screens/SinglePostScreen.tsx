@@ -3,8 +3,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Button } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
-import { useTheme } from "styled-components/native";
+import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Card } from "../components/Card";
 import HardDeletePostItem from "../components/HardDeletePostItem";
 import TextInput from "../components/TextInput";
@@ -16,7 +15,6 @@ import useForm from "../utils/useForm";
 
 export default function SinglePostcreen(): JSX.Element {
   const route = useRoute<RouteProp<RootStackParams, "SinglePost">>();
-  const theme = useTheme();
   const { id } = route.params;
   const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
@@ -45,14 +43,7 @@ export default function SinglePostcreen(): JSX.Element {
   if (loading) return <TextStyles>Loading...</TextStyles>;
 
   return (
-    <SafeAreaView
-      forceInset={{
-        left: "always",
-        top: "always",
-        right: "always",
-        bottom: "always",
-      }}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <SafeAreaViewDefault>
       <TextStyles>SinglePostItemScreen</TextStyles>
       <Button title="goBack" onPress={() => navigation.goBack()} />
       <TextStyles>Post id to update is: {id}</TextStyles>
@@ -89,6 +80,6 @@ export default function SinglePostcreen(): JSX.Element {
         }}
       />
       <HardDeletePostItem id={id} />
-    </SafeAreaView>
+    </SafeAreaViewDefault>
   );
 }

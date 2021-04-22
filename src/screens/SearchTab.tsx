@@ -2,17 +2,14 @@ import { useLazyQuery } from "@apollo/client";
 import React, { useCallback, useState } from "react";
 import { StatusBar, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import SafeAreaView from "react-native-safe-area-view";
-import { useTheme } from "styled-components/native";
 import debounce from "lodash.debounce";
 import SearchBar from "../components/SearchBar";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
+import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { TextStyles } from "../components/TextStyles";
 
 export default function SearchTab(): JSX.Element {
-  const theme = useTheme();
-
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
 
@@ -41,14 +38,7 @@ export default function SearchTab(): JSX.Element {
   );
 
   return (
-    <SafeAreaView
-      forceInset={{
-        left: "always",
-        top: "always",
-        right: "always",
-        bottom: "always",
-      }}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <SafeAreaViewDefault>
       <StatusBar barStyle="dark-content" />
       <View>
         <SearchBar
@@ -72,6 +62,6 @@ export default function SearchTab(): JSX.Element {
             <></>
           ))}
       </View>
-    </SafeAreaView>
+    </SafeAreaViewDefault>
   );
 }

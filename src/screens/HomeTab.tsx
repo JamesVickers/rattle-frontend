@@ -6,7 +6,6 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { StatusBar } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
 import { ChatTabsParams, RootStackParams } from "../routes";
 import CreatePostItem from "../components/CreatePostItem";
@@ -15,7 +14,7 @@ import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { useQuery } from "@apollo/client";
 import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
-import { useTheme } from "styled-components/native";
+import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { TextStyles } from "../components/TextStyles";
 
 export default function HomeTab(): JSX.Element {
@@ -25,7 +24,6 @@ export default function HomeTab(): JSX.Element {
       StackNavigationProp<ChatTabsParams, "Home">
     >
   >();
-  const theme = useTheme();
   const user = useUser();
 
   const {
@@ -48,14 +46,7 @@ export default function HomeTab(): JSX.Element {
   );
 
   return (
-    <SafeAreaView
-      forceInset={{
-        left: "always",
-        top: "always",
-        right: "always",
-        bottom: "always",
-      }}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}>
+    <SafeAreaViewDefault>
       <StatusBar barStyle="dark-content" />
       <TextStyles>{user && `${user.firstName}`}</TextStyles>
       <TextStyles>
@@ -74,6 +65,6 @@ export default function HomeTab(): JSX.Element {
         )}
       />
       <CreatePostItem />
-    </SafeAreaView>
+    </SafeAreaViewDefault>
   );
 }
