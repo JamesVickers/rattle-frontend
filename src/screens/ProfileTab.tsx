@@ -1,15 +1,15 @@
 import React, { useCallback } from "react";
 import { Button, StatusBar, View } from "react-native";
-import ToggleThemeMode from "../components/ToggleThemeMode";
-import { useUser } from "../components/User";
-import ProfileImage from "../components/ProfileImage";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { ChatTabsParams, RootStackParams } from "../routes";
 import {
   CompositeNavigationProp,
   useNavigation,
 } from "@react-navigation/native";
+import { ChatTabsParams, RootStackParams } from "../routes";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
+import { useUser } from "../components/User";
+import ToggleThemeSwitch from "../components/ToggleThemeSwitch";
+import ProfileImage from "../components/ProfileImage";
 
 export default function ProfileTab(): JSX.Element {
   const navigation = useNavigation<
@@ -29,7 +29,7 @@ export default function ProfileTab(): JSX.Element {
       <StatusBar barStyle="dark-content" />
       <View>
         <Button title="Sign Out" onPress={goToSignOutScreen} />
-        <ToggleThemeMode />
+        <ToggleThemeSwitch />
         <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />
       </View>
     </SafeAreaViewDefault>
