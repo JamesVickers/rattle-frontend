@@ -1,13 +1,13 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
-import { Button, Image, Text } from "react-native";
+import { Button, Image } from "react-native";
 import styled from "styled-components/native";
-import { useTheme } from "styled-components/native";
 import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
 import useForm from "../utils/useForm";
 import { Card } from "./Card";
 import TextInput from "./TextInput";
+import { TextStyles } from "./TextStyles";
 
 export default function CreatePostItem(): JSX.Element {
   // remove initial state in useForm custom hook if want no initial values and not using resetForm function
@@ -32,13 +32,11 @@ export default function CreatePostItem(): JSX.Element {
     ],
   });
 
-  const theme = useTheme();
-
   const canCreatePost = inputs.title !== "" && inputs.body !== "";
 
   return (
     <Card>
-      <Text style={{ color: theme.colors.foreground }}>Create a PostItem:</Text>
+      <TextStyles>Create a PostItem:</TextStyles>
       <TextInput
         value={inputs.title}
         handleChange={handleChange}

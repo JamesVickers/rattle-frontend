@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { StatusBar, Text } from "react-native";
+import { StatusBar } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
@@ -16,6 +16,7 @@ import { useQuery } from "@apollo/client";
 import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
 import { useTheme } from "styled-components/native";
+import { TextStyles } from "../components/TextStyles";
 
 export default function HomeTab(): JSX.Element {
   const navigation = useNavigation<
@@ -56,14 +57,11 @@ export default function HomeTab(): JSX.Element {
       }}
       style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <StatusBar barStyle="dark-content" />
-      <Text style={{ color: theme.colors.foreground }}>
-        {user && `${user.firstName}`}
-      </Text>
-      <Text style={{ color: theme.colors.foreground }}>
-        Post count:{" "}
-        <Text style={{ color: theme.colors.foreground }}>{postsCount}. </Text>
+      <TextStyles>{user && `${user.firstName}`}</TextStyles>
+      <TextStyles>
+        Post count: <TextStyles>{postsCount}. </TextStyles>
         Found using GraphQL meta query!
-      </Text>
+      </TextStyles>
       <FlatList
         data={data.allPosts}
         keyExtractor={(item) => item.id}

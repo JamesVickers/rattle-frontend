@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
 import { RootStackParams } from "../routes";
-import { Text } from "react-native";
+import { TextStyles } from "../components/TextStyles";
 // import Text from "../components/Text";
 
 export default function SplashScreen(): JSX.Element {
@@ -46,7 +46,8 @@ export default function SplashScreen(): JSX.Element {
         bottom: "always",
       }}
       style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <Text style={{ color: theme.colors.foreground }}>Splash screen</Text>
+      <TextStyles>Splash screen</TextStyles>
+      <TextStyles colour="danger">Splash screen</TextStyles>
     </SafeAreaView>
   );
 }

@@ -2,9 +2,10 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "styled-components/native";
+import { TextStyles } from "../components/TextStyles";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
 import { RootStackParams } from "../routes";
@@ -50,9 +51,9 @@ export default function SignOutScreen(): JSX.Element {
       <Button title="Sign out" onPress={onSignOut} />
       <Button title="Cancel" onPress={onCancel} />
       {error && (
-        <Text style={{ color: theme.colors.foreground }}>
+        <TextStyles>
           We had an issue signing you out, please try again :(
-        </Text>
+        </TextStyles>
       )}
     </SafeAreaView>
   );

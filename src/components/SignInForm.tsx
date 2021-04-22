@@ -2,14 +2,14 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
-import { Button, Text } from "react-native";
-import { useTheme } from "styled-components/native";
+import { Button } from "react-native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
 import { Card } from "./Card";
 import TextInput from "./TextInput";
+import { TextStyles } from "./TextStyles";
 import { useUser } from "./User";
 
 export default function SignInForm(): JSX.Element {
@@ -33,7 +33,6 @@ export default function SignInForm(): JSX.Element {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
-  const theme = useTheme();
   const user = useUser();
 
   useEffect(() => {
@@ -53,9 +52,7 @@ export default function SignInForm(): JSX.Element {
 
   return (
     <Card>
-      <Text style={{ color: theme.colors.foreground }}>
-        Sign in to your account:
-      </Text>
+      <TextStyles>Sign in to your account:</TextStyles>
       <TextInput
         value={inputs.email}
         handleChange={handleChange}
@@ -71,9 +68,7 @@ export default function SignInForm(): JSX.Element {
       />
       <Button title="Sign in!" onPress={onSubmit} />
       {error && (
-        <Text style={{ color: theme.colors.foreground }}>
-          Authentication failed, please try again :(
-        </Text>
+        <TextStyles>Authentication failed, please try again :(</TextStyles>
       )}
     </Card>
   );

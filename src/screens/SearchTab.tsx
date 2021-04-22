@@ -1,6 +1,6 @@
 import { useLazyQuery } from "@apollo/client";
 import React, { useCallback, useState } from "react";
-import { StatusBar, View, Text } from "react-native";
+import { StatusBar, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "styled-components/native";
@@ -8,6 +8,7 @@ import debounce from "lodash.debounce";
 import SearchBar from "../components/SearchBar";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
+import { TextStyles } from "../components/TextStyles";
 
 export default function SearchTab(): JSX.Element {
   const theme = useTheme();
@@ -57,16 +58,14 @@ export default function SearchTab(): JSX.Element {
         />
         {searchString !== "" &&
           (findUsersLoading || debouncing ? (
-            <Text style={{ color: theme.colors.foreground }}>Searching...</Text>
+            <TextStyles>Searching...</TextStyles>
           ) : findUsersData ? (
             <FlatList
               data={findUsersData.allUsers}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => <UserItem key={item.id} user={item} />}
               ListEmptyComponent={
-                <Text style={{ color: theme.colors.foreground }}>
-                  No user matched found
-                </Text>
+                <TextStyles>No user matched found</TextStyles>
               }
             />
           ) : (
