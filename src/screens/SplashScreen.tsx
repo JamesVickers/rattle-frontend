@@ -3,9 +3,10 @@ import { useTheme } from "styled-components/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect } from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import Text from "../components/Text";
 import { useUser } from "../components/User";
 import { RootStackParams } from "../routes";
+import { Text } from "react-native";
+// import Text from "../components/Text";
 
 export default function SplashScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -45,15 +46,7 @@ export default function SplashScreen(): JSX.Element {
         bottom: "always",
       }}
       style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
-      <Text>Splash screen</Text>
+      <Text style={{ color: theme.colors.foreground }}>Splash screen</Text>
     </SafeAreaView>
   );
 }

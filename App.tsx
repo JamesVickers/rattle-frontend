@@ -18,7 +18,7 @@ import { useUser } from "./src/components/User";
 import ChatTabsNavigation from "./src/ChatTabsNavigation";
 import { darkTheme, lightTheme } from "./src/styles/theme";
 import { useDarkMode } from "./src/utils/useDarkMode";
-import Text from "./src/components/Text";
+import { Text } from "react-native";
 
 // const Stack = createStackNavigator();
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -47,7 +47,7 @@ const App = (): JSX.Element => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   if (loadingCache) {
-    return <Text>Loading App...</Text>;
+    return <Text style={{ color: "#8cd4ff" }}>Loading App...</Text>;
   }
 
   return (
@@ -58,7 +58,7 @@ const App = (): JSX.Element => {
           <SafeAreaProvider>
             <Navigation />
             {/* <Button onPress={toggleTheme} title="toggle theme" />
-            <Text>theme: {theme}</Text> */}
+            <TextStyles>theme: {theme}</TextStyles> */}
           </SafeAreaProvider>
         </AppProvider>
       </ThemeProvider>

@@ -50,7 +50,9 @@ export default function SignOutScreen(): JSX.Element {
       <Button title="Sign out" onPress={onSignOut} />
       <Button title="Cancel" onPress={onCancel} />
       {error && (
-        <Text>We had an issue signing you out, please try again :(</Text>
+        <Text style={{ color: theme.colors.foreground }}>
+          We had an issue signing you out, please try again :(
+        </Text>
       )}
     </SafeAreaView>
   );

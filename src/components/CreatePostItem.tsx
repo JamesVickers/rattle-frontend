@@ -1,12 +1,12 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
-import { Button, Image } from "react-native";
+import { Button, Image, Text } from "react-native";
 import styled from "styled-components/native";
+import { useTheme } from "styled-components/native";
 import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
 import useForm from "../utils/useForm";
 import { Card } from "./Card";
-import Text from "./Text";
 import TextInput from "./TextInput";
 
 export default function CreatePostItem(): JSX.Element {
@@ -32,11 +32,13 @@ export default function CreatePostItem(): JSX.Element {
     ],
   });
 
+  const theme = useTheme();
+
   const canCreatePost = inputs.title !== "" && inputs.body !== "";
 
   return (
     <Card>
-      <Text>Create a PostItem:</Text>
+      <Text style={{ color: theme.colors.foreground }}>Create a PostItem:</Text>
       <TextInput
         value={inputs.title}
         handleChange={handleChange}

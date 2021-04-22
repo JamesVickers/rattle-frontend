@@ -4,7 +4,6 @@
 // import { SIGN_UP_MUTATION } from "../gql/SignUpMutation";
 // import useForm from "../utils/useForm";
 // import TextInput from "./TextInput";
-// import Text from "./Text";
 
 // export default function RequestPasswordReset(): JSX.Element {
 //   const {
@@ -40,7 +39,7 @@
 
 //   return (
 //     <View style={{ backgroundColor: "white" }}>
-//       <Text>Request a password reset:</Text>
+//       <TextStyles>Request a password reset:</TextStyles>
 //       <TextInput
 //         value={inputs.email}
 //         handleChange={handleChange}
@@ -49,9 +48,9 @@
 //       />
 //       <Button title="Request password reset" onPress={() => null} />
 //       {error && (
-//         <Text>
+//         <TextStyles>
 //           Password reset request failed, please try again :(
-//         </Text>
+//         </TextStyles>
 //       )}
 //     </View>
 //   );

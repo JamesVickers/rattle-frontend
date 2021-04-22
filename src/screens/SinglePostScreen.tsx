@@ -2,12 +2,11 @@ import { useMutation, useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { Button } from "react-native";
+import { Button, Text } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "styled-components/native";
 import { Card } from "../components/Card";
 import HardDeletePostItem from "../components/HardDeletePostItem";
-import Text from "../components/Text";
 import TextInput from "../components/TextInput";
 import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
@@ -42,7 +41,8 @@ export default function SinglePostcreen(): JSX.Element {
     body: data?.Post.body,
   });
 
-  if (loading) return <Text>Loading...</Text>;
+  if (loading)
+    return <Text style={{ color: theme.colors.foreground }}>Loading...</Text>;
 
   return (
     <SafeAreaView
@@ -53,9 +53,13 @@ export default function SinglePostcreen(): JSX.Element {
         bottom: "always",
       }}
       style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <Text>SinglePostItemScreen</Text>
+      <Text style={{ color: theme.colors.foreground }}>
+        SinglePostItemScreen
+      </Text>
       <Button title="goBack" onPress={() => navigation.goBack()} />
-      <Text>Post id to update is: {id}</Text>
+      <Text style={{ color: theme.colors.foreground }}>
+        Post id to update is: {id}
+      </Text>
       <Card>
         <TextInput
           value={inputs.title}

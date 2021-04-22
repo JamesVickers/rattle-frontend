@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
@@ -15,7 +15,6 @@ import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { useQuery } from "@apollo/client";
 import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
-import Text from "../components/Text";
 import { useTheme } from "styled-components/native";
 
 export default function HomeTab(): JSX.Element {
@@ -57,9 +56,12 @@ export default function HomeTab(): JSX.Element {
       }}
       style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <StatusBar barStyle="dark-content" />
-      <Text>{user && `${user.firstName}`}</Text>
-      <Text>
-        Post count: <Text>{postsCount}. </Text>
+      <Text style={{ color: theme.colors.foreground }}>
+        {user && `${user.firstName}`}
+      </Text>
+      <Text style={{ color: theme.colors.foreground }}>
+        Post count:{" "}
+        <Text style={{ color: theme.colors.foreground }}>{postsCount}. </Text>
         Found using GraphQL meta query!
       </Text>
       <FlatList

@@ -2,10 +2,9 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button } from "react-native";
+import { Button, Text } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "styled-components/native";
-import Text from "../components/Text";
 import TextInput from "../components/TextInput";
 import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
 import { RootStackParams } from "../routes";
@@ -67,7 +66,9 @@ export default function CreateAccountScreen(): JSX.Element {
         bottom: "always",
       }}
       style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <Text>Sign up for an account:</Text>
+      <Text style={{ color: theme.colors.foreground }}>
+        Sign up for an account:
+      </Text>
       <TextInput
         value={inputs.firstName}
         handleChange={handleChange}
@@ -97,12 +98,20 @@ export default function CreateAccountScreen(): JSX.Element {
       <Button title="Cancel" onPress={onCancel} />
       {data?.createUser && (
         <>
-          <Text>Sign up successful with {data.createUser.email}</Text>
-          <Text>You can now sign in to Rattle</Text>
+          <Text style={{ color: theme.colors.foreground }}>
+            Sign up successful with {data.createUser.email}
+          </Text>
+          <Text style={{ color: theme.colors.foreground }}>
+            You can now sign in to Rattle
+          </Text>
           <Button title="Back to Sign In" onPress={goBackToSignInScreen} />
         </>
       )}
-      {error && <Text>Sign up failed, please try again :(</Text>}
+      {error && (
+        <Text style={{ color: theme.colors.foreground }}>
+          Sign up failed, please try again :(
+        </Text>
+      )}
     </SafeAreaView>
   );
 }
