@@ -1,10 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect } from "react";
+import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
 import { RootStackParams } from "../routes";
-import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { TextStyles } from "../components/TextStyles";
+import { StyledLikeSvg } from "../components/LikeSvg";
+import styled from "styled-components/native";
+import Spacer from "../components/Spacer";
 
 export default function SplashScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -19,7 +22,7 @@ export default function SplashScreen(): JSX.Element {
   useEffect(() => {
     const timer = setTimeout(() => {
       setUnpaused(true);
-    }, 1500);
+    }, 5500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -35,9 +38,22 @@ export default function SplashScreen(): JSX.Element {
   }, [user, navigation, isUnpaused]);
 
   return (
-    <SafeAreaViewDefault>
+    <SafeAreaViewStyles
+      forceInset={{
+        left: "always",
+        top: "always",
+        right: "always",
+        bottom: "always",
+      }}>
+      <StyledLikeSvg width={200} height={200} />
+      <Spacer height={20} />
       <TextStyles>Splash screen</TextStyles>
-      <TextStyles colour="danger">Splash screen</TextStyles>
-    </SafeAreaViewDefault>
+    </SafeAreaViewStyles>
   );
 }
+const SafeAreaViewStyles = styled(SafeAreaView)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.colors.background};
+`;

@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Button } from "react-native";
-import styled from "styled-components/native";
-import LikeSvg from "../images/like.svg";
 import { AppContext } from "../components/AppContext";
 import { Card } from "./Card";
+import { StyledLikeSvg } from "./LikeSvg";
 import { TextStyles } from "./TextStyles";
 
 export default function ToggleOpen(): JSX.Element {
@@ -21,6 +20,3 @@ export default function ToggleOpen(): JSX.Element {
     </Card>
   );
 }
-const StyledLikeSvg = styled(LikeSvg)`
-  color: ${(props) => props.theme.colors.foreground};
-`;

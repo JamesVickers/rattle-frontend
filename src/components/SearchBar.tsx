@@ -16,7 +16,7 @@ export default function Searchbar({
   const theme = useTheme();
   return (
     <View style={{ backgroundColor: theme.colors.card }}>
-      <TextStyles>Search for a post:</TextStyles>
+      <TextStyles>Search for a user:</TextStyles>
       <TextInput
         value={searchString}
         onChangeText={(string) => setSearchString(string)}
