@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
 import { Button } from "react-native";
+import { useTheme } from "styled-components/native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";

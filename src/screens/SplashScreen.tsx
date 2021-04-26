@@ -22,7 +22,7 @@ export default function SplashScreen(): JSX.Element {
   useEffect(() => {
     const timer = setTimeout(() => {
       setUnpaused(true);
-    }, 5500);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);

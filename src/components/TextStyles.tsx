@@ -1,6 +1,10 @@
 import styled from "styled-components/native";
-import { MyColours } from "../styles/myTheme";
+import { MyColours, MyFontSize } from "../styles/myTheme";
 
-export const TextStyles = styled.Text<{ colour?: keyof MyColours }>`
+export const TextStyles = styled.Text<{
+  fontSize?: keyof MyFontSize;
+  colour?: keyof MyColours;
+}>`
   color: ${(props) => props.theme.colors[props.colour || "foreground"]};
+  font-size: ${(props) => props.theme.fontSize[props.fontSize || "body"]}px;
 `;
