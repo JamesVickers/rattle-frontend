@@ -15,7 +15,7 @@
 //   colour,
 // }: {
 //   children: React.ReactNode;
-//   styles?: StyleProp<TextStyle>;
+//   style?: StyleProp<TextStyle>;
 //   colour?: keyof MyColours;
 //   // colour?: string;
 // } & Omit<RNTextProps, "style">): JSX.Element {

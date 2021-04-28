@@ -29,5 +29,8 @@ export default function TextInput({
 }
 const RNTextInputStyles = styled(RNTextInput)`
   color: ${(props) => props.theme.colors.foreground};
-  background-color: ${(props) => props.theme.colors.card};
+  background-color: ${(props) => props.theme.colors.input};
+  border-radius: ${(props) => props.theme.borderRadius.input}px;
+  height: ${(props) => props.theme.spacing[8]}px;
+  padding: 0 ${(props) => props.theme.spacing[2]}px;px;
 `;

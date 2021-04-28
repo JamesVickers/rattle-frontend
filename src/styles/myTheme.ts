@@ -3,6 +3,7 @@ export interface MyColours {
   background: string;
   card: string;
   icon: string;
+  input: string;
   midGrey: string;
   border: string;
   primary: string;

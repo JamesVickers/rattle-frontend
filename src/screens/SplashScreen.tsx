@@ -46,7 +46,7 @@ export default function SplashScreen(): JSX.Element {
         bottom: "always",
       }}>
       <StyledLikeSvg width={200} height={200} />
-      <Spacer height={20} />
+      <Spacer height={10} />
       <TextStyles>Splash screen</TextStyles>
     </SafeAreaViewStyles>
   );

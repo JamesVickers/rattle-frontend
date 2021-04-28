@@ -2,18 +2,21 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
-import { Button } from "react-native";
-import { useTheme } from "styled-components/native";
+import { Button, StyleProp, View, ViewStyle } from "react-native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
-import { Card } from "./Card";
+import Spacer from "./Spacer";
 import TextInput from "./TextInput";
 import { TextStyles } from "./TextStyles";
 import { useUser } from "./User";
 
-export default function SignInForm(): JSX.Element {
+export default function SignInForm({
+  style,
+}: {
+  style?: StyleProp<ViewStyle>;
+}): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignIn">
   >();
@@ -52,14 +55,17 @@ export default function SignInForm(): JSX.Element {
   }, [error, resetForm, signin]);
 
   return (
-    <Card>
+    <View style={style}>
+      <Spacer height={4} />
       <TextStyles>Sign in to your account:</TextStyles>
+      <Spacer height={4} />
       <TextInput
         value={inputs.email}
         handleChange={handleChange}
         name={"email"}
         placeholder={"Email"}
       />
+      <Spacer height={4} />
       <TextInput
         secureTextEntry
         value={inputs.password}
@@ -67,10 +73,11 @@ export default function SignInForm(): JSX.Element {
         name={"password"}
         placeholder={"Password"}
       />
+      <Spacer height={4} />
       <Button title="Sign in!" onPress={onSubmit} />
       {error && (
         <TextStyles>Authentication failed, please try again :(</TextStyles>
       )}
-    </Card>
+    </View>
   );
 }

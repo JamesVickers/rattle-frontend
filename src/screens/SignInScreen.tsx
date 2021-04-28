@@ -2,9 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { Button, StatusBar } from "react-native";
-import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import SignInForm from "../components/SignInForm";
 import { RootStackParams } from "../routes";
+import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
+import { Outer } from "../components/Outer";
+import SignInForm from "../components/SignInForm";
 
 export default function SignInScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -17,10 +18,12 @@ export default function SignInScreen(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <StatusBar barStyle="dark-content" />
-      <SignInForm />
-      <Button title="Create Account" onPress={onCreateAccount} />
-      {/* <RequestPasswordReset /> */}
+      <Outer style={{ flex: 1, margin: "5%" }}>
+        <StatusBar barStyle="dark-content" />
+        <SignInForm />
+        <Button title="Create Account" onPress={onCreateAccount} />
+        {/* <RequestPasswordReset /> */}
+      </Outer>
     </SafeAreaViewDefault>
   );
 }

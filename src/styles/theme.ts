@@ -43,14 +43,16 @@ export const lightTheme: DefaultTheme = {
     foreground: "#171717",
     // lightGrey
     background: "#efefef",
-    // white
-    card: "#ffffff",
+    // lightGrey
+    card: "#cfcfcf",
     // darkGrey
     icon: "#383838",
+    // white
+    input: "#ffffff",
     // midGrey
     midGrey: "#cfcfcf",
-    // white
-    border: "#ffffff",
+    // lightGrey
+    border: "#cfcfcf",
     // primary
     primary: "#ffe000",
     // lightBlue
@@ -68,10 +70,11 @@ export const darkTheme: DefaultTheme = {
   colors: {
     foreground: "#ffffff",
     background: "#171717",
-    card: "#2e2e2e",
-    icon: "#efefef",
+    card: "#383838",
+    icon: "#cfcfcf",
+    input: "#171717",
     midGrey: "#cfcfcf",
-    border: "#171717",
+    border: "#383838",
     primary: "#ffe000",
     secondary: "#8cd4ff",
     midBlue: "#71add1",
