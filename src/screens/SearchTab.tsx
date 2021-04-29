@@ -7,7 +7,7 @@ import SearchBar from "../components/SearchBar";
 import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import { TextStyles } from "../components/TextStyles";
+import Text from "../components/Text";
 
 export default function SearchTab(): JSX.Element {
   const [searchString, setSearchString] = useState("");
@@ -48,15 +48,13 @@ export default function SearchTab(): JSX.Element {
         />
         {searchString !== "" &&
           (findUsersLoading || debouncing ? (
-            <TextStyles>Searching...</TextStyles>
+            <Text>Searching...</Text>
           ) : findUsersData ? (
             <FlatList
               data={findUsersData.allUsers}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => <UserItem key={item.id} user={item} />}
-              ListEmptyComponent={
-                <TextStyles>No user matched found</TextStyles>
-              }
+              ListEmptyComponent={<Text>No user matched found</Text>}
             />
           ) : (
             <></>

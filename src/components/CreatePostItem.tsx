@@ -6,8 +6,8 @@ import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
 import useForm from "../utils/useForm";
 import { Card } from "./Card";
+import Text from "./Text";
 import TextInput from "./TextInput";
-import { TextStyles } from "./TextStyles";
 
 export default function CreatePostItem(): JSX.Element {
   // remove initial state in useForm custom hook if want no initial values and not using resetForm function
@@ -36,7 +36,7 @@ export default function CreatePostItem(): JSX.Element {
 
   return (
     <Card>
-      <TextStyles>Create a PostItem:</TextStyles>
+      <Text>Create a PostItem:</Text>
       <TextInput
         value={inputs.title}
         handleChange={handleChange}

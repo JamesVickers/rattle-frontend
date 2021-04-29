@@ -7,7 +7,7 @@ import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Card } from "../components/Card";
 import HardDeletePostItem from "../components/HardDeletePostItem";
 import TextInput from "../components/TextInput";
-import { TextStyles } from "../components/TextStyles";
+import Text from "../components/Text";
 import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
 import { RootStackParams } from "../routes";
@@ -40,13 +40,13 @@ export default function SinglePostcreen(): JSX.Element {
     body: data?.Post.body,
   });
 
-  if (loading) return <TextStyles>Loading...</TextStyles>;
+  if (loading) return <Text>Loading...</Text>;
 
   return (
     <SafeAreaViewDefault>
-      <TextStyles>SinglePostItemScreen</TextStyles>
+      <Text>SinglePostItemScreen</Text>
       <Button title="goBack" onPress={() => navigation.goBack()} />
-      <TextStyles>Post id to update is: {id}</TextStyles>
+      <Text>Post id to update is: {id}</Text>
       <Card>
         <TextInput
           value={inputs.title}

@@ -2,14 +2,14 @@ import React from "react";
 import { User } from "../state/user.model";
 import { Card } from "./Card";
 import ProfileImage from "./ProfileImage";
-import { TextStyles } from "./TextStyles";
+import Text from "./Text";
 
 export default function UserItem({ user }: { user: User }): JSX.Element {
   return (
     <Card>
-      <TextStyles>
+      <Text>
         {user.firstName} {user.lastName}
-      </TextStyles>
+      </Text>
       <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />
     </Card>
   );

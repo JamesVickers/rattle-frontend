@@ -39,7 +39,7 @@
 
 //   return (
 //     <View style={{ backgroundColor: "white" }}>
-//       <TextStyles>Request a password reset:</TextStyles>
+//       <Text>Request a password reset:</Text>
 //       <TextInput
 //         value={inputs.email}
 //         handleChange={handleChange}
@@ -48,9 +48,9 @@
 //       />
 //       <Button title="Request password reset" onPress={() => null} />
 //       {error && (
-//         <TextStyles>
+//         <Text>
 //           Password reset request failed, please try again :(
-//         </TextStyles>
+//         </Text>
 //       )}
 //     </View>
 //   );

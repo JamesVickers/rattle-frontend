@@ -2,7 +2,7 @@ import { ApolloError } from "@apollo/client";
 import React from "react";
 import { TextInput, View } from "react-native";
 import { useTheme } from "styled-components/native";
-import { TextStyles } from "./TextStyles";
+import Text from "./Text";
 
 export default function Searchbar({
   error,
@@ -16,13 +16,13 @@ export default function Searchbar({
   const theme = useTheme();
   return (
     <View style={{ backgroundColor: theme.colors.card }}>
-      <TextStyles>Search for a user:</TextStyles>
+      <Text>Search for a user:</Text>
       <TextInput
         value={searchString}
         onChangeText={(string) => setSearchString(string)}
         placeholder={"Search"}
       />
-      {error && <TextStyles>Search failed, please try again :(</TextStyles>}
+      {error && <Text>Search failed, please try again :(</Text>}
     </View>
   );
 }

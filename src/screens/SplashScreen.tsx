@@ -4,10 +4,10 @@ import React, { useEffect } from "react";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
 import { RootStackParams } from "../routes";
-import { TextStyles } from "../components/TextStyles";
 import { StyledLikeSvg } from "../components/LikeSvg";
 import styled from "styled-components/native";
 import Spacer from "../components/Spacer";
+import { TextStyles } from "../components/TextStyles";
 
 export default function SplashScreen(): JSX.Element {
   const navigation = useNavigation<

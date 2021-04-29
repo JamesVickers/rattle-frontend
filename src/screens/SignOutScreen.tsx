@@ -4,7 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { Button } from "react-native";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import { TextStyles } from "../components/TextStyles";
+import Text from "../components/Text";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
 import { RootStackParams } from "../routes";
@@ -42,9 +42,7 @@ export default function SignOutScreen(): JSX.Element {
       <Button title="Sign out" onPress={onSignOut} />
       <Button title="Cancel" onPress={onCancel} />
       {error && (
-        <TextStyles>
-          We had an issue signing you out, please try again :(
-        </TextStyles>
+        <Text>We had an issue signing you out, please try again :(</Text>
       )}
     </SafeAreaViewDefault>
   );

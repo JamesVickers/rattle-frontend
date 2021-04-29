@@ -5,8 +5,8 @@ import React, { useCallback } from "react";
 import { Button } from "react-native";
 import { useTheme } from "styled-components/native";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
+import Text from "../components/Text";
 import TextInput from "../components/TextInput";
-import { TextStyles } from "../components/TextStyles";
 import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
@@ -60,7 +60,7 @@ export default function CreateAccountScreen(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <TextStyles>Sign up for an account:</TextStyles>
+      <Text>Sign up for an account:</Text>
       <TextInput
         value={inputs.firstName}
         handleChange={handleChange}
@@ -90,19 +90,19 @@ export default function CreateAccountScreen(): JSX.Element {
       <Button title="Cancel" onPress={onCancel} />
       {data?.createUser && (
         <>
-          <TextStyles style={{ color: theme.colors.foreground }}>
+          <Text style={{ color: theme.colors.foreground }}>
             Sign up successful with {data.createUser.email}
-          </TextStyles>
-          <TextStyles style={{ color: theme.colors.foreground }}>
+          </Text>
+          <Text style={{ color: theme.colors.foreground }}>
             You can now sign in to Rattle
-          </TextStyles>
+          </Text>
           <Button title="Back to Sign In" onPress={goBackToSignInScreen} />
         </>
       )}
       {error && (
-        <TextStyles style={{ color: theme.colors.foreground }}>
+        <Text style={{ color: theme.colors.foreground }}>
           Sign up failed, please try again :(
-        </TextStyles>
+        </Text>
       )}
     </SafeAreaViewDefault>
   );

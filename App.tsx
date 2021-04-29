@@ -58,7 +58,7 @@ const App = (): JSX.Element => {
           <SafeAreaProvider>
             <Navigation />
             {/* <Button onPress={toggleTheme} title="toggle theme" />
-            <TextStyles>theme: {theme}</TextStyles> */}
+            <Text>theme: {theme}</Text> */}
           </SafeAreaProvider>
         </AppProvider>
       </ThemeProvider>

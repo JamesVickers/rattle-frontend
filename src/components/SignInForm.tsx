@@ -10,8 +10,8 @@ import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
 import Button from "./Button";
 import Spacer from "./Spacer";
+import Text from "./Text";
 import TextInput from "./TextInput";
-import { TextStyles } from "./TextStyles";
 import { useUser } from "./User";
 
 export default function SignInForm({
@@ -58,16 +58,16 @@ export default function SignInForm({
 
   return (
     <FormStyles style={style}>
-      <Spacer height={4} />
-      <TextStyles>Sign in to your account:</TextStyles>
-      <Spacer height={4} />
+      <Spacer />
+      <Text>Sign in to your account:</Text>
+      <Spacer />
       <TextInput
         value={inputs.email}
         handleChange={handleChange}
         name={"email"}
         placeholder={"Email"}
       />
-      <Spacer height={4} />
+      <Spacer />
       <TextInput
         secureTextEntry
         value={inputs.password}
@@ -75,12 +75,14 @@ export default function SignInForm({
         name={"password"}
         placeholder={"Password"}
       />
-      <Spacer height={4} />
+      <Spacer />
       <Button text="Sign in!" onPress={onSubmit} />
       {error && (
         <>
-          <Spacer height={4} />
-          <TextStyles>Authentication failed, please try again :(</TextStyles>
+          <Spacer />
+          <Text colour="danger">
+            Authentication failed, please try again :(
+          </Text>
         </>
       )}
     </FormStyles>

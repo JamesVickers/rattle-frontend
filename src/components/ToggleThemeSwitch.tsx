@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Switch } from "react-native";
 import { useTheme } from "styled-components/native";
 import { AppContext } from "./AppContext";
-import { TextStyles } from "./TextStyles";
+import Text from "./Text";
 
 export default function ToggleThemeSwitch(): JSX.Element {
   const { toggleMode } = useContext(AppContext);
@@ -12,7 +12,7 @@ export default function ToggleThemeSwitch(): JSX.Element {
 
   return (
     <>
-      <TextStyles>Switch theme</TextStyles>
+      <Text>Switch theme</Text>
       <Switch
         trackColor={{
           false: "",
