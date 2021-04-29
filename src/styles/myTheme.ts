@@ -4,6 +4,7 @@ export interface MyColours {
   card: string;
   icon: string;
   input: string;
+  button: string;
   midGrey: string;
   border: string;
   primary: string;
@@ -37,7 +38,7 @@ export interface MyOpacity {
 
 export interface MyTheme {
   // id?: string;
-  // isSmallScreen: boolean;
+  isSmallScreen: boolean;
   lightOrDark: "light" | "dark";
   colors: MyColours;
   borderRadius: MyBorderRadius;

@@ -31,6 +31,7 @@ const RNTextInputStyles = styled(RNTextInput)`
   color: ${(props) => props.theme.colors.foreground};
   background-color: ${(props) => props.theme.colors.input};
   border-radius: ${(props) => props.theme.borderRadius.input}px;
+  width: 100%;
   height: ${(props) => props.theme.spacing[8]}px;
   padding: 0 ${(props) => props.theme.spacing[2]}px;px;
 `;

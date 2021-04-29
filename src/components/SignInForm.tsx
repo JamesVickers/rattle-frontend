@@ -2,11 +2,13 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
-import { Button, StyleProp, View, ViewStyle } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
+import styled from "styled-components/native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import useForm from "../utils/useForm";
+import Button from "./Button";
 import Spacer from "./Spacer";
 import TextInput from "./TextInput";
 import { TextStyles } from "./TextStyles";
@@ -55,7 +57,7 @@ export default function SignInForm({
   }, [error, resetForm, signin]);
 
   return (
-    <View style={style}>
+    <FormStyles style={style}>
       <Spacer height={4} />
       <TextStyles>Sign in to your account:</TextStyles>
       <Spacer height={4} />
@@ -74,10 +76,16 @@ export default function SignInForm({
         placeholder={"Password"}
       />
       <Spacer height={4} />
-      <Button title="Sign in!" onPress={onSubmit} />
+      <Button text="Sign in!" onPress={onSubmit} />
       {error && (
-        <TextStyles>Authentication failed, please try again :(</TextStyles>
+        <>
+          <Spacer height={4} />
+          <TextStyles>Authentication failed, please try again :(</TextStyles>
+        </>
       )}
-    </View>
+    </FormStyles>
   );
 }
+const FormStyles = styled(View)`
+  align-items: center;
+`;

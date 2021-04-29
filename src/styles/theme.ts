@@ -37,35 +37,27 @@ const baseTheme = {
 };
 
 export const lightTheme: DefaultTheme = {
+  isSmallScreen: isSmallScreen,
   lightOrDark: "light",
   colors: {
-    // black
-    foreground: "#171717",
-    // lightGrey
-    background: "#efefef",
-    // lightGrey
-    card: "#cfcfcf",
-    // darkGrey
-    icon: "#383838",
-    // white
-    input: "#ffffff",
-    // midGrey
-    midGrey: "#cfcfcf",
-    // lightGrey
-    border: "#cfcfcf",
-    // primary
-    primary: "#ffe000",
-    // lightBlue
-    secondary: "#8cd4ff",
-    // midBlue
-    midBlue: "#71add1",
-    // danger
-    danger: "#fa2a2a",
+    foreground: "#171717" /* black */,
+    background: "#efefef" /* very light grey */,
+    card: "#cfcfcf" /* light grey */,
+    icon: "#383838" /* dark grey */,
+    input: "#ffffff" /* white */,
+    button: "#ffffff" /* white */,
+    midGrey: "#cfcfcf" /* mid grey */,
+    border: "#cfcfcf" /* light grey */,
+    primary: "#ffe000" /* yellow */,
+    secondary: "#8cd4ff" /* light blue */,
+    midBlue: "#71add1" /* mid blue */,
+    danger: "#fa2a2a" /* red */,
   },
   ...baseTheme,
 };
 
 export const darkTheme: DefaultTheme = {
+  isSmallScreen: isSmallScreen,
   lightOrDark: "dark",
   colors: {
     foreground: "#ffffff",
@@ -73,6 +65,7 @@ export const darkTheme: DefaultTheme = {
     card: "#383838",
     icon: "#cfcfcf",
     input: "#171717",
+    button: "#171717",
     midGrey: "#cfcfcf",
     border: "#383838",
     primary: "#ffe000",
