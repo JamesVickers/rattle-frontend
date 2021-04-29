@@ -59,7 +59,7 @@ export default function SignInForm({
   return (
     <FormStyles style={style}>
       <Spacer />
-      <Text>Sign in to your account:</Text>
+      <Text>Sign in to your account</Text>
       <Spacer />
       <TextInput
         value={inputs.email}
@@ -89,5 +89,6 @@ export default function SignInForm({
   );
 }
 const FormStyles = styled(View)`
+  width: 100%;
   align-items: center;
 `;

@@ -36,7 +36,7 @@ export default function CreatePostItem(): JSX.Element {
 
   return (
     <Card>
-      <Text>Create a PostItem:</Text>
+      <Text>Create a PostItem</Text>
       <TextInput
         value={inputs.title}
         handleChange={handleChange}

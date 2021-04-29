@@ -2,8 +2,11 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { Button } from "react-native";
+import { useTheme } from "styled-components/native";
+import Button from "../components/Button";
+import { Outer } from "../components/Outer";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
+import Spacer from "../components/Spacer";
 import Text from "../components/Text";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
@@ -13,6 +16,7 @@ export default function SignOutScreen(): JSX.Element {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignOut">
   >();
+  const theme = useTheme();
 
   const [
     signout,
@@ -39,11 +43,21 @@ export default function SignOutScreen(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <Button title="Sign out" onPress={onSignOut} />
-      <Button title="Cancel" onPress={onCancel} />
-      {error && (
-        <Text>We had an issue signing you out, please try again :(</Text>
-      )}
+      <Outer style={{ alignItems: "center" }}>
+        <Button
+          text="Sign out"
+          touchableStyle={{ backgroundColor: theme.colors.danger }}
+          onPress={onSignOut}
+        />
+        <Spacer />
+        <Button text="Cancel" onPress={onCancel} />
+        {error && (
+          <>
+            <Spacer />
+            <Text>We had an issue signing you out, please try again :(</Text>
+          </>
+        )}
+      </Outer>
     </SafeAreaViewDefault>
   );
 }

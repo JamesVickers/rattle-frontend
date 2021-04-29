@@ -39,7 +39,7 @@
 
 //   return (
 //     <View style={{ backgroundColor: "white" }}>
-//       <Text>Request a password reset:</Text>
+//       <Text>Request a password reset</Text>
 //       <TextInput
 //         value={inputs.email}
 //         handleChange={handleChange}
