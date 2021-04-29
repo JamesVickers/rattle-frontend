@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
 import { ChatTabsParams } from "./routes";
@@ -40,50 +40,49 @@ export default function ChatTabsNavigation(): JSX.Element {
           keyboardHidesTabBar: Platform.OS === "android",
         }}>
         <ChatTabs.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Search"
+          component={SearchTab}
           options={{
             tabBarIcon: ({ focused }) => {
-              return focused ? (
-                // <HomeSvgActive width={tabIconSpacing} height={tabIconSpacing} />
-                <HomeSvg
-                  width={iconSize}
-                  height={iconSize}
-                  stroke={theme.colors.foreground}
-                  strokeWidth={iconStrokeWidth}
-                  // fill={theme.colors.primary}
-                />
-              ) : (
-                <HomeSvg
-                  width={iconSize}
-                  height={iconSize}
-                  stroke={theme.colors.midGrey}
-                  strokeWidth={iconStrokeWidth}
-                  // fill={theme.colors.primary}
-                />
+              return (
+                <View
+                  style={{
+                    backgroundColor: theme.colors.secondary,
+                    padding: theme.spacing[2],
+                    borderRadius: theme.borderRadius.circle,
+                  }}>
+                  <SearchSvg
+                    width={iconSize}
+                    height={iconSize}
+                    stroke={theme.colors[focused ? "icon" : "background"]}
+                    strokeWidth={iconStrokeWidth}
+                    // fill={theme.colors.primary}
+                  />
+                </View>
               );
             },
           }}
         />
         <ChatTabs.Screen
-          name="Search"
-          component={SearchTab}
+          name="Home"
+          component={HomeScreen}
           options={{
             tabBarIcon: ({ focused }) => {
-              return focused ? (
-                <SearchSvg
-                  width={iconSize}
-                  height={iconSize}
-                  stroke={theme.colors.foreground}
-                  strokeWidth={iconStrokeWidth}
-                />
-              ) : (
-                <SearchSvg
-                  width={iconSize}
-                  height={iconSize}
-                  stroke={theme.colors.midGrey}
-                  strokeWidth={iconStrokeWidth}
-                />
+              return (
+                <View
+                  style={{
+                    backgroundColor: theme.colors.secondary,
+                    padding: theme.spacing[2],
+                    borderRadius: theme.borderRadius.circle,
+                  }}>
+                  <HomeSvg
+                    width={iconSize}
+                    height={iconSize}
+                    stroke={theme.colors[focused ? "icon" : "background"]}
+                    strokeWidth={iconStrokeWidth}
+                    // fill={theme.colors.primary}
+                  />
+                </View>
               );
             },
           }}
@@ -93,20 +92,21 @@ export default function ChatTabsNavigation(): JSX.Element {
           component={ProfileTab}
           options={{
             tabBarIcon: ({ focused }) => {
-              return focused ? (
-                <PersonSvg
-                  width={iconSize}
-                  height={iconSize}
-                  stroke={theme.colors.foreground}
-                  strokeWidth={iconStrokeWidth}
-                />
-              ) : (
-                <PersonSvg
-                  width={iconSize}
-                  height={iconSize}
-                  stroke={theme.colors.midGrey}
-                  strokeWidth={iconStrokeWidth}
-                />
+              return (
+                <View
+                  style={{
+                    backgroundColor: theme.colors.secondary,
+                    padding: theme.spacing[2],
+                    borderRadius: theme.borderRadius.circle,
+                  }}>
+                  <PersonSvg
+                    width={iconSize}
+                    height={iconSize}
+                    stroke={theme.colors[focused ? "icon" : "background"]}
+                    strokeWidth={iconStrokeWidth}
+                    // fill={theme.colors.primary}
+                  />
+                </View>
               );
             },
           }}

@@ -18,6 +18,7 @@ export interface MyBorderRadius {
   card: number;
   input: number;
   modal: number;
+  circle: number;
 }
 
 export interface MyFontSize {

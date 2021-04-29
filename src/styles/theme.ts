@@ -18,6 +18,7 @@ const baseTheme = {
     card: 5,
     input: 5,
     modal: 10,
+    circle: 200,
   },
   fontSize: {
     body: scaleFontSize(BASE_FONT_SIZE),
