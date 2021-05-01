@@ -6,7 +6,7 @@ export type RootStackParams = {
   SignIn: undefined;
   SignOut: undefined;
   CreateAccount: undefined;
-  Chat: undefined;
+  ChatStack: undefined;
 };
 
 export type ChatStackParams = {

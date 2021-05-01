@@ -30,7 +30,7 @@ export default function SplashScreen(): JSX.Element {
   useEffect(() => {
     if (isUnpaused) {
       if (user) {
-        navigation.replace("Chat");
+        navigation.replace("ChatStack");
       } else {
         navigation.replace("SignIn");
       }

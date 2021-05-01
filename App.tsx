@@ -82,7 +82,7 @@ function Navigation(): JSX.Element {
           }}>
           {user && (
             <RootStack.Screen
-              name="Chat"
+              name="ChatStack"
               component={ChatStackNavigation}
               options={{
                 ...headerOptions,

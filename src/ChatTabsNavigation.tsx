@@ -23,6 +23,7 @@ export default function ChatTabsNavigation(): JSX.Element {
   return (
     <>
       <ChatTabs.Navigator
+        initialRouteName="Home"
         tabBarOptions={{
           showLabel: false,
           // activeTintColor: theme.foreground.tabBarActive,

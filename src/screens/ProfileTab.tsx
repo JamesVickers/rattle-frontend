@@ -14,7 +14,7 @@ import ProfileImage from "../components/ProfileImage";
 export default function ProfileTab(): JSX.Element {
   const navigation = useNavigation<
     CompositeNavigationProp<
-      StackNavigationProp<RootStackParams, "Chat">,
+      StackNavigationProp<RootStackParams, "ChatStack">,
       StackNavigationProp<ChatTabsParams, "Profile">
     >
   >();
