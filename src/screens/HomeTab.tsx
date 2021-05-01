@@ -7,7 +7,7 @@ import React, { useCallback } from "react";
 import { StatusBar } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useUser } from "../components/User";
-import { ChatTabsParams, RootStackParams } from "../routes";
+import { ChatStackParams, ChatTabsParams } from "../routes";
 import CreatePostItem from "../components/CreatePostItem";
 import PostItem from "../components/PostItem";
 import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
@@ -20,8 +20,8 @@ import Text from "../components/Text";
 export default function HomeTab(): JSX.Element {
   const navigation = useNavigation<
     CompositeNavigationProp<
-      StackNavigationProp<RootStackParams, "ChatTabs">,
-      StackNavigationProp<ChatTabsParams, "Home">
+      StackNavigationProp<ChatTabsParams, "Home">,
+      StackNavigationProp<ChatStackParams>
     >
   >();
   const user = useUser();

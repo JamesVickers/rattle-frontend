@@ -1,5 +1,8 @@
 import { useMutation } from "@apollo/client";
-import { useNavigation } from "@react-navigation/native";
+import {
+  CompositeNavigationProp,
+  useNavigation,
+} from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { useTheme } from "styled-components/native";
@@ -10,11 +13,14 @@ import Spacer from "../components/Spacer";
 import Text from "../components/Text";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
-import { RootStackParams } from "../routes";
+import { ChatTabsParams, RootStackParams } from "../routes";
 
 export default function SignOutScreen(): JSX.Element {
   const navigation = useNavigation<
-    StackNavigationProp<RootStackParams, "SignOut">
+    CompositeNavigationProp<
+      StackNavigationProp<RootStackParams, "SignOut">,
+      StackNavigationProp<ChatTabsParams>
+    >
   >();
   const theme = useTheme();
 

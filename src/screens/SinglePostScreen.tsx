@@ -10,13 +10,15 @@ import TextInput from "../components/TextInput";
 import Text from "../components/Text";
 import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
-import { RootStackParams } from "../routes";
+import { ChatStackParams } from "../routes";
 import useForm from "../utils/useForm";
 
 export default function SinglePostcreen(): JSX.Element {
-  const route = useRoute<RouteProp<RootStackParams, "SinglePost">>();
+  const route = useRoute<RouteProp<ChatStackParams, "SinglePost">>();
   const { id } = route.params;
-  const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+  const navigation = useNavigation<
+    StackNavigationProp<ChatStackParams, "SinglePost">
+  >();
 
   const {
     data,

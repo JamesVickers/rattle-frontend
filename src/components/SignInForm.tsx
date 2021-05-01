@@ -43,7 +43,7 @@ export default function SignInForm({
 
   useEffect(() => {
     if (user) {
-      navigation.replace("ChatTabs");
+      navigation.replace("Chat");
     }
   }, [user, navigation]);
 
