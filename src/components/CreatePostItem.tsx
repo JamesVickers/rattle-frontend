@@ -4,7 +4,7 @@ import { Button, Image } from "react-native";
 import styled from "styled-components/native";
 import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
-import useForm from "../utils/useForm";
+import { useForm } from "../utils/useForm";
 import { Card } from "./Card";
 import Text from "./Text";
 import TextInput from "./TextInput";

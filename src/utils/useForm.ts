@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { SilentAny } from "../state/types";
 
-export default function useForm(
+export const useForm = (
   initial = {},
 ): {
   inputs: SilentAny;
   handleChange: (name: string, value: string) => void;
   resetForm: () => void;
   clearForm: () => void;
-} {
+} => {
   const [inputs, setInputs] = useState(initial);
   // used to check when initial values goes from nothing to something
   const initialValues = Object.values(initial).join("");
@@ -44,4 +44,4 @@ export default function useForm(
     resetForm,
     clearForm,
   };
-}
+};

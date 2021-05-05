@@ -11,7 +11,7 @@ import Text from "../components/Text";
 import TextInput from "../components/TextInput";
 import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
 import { RootStackParams } from "../routes";
-import useForm from "../utils/useForm";
+import { useForm } from "../utils/useForm";
 
 export default function CreateAccountScreen(): JSX.Element {
   const navigation = useNavigation<

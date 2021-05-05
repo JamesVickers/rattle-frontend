@@ -2,7 +2,7 @@
 // import React from "react";
 // import { Button, View } from "react-native";
 // import { SIGN_UP_MUTATION } from "../gql/SignUpMutation";
-// import useForm from "../utils/useForm";
+// import { useForm } from "../utils/useForm";
 // import TextInput from "./TextInput";
 
 // export default function RequestPasswordReset(): JSX.Element {

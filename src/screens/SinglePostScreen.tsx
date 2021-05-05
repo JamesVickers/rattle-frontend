@@ -11,7 +11,7 @@ import Text from "../components/Text";
 import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
 import { ChatStackParams } from "../routes";
-import useForm from "../utils/useForm";
+import { useForm } from "../utils/useForm";
 
 export default function SinglePostcreen(): JSX.Element {
   const route = useRoute<RouteProp<ChatStackParams, "SinglePost">>();

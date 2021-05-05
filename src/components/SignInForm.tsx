@@ -2,13 +2,16 @@ import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect } from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
+import { ActivityIndicator, StyleProp, View, ViewStyle } from "react-native";
 import styled from "styled-components/native";
+import { useTheme } from "styled-components/native";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
-import useForm from "../utils/useForm";
+import { useError } from "../utils/useError";
+import { useForm } from "../utils/useForm";
 import Button from "./Button";
+import ErrorBox from "./ErrorBox";
 import Spacer from "./Spacer";
 import Text from "./Text";
 import TextInput from "./TextInput";
@@ -22,22 +25,22 @@ export default function SignInForm({
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignIn">
   >();
+  const theme = useTheme();
 
   const { inputs, handleChange, resetForm } = useForm({
     email: "",
     password: "",
   });
 
-  const [
-    signin,
+  const { error, handleError, clearError } = useError();
+
+  const [signin, { loading, error: signInError }] = useMutation(
+    SIGN_IN_MUTATION,
     {
-      //   loading,
-      error,
+      variables: inputs,
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
     },
-  ] = useMutation(SIGN_IN_MUTATION, {
-    variables: inputs,
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
-  });
+  );
 
   const user = useUser();
 
@@ -51,10 +54,12 @@ export default function SignInForm({
     try {
       await signin();
     } catch {
-      console.error(error);
+      handleError(signInError);
     }
     resetForm();
-  }, [error, resetForm, signin]);
+  }, [resetForm, signin, handleError, signInError]);
+
+  console.log("error: ", error);
 
   return (
     <FormStyles style={style}>
@@ -76,13 +81,18 @@ export default function SignInForm({
         placeholder={"Password"}
       />
       <Spacer />
-      <Button text="Sign in!" onPress={onSubmit} />
       {error && (
         <>
+          <ErrorBox error={error} clearError={clearError} />
           <Spacer />
-          <Text colour="danger">
-            Authentication failed, please try again :(
-          </Text>
+        </>
+      )}
+      {!loading ? (
+        <Button text="Sign in!" onPress={onSubmit} />
+      ) : (
+        <>
+          <Spacer />
+          <ActivityIndicator color={theme.colors.foreground} size="large" />
         </>
       )}
     </FormStyles>
