@@ -18,33 +18,26 @@ export default function ErrorBox({
 
   return (
     // <Collapse isOpened={error ? true : false} style={style}>
-    <Background>
-      {clearError && (
-        <>
-          <CloseIconTouchable
-            onPress={clearError}
-            activeOpacity={theme.opacity.pressed}>
-            <CloseSvg
-              width={theme.spacing[5]}
-              height={theme.spacing[5]}
-              fill={theme.colors.background}
-            />
-          </CloseIconTouchable>
-          <Spacer height={1} />
-        </>
-      )}
+    <TouchableOpacityStyled
+      onPress={clearError || undefined}
+      activeOpacity={theme.opacity.pressed}>
+      <CloseSvg
+        width={theme.spacing[5]}
+        height={theme.spacing[5]}
+        fill={theme.colors.background}
+      />
+      <Spacer height={1} />
       <Text colour="background" style={{ display: "flex" }}>
         {error?.message || "Oh no! Something went wrong, please try again."}
       </Text>
-    </Background>
+    </TouchableOpacityStyled>
     // </Collapse>
   );
 }
-const Background = styled.View`
+const TouchableOpacityStyled = styled(TouchableOpacity)`
   align-items: center;
   justify-content: space-between;
   padding: ${(props) => props.theme.spacing[2]}px;
   background-color: ${(props) => props.theme.colors.danger};
   border-radius: ${(props) => props.theme.borderRadius.card}px;
 `;
-const CloseIconTouchable = styled(TouchableOpacity)``;

@@ -42,6 +42,12 @@ export default function SignInForm({
     },
   );
 
+  useEffect(() => {
+    // if graphql error changes, update useError hook
+    handleError(signInError);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signInError]);
+
   const user = useUser();
 
   useEffect(() => {
@@ -58,8 +64,6 @@ export default function SignInForm({
     }
     resetForm();
   }, [resetForm, signin, handleError, signInError]);
-
-  console.log("error: ", error);
 
   return (
     <FormStyles style={style}>
