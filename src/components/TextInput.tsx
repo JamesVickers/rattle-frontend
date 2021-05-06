@@ -17,7 +17,7 @@ export default function TextInput({
 }): JSX.Element {
   const theme = useTheme();
   return (
-    <RNTextInputStyles
+    <RNTextInputStyled
       placeholder={placeholder}
       placeholderTextColor={theme.colors.foreground}
       value={value}
@@ -27,7 +27,7 @@ export default function TextInput({
     />
   );
 }
-const RNTextInputStyles = styled(RNTextInput)`
+const RNTextInputStyled = styled(RNTextInput)`
   color: ${(props) => props.theme.colors.foreground};
   background-color: ${(props) => props.theme.colors.input};
   border-radius: ${(props) => props.theme.borderRadius.input}px;

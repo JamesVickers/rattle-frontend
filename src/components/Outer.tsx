@@ -9,9 +9,9 @@ export const Outer = ({
   style?: StyleProp<ViewStyle>;
   children?: React.ReactNode;
 }): JSX.Element => {
-  return <ViewStyles style={style}>{children}</ViewStyles>;
+  return <ViewStyled style={style}>{children}</ViewStyled>;
 };
-const ViewStyles = styled(View)`
+const ViewStyled = styled(View)`
   flex: 1;
   margin: ${(props) => props.theme.spacing[2]}px;
 `;

@@ -7,7 +7,7 @@ import { RootStackParams } from "../routes";
 import { StyledLikeSvg } from "../components/LikeSvg";
 import styled from "styled-components/native";
 import Spacer from "../components/Spacer";
-import { TextStyles } from "../components/TextStyles";
+import { TextStyled } from "../components/TextStyled";
 
 export default function SplashScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -38,7 +38,7 @@ export default function SplashScreen(): JSX.Element {
   }, [user, navigation, isUnpaused]);
 
   return (
-    <SafeAreaViewStyles
+    <SafeAreaViewStyled
       forceInset={{
         left: "always",
         top: "always",
@@ -47,11 +47,11 @@ export default function SplashScreen(): JSX.Element {
       }}>
       <StyledLikeSvg width={200} height={200} />
       <Spacer height={10} />
-      <TextStyles>Splash screen</TextStyles>
-    </SafeAreaViewStyles>
+      <TextStyled>Splash screen</TextStyled>
+    </SafeAreaViewStyled>
   );
 }
-const SafeAreaViewStyles = styled(SafeAreaView)`
+const SafeAreaViewStyled = styled(SafeAreaView)`
   flex: 1;
   align-items: center;
   justify-content: center;

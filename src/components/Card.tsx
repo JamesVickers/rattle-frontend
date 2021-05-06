@@ -21,8 +21,8 @@ export const CardTouchable = ({
 }: {
   children?: React.ReactNode;
 }): JSX.Element => {
-  return <CardStyles>{children}</CardStyles>;
+  return <CardStyled>{children}</CardStyled>;
 };
-const CardStyles = styled.TouchableOpacity`
+const CardStyled = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.colors.card};
 `;

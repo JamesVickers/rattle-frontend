@@ -19,21 +19,21 @@ export default function Button({
   onLongPress?: () => void;
 }): JSX.Element {
   return (
-    <TouchableWithoutFeedbackStyles
+    <TouchableWithoutFeedbackStyled
       style={touchableStyle}
       disabled={disabled || (!onPress && !onLongPress)}
       onPress={onPress}
       onLongPress={onLongPress}>
-      <TextStyles style={textStyle}>{text}</TextStyles>
-    </TouchableWithoutFeedbackStyles>
+      <TextStyled style={textStyle}>{text}</TextStyled>
+    </TouchableWithoutFeedbackStyled>
   );
 }
-const TouchableWithoutFeedbackStyles = styled(TouchableWithoutFeedback)`
+const TouchableWithoutFeedbackStyled = styled(TouchableWithoutFeedback)`
   background: ${(props) => props.theme.colors.secondary};
   padding: ${(props) => props.theme.spacing[2]}px;
   align-self: flex-start;
   border-radius: ${(props) => props.theme.borderRadius.button}px;
 `;
-const TextStyles = styled(Text)`
+const TextStyled = styled(Text)`
   color: ${(props) => props.theme.colors.foreground};
 `;

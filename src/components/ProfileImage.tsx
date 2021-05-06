@@ -8,7 +8,7 @@ export default function ProfileImage({
   source?: string;
 }): JSX.Element {
   return (
-    <ProfileImageStyles
+    <ProfileImageStyled
       source={{
         uri: source,
       }}
@@ -16,7 +16,7 @@ export default function ProfileImage({
   );
 }
 
-const ProfileImageStyles = styled(Image)<{
+const ProfileImageStyled = styled(Image)<{
   height?: number;
   colour?: string;
 }>`

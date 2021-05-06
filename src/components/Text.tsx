@@ -20,12 +20,12 @@ export default function Text({
   // colour?: string;
 } & Omit<RNTextProps, "style">): JSX.Element {
   return (
-    <RNTextStyles style={style} colour={colour}>
+    <RNTextStyled style={style} colour={colour}>
       {children}
-    </RNTextStyles>
+    </RNTextStyled>
   );
 }
-const RNTextStyles = styled(RNText)<{ colour?: keyof MyColours }>`
+const RNTextStyled = styled(RNText)<{ colour?: keyof MyColours }>`
   color: ${(props) =>
     props.colour ? props.theme.colors[props.colour] : "#171717"};
 `;

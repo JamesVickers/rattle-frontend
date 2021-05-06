@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { MyColours, MyFontSize } from "../styles/myTheme";
 
-export const TextStyles = styled.Text<{
+export const TextStyled = styled.Text<{
   fontSize?: keyof MyFontSize;
   colour?: keyof MyColours;
 }>`

@@ -66,7 +66,7 @@ export default function SignInForm({
   }, [resetForm, signin, handleError, signInError]);
 
   return (
-    <FormStyles style={style}>
+    <FormStyled style={style}>
       <Spacer />
       <Text>Sign in to your account</Text>
       <Spacer />
@@ -99,10 +99,10 @@ export default function SignInForm({
           <ActivityIndicator color={theme.colors.foreground} size="large" />
         </>
       )}
-    </FormStyles>
+    </FormStyled>
   );
 }
-const FormStyles = styled(View)`
+const FormStyled = styled(View)`
   width: 100%;
   align-items: center;
 `;
