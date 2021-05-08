@@ -29,7 +29,7 @@ export default function SignInForm({
 
   const user = useUser();
 
-  const { inputs, handleChange } = useForm({
+  const { inputs, handleChange, clearIndividualKey } = useForm({
     email: "",
     password: "",
   });
@@ -82,6 +82,7 @@ export default function SignInForm({
         name={"email"}
         placeholder={"Email"}
         isInvalid={submitted && !inputs.email}
+        clearValue={clearIndividualKey}
       />
       <Spacer />
       <TextInput

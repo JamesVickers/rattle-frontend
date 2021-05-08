@@ -8,6 +8,7 @@ export const useForm = (
   handleChange: (name: string, value: string) => void;
   resetForm: () => void;
   clearForm: () => void;
+  clearIndividualKey: (key: string) => void;
 } => {
   const [inputs, setInputs] = useState(initial);
   // used to check when initial values goes from nothing to something
@@ -38,10 +39,23 @@ export const useForm = (
     setInputs(blankStateObject);
   }
 
+  function clearIndividualKey(key: string) {
+    console.log("key: ", key);
+    // turn object into array and empty values
+    const arrayWithClearedKey = Object.entries(inputs).map(([k]) => {
+      k === key ? [k, ""] : [k];
+      console.log("k: ", k);
+    });
+    // turn array back into an object
+    const objectWithClearedKey = Object.fromEntries(arrayWithClearedKey);
+    setInputs(objectWithClearedKey);
+  }
+
   return {
     inputs,
     handleChange,
     resetForm,
     clearForm,
+    clearIndividualKey,
   };
 };
