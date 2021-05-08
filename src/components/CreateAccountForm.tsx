@@ -5,8 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, StyleProp, View, ViewStyle } from "react-native";
 import styled from "styled-components/native";
 import { useTheme } from "styled-components/native";
-import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
-import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
+import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
 import { RootStackParams } from "../routes";
 import { useError } from "../utils/useError";
 import { useForm } from "../utils/useForm";
@@ -15,21 +14,20 @@ import ErrorBox from "./ErrorBox";
 import Spacer from "./Spacer";
 import Text from "./Text";
 import TextInput from "./TextInput";
-import { useUser } from "./User";
 
-export default function SignInForm({
+export default function CreateAccountForm({
   style,
 }: {
   style?: StyleProp<ViewStyle>;
 }): JSX.Element {
   const navigation = useNavigation<
-    StackNavigationProp<RootStackParams, "SignIn">
+    StackNavigationProp<RootStackParams, "CreateAccount">
   >();
   const theme = useTheme();
 
-  const user = useUser();
-
   const { inputs, handleChange } = useForm({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -38,43 +36,70 @@ export default function SignInForm({
 
   const [submitted, setSubmitted] = useState(false);
 
-  // const submitDisabled = !inputs.email || !inputs.password;
+  // const submitDisabled =
+  //   !inputs.firstName || !inputs.lastName || !inputs.email || !inputs.password;
 
-  const [signin, { loading, error: signInError }] = useMutation(
-    SIGN_IN_MUTATION,
+  const [signup, { data, loading, error: signUpError }] = useMutation(
+    SIGN_UP_MUTATION,
     {
       variables: inputs,
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
     },
   );
 
   useEffect(() => {
     // if graphql error changes, update useError hook
-    handleError(signInError);
+    handleError(signUpError);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [signInError]);
-
-  useEffect(() => {
-    if (user) {
-      navigation.replace("ChatStack");
-    }
-  }, [user, navigation]);
+  }, [signUpError]);
 
   const onSubmit = useCallback(async () => {
     setSubmitted(true);
-    if (inputs.email && inputs.password) {
+    if (
+      inputs.firstName &&
+      inputs.lastName &&
+      inputs.email &&
+      inputs.password
+    ) {
       try {
-        await signin();
+        await signup();
       } catch {
-        handleError(signInError);
+        handleError(signUpError);
       }
     }
-  }, [inputs.email, inputs.password, signin, handleError, signInError]);
+  }, [
+    inputs.firstName,
+    inputs.lastName,
+    inputs.email,
+    inputs.password,
+    signup,
+    handleError,
+    signUpError,
+  ]);
 
+  const onCancel = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
+  const goBackToSignInScreen = useCallback(() => {
+    navigation.navigate("SignIn");
+  }, [navigation]);
   return (
     <FormStyled style={style}>
+      <TextInput
+        value={inputs.firstName}
+        handleChange={handleChange}
+        name={"firstName"}
+        placeholder={"First Name"}
+        isInvalid={submitted && !inputs.firstName}
+      />
       <Spacer />
-      <Text>Sign in to your account</Text>
+      <TextInput
+        value={inputs.lastName}
+        handleChange={handleChange}
+        name={"lastName"}
+        placeholder={"Last Name"}
+        isInvalid={submitted && !inputs.lastName}
+      />
       <Spacer />
       <TextInput
         value={inputs.email}
@@ -93,18 +118,30 @@ export default function SignInForm({
         isInvalid={submitted && !inputs.password}
       />
       <Spacer />
+      <Button text="Cancel" onPress={onCancel} />
+      {data?.createUser && (
+        <>
+          <Spacer />
+          <Text>Sign up successful with {data.createUser.email}</Text>
+          <Text>You can now sign in to Rattle</Text>
+          <Spacer />
+          <Button
+            text="Back to Sign In"
+            onPress={goBackToSignInScreen}
+            // disabled={submitDisabled}
+          />
+        </>
+      )}
       {error && (
         <>
-          <ErrorBox error={error} clearError={clearError} />
-          <Spacer />
+          <>
+            <ErrorBox error={error} clearError={clearError} />
+            <Spacer />
+          </>
         </>
       )}
       {!loading ? (
-        <Button
-          text="Sign in!"
-          onPress={onSubmit}
-          //  disabled={submitDisabled}
-        />
+        <Button text="Sign up!" onPress={onSubmit} />
       ) : (
         <>
           <Spacer />

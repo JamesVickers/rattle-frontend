@@ -52,7 +52,10 @@ const App = (): JSX.Element => {
     <ApolloProvider client={client}>
       <ThemeProvider theme={themeMode}>
         <AppProvider toggleMode={toggleTheme}>
-          <StatusBar barStyle="dark-content" />
+          <StatusBar
+            barStyle={theme === "dark" ? "light-content" : "dark-content"}
+            // backgroundColor={chosenTheme.colour.cardBody}
+          />
           <SafeAreaProvider>
             <Navigation />
             {/* <Button onPress={toggleTheme} title="toggle theme" />

@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { StatusBar } from "react-native";
 import { RootStackParams } from "../routes";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Outer } from "../components/Outer";
@@ -21,7 +20,6 @@ export default function SignInScreen(): JSX.Element {
   return (
     <SafeAreaViewDefault>
       <Outer style={{ alignItems: "center" }}>
-        <StatusBar barStyle="dark-content" />
         <SignInForm />
         <Spacer />
         <Button text="Create Account" onPress={onCreateAccount} />

@@ -4,7 +4,6 @@ import {
 } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { StatusBar } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useUser } from "../components/User";
 import { ChatStackParams, ChatTabsParams } from "../routes";
@@ -47,7 +46,6 @@ export default function HomeTab(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <StatusBar barStyle="dark-content" />
       <Text>{user && `${user.firstName}`}</Text>
       <Text>
         Post count: <Text>{postsCount}. </Text>

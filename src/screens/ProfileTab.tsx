@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Button, StatusBar, View } from "react-native";
+import { Button, View } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
   CompositeNavigationProp,
@@ -26,7 +26,6 @@ export default function ProfileTab(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <StatusBar barStyle="dark-content" />
       <View>
         <Button title="Sign Out" onPress={goToSignOutScreen} />
         <ToggleThemeSwitch />

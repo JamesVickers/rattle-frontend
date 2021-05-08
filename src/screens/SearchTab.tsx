@@ -1,6 +1,6 @@
 import { useLazyQuery } from "@apollo/client";
 import React, { useCallback, useState } from "react";
-import { StatusBar, View } from "react-native";
+import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import debounce from "lodash.debounce";
 import SearchBar from "../components/SearchBar";
@@ -39,7 +39,6 @@ export default function SearchTab(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <StatusBar barStyle="dark-content" />
       <View>
         <SearchBar
           error={findUsersError}
