@@ -1,6 +1,5 @@
 import { useLazyQuery } from "@apollo/client";
 import React, { useCallback, useState } from "react";
-import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import debounce from "lodash.debounce";
 import SearchBar from "../components/SearchBar";
@@ -8,15 +7,18 @@ import UserItem from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import Text from "../components/Text";
+import { Outer } from "../components/Outer";
+import ErrorBox from "../components/ErrorBox";
+import Spacer from "../components/Spacer";
 
 export default function SearchTab(): JSX.Element {
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
 
-  const [
-    findUsers,
-    { data: findUsersData, loading: findUsersLoading, error: findUsersError },
-  ] = useLazyQuery(SEARCH_USERS_QUERY, { fetchPolicy: "no-cache" });
+  const [findUsers, { data, loading, error }] = useLazyQuery(
+    SEARCH_USERS_QUERY,
+    { fetchPolicy: "no-cache" },
+  );
 
   const debounceAndFindUsers = useCallback(
     debounce((searchTerm: string) => {
@@ -39,18 +41,30 @@ export default function SearchTab(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <View>
+      <Outer>
         <SearchBar
-          error={findUsersError}
+          error={error}
           searchString={searchString}
           setSearchString={onChangeText}
         />
+        {true && (
+          <>
+            <>
+              <Spacer />
+              <ErrorBox
+                error={error}
+                // clearError={clearError}
+              />
+              <Spacer />
+            </>
+          </>
+        )}
         {searchString !== "" &&
-          (findUsersLoading || debouncing ? (
+          (loading || debouncing ? (
             <Text>Searching...</Text>
-          ) : findUsersData ? (
+          ) : data ? (
             <FlatList
-              data={findUsersData.allUsers}
+              data={data.allUsers}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => <UserItem key={item.id} user={item} />}
               ListEmptyComponent={<Text>No user matched found</Text>}
@@ -58,7 +72,7 @@ export default function SearchTab(): JSX.Element {
           ) : (
             <></>
           ))}
-      </View>
+      </Outer>
     </SafeAreaViewDefault>
   );
 }

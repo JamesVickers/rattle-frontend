@@ -15,6 +15,7 @@ import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import Text from "../components/Text";
+import { Outer } from "../components/Outer";
 
 export default function HomeTab(): JSX.Element {
   const navigation = useNavigation<
@@ -46,23 +47,25 @@ export default function HomeTab(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <Text>{user && `${user.firstName}`}</Text>
-      <Text>
-        Post count: <Text>{postsCount}. </Text>
-        Found using GraphQL meta query!
-      </Text>
-      <FlatList
-        data={data.allPosts}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <PostItem
-            key={item.id}
-            post={item}
-            onPressPost={goToPostItemScreen}
-          />
-        )}
-      />
-      <CreatePostItem />
+      <Outer>
+        <Text>{user && `${user.firstName}`}</Text>
+        <Text>
+          Post count: <Text>{postsCount}. </Text>
+          Found using GraphQL meta query!
+        </Text>
+        <FlatList
+          data={data.allPosts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <PostItem
+              key={item.id}
+              post={item}
+              onPressPost={goToPostItemScreen}
+            />
+          )}
+        />
+        <CreatePostItem />
+      </Outer>
     </SafeAreaViewDefault>
   );
 }

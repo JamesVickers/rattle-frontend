@@ -1,8 +1,13 @@
 import { ApolloError } from "@apollo/client";
 import React from "react";
-import { TextInput, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useTheme } from "styled-components/native";
-import Text from "./Text";
+import CloseSvg from "../images/close.svg";
+import {
+  CloseIconContainer,
+  RNTextInputStyled,
+  TextInputContainer,
+} from "./TextInput";
 
 export default function Searchbar({
   error,
@@ -15,14 +20,23 @@ export default function Searchbar({
 }): JSX.Element {
   const theme = useTheme();
   return (
-    <View style={{ backgroundColor: theme.colors.card }}>
-      <Text>Search for a user</Text>
-      <TextInput
+    <TextInputContainer>
+      <RNTextInputStyled
         value={searchString}
         onChangeText={(string) => setSearchString(string)}
         placeholder={"Search"}
       />
-      {error && <Text>Search failed, please try again :(</Text>}
-    </View>
+      {searchString ? (
+        <CloseIconContainer>
+          <TouchableOpacity
+            onPress={() => setSearchString("")}
+            activeOpacity={theme.opacity.pressed}>
+            <CloseSvg width={30} height={30} fill={theme.colors.foreground} />
+          </TouchableOpacity>
+        </CloseIconContainer>
+      ) : (
+        <></>
+      )}
+    </TextInputContainer>
   );
 }

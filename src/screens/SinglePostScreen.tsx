@@ -12,6 +12,7 @@ import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
 import { ChatStackParams } from "../routes";
 import { useForm } from "../utils/useForm";
+import { Outer } from "../components/Outer";
 
 export default function SinglePostcreen(): JSX.Element {
   const route = useRoute<RouteProp<ChatStackParams, "SinglePost">>();
@@ -46,44 +47,46 @@ export default function SinglePostcreen(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <Text>SinglePostItemScreen</Text>
-      <Button title="goBack" onPress={() => navigation.goBack()} />
-      <Text>Post id to update is: {id}</Text>
-      <Card>
-        <TextInput
-          value={inputs.title}
-          handleChange={handleChange}
-          name={"title"}
-          placeholder={"Add the post title"}
-          clearValue={clearIndividualKey}
+      <Outer>
+        <Text>SinglePostItemScreen</Text>
+        <Button title="goBack" onPress={() => navigation.goBack()} />
+        <Text>Post id to update is: {id}</Text>
+        <Card>
+          <TextInput
+            value={inputs.title}
+            handleChange={handleChange}
+            name={"title"}
+            placeholder={"Add the post title"}
+            clearValue={clearIndividualKey}
+          />
+          <TextInput
+            value={inputs.body}
+            handleChange={handleChange}
+            name={"body"}
+            placeholder={"Add the post body text"}
+            clearValue={clearIndividualKey}
+          />
+        </Card>
+        <Button
+          title="Update"
+          onPress={async () => {
+            try {
+              // const res =
+              const res = await updatePost({
+                variables: {
+                  id: id,
+                  title: inputs.title,
+                  body: inputs.body,
+                },
+              });
+              console.log("updatePost res: ", res);
+            } catch {
+              console.error("updatePost error: ", updateError);
+            }
+          }}
         />
-        <TextInput
-          value={inputs.body}
-          handleChange={handleChange}
-          name={"body"}
-          placeholder={"Add the post body text"}
-          clearValue={clearIndividualKey}
-        />
-      </Card>
-      <Button
-        title="Update"
-        onPress={async () => {
-          try {
-            // const res =
-            const res = await updatePost({
-              variables: {
-                id: id,
-                title: inputs.title,
-                body: inputs.body,
-              },
-            });
-            console.log("updatePost res: ", res);
-          } catch {
-            console.error("updatePost error: ", updateError);
-          }
-        }}
-      />
-      <HardDeletePostItem id={id} />
+        <HardDeletePostItem id={id} />
+      </Outer>
     </SafeAreaViewDefault>
   );
 }

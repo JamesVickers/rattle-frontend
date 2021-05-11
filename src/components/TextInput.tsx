@@ -53,10 +53,10 @@ export default function TextInput({
     </TextInputContainer>
   );
 }
-const TextInputContainer = styled.View`
+export const TextInputContainer = styled.View`
   width: 100%;
 `;
-const RNTextInputStyled = styled(RNTextInput)<{ isInvalid?: boolean }>`
+export const RNTextInputStyled = styled(RNTextInput)<{ isInvalid?: boolean }>`
   color: ${(props) => props.theme.colors.foreground};
   background-color: ${(props) => props.theme.colors.input};
   border-radius: ${(props) => props.theme.borderRadius.input}px;

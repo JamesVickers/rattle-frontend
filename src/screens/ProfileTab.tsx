@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Button, View } from "react-native";
+import { Button } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
   CompositeNavigationProp,
@@ -10,6 +10,7 @@ import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { useUser } from "../components/User";
 import ToggleThemeSwitch from "../components/ToggleThemeSwitch";
 import ProfileImage from "../components/ProfileImage";
+import { Outer } from "../components/Outer";
 
 export default function ProfileTab(): JSX.Element {
   const navigation = useNavigation<
@@ -26,11 +27,11 @@ export default function ProfileTab(): JSX.Element {
 
   return (
     <SafeAreaViewDefault>
-      <View>
+      <Outer>
         <Button title="Sign Out" onPress={goToSignOutScreen} />
         <ToggleThemeSwitch />
         <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />
-      </View>
+      </Outer>
     </SafeAreaViewDefault>
   );
 }
