@@ -37,7 +37,7 @@ export default function SinglePostcreen(): JSX.Element {
     },
   ] = useMutation(UPDATE_POST_MUTATION);
 
-  const { inputs, handleChange } = useForm({
+  const { inputs, handleChange, clearIndividualKey } = useForm({
     title: data?.Post.title,
     body: data?.Post.body,
   });
@@ -55,12 +55,14 @@ export default function SinglePostcreen(): JSX.Element {
           handleChange={handleChange}
           name={"title"}
           placeholder={"Add the post title"}
+          clearValue={clearIndividualKey}
         />
         <TextInput
           value={inputs.body}
           handleChange={handleChange}
           name={"body"}
           placeholder={"Add the post body text"}
+          clearValue={clearIndividualKey}
         />
       </Card>
       <Button

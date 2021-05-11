@@ -11,6 +11,7 @@
 //     handleChange,
 //     // clearForm,
 //     // resetForm,
+//     // clearIndividualKey
 //   } = useForm({
 //     email: "",
 //   });
@@ -45,6 +46,7 @@
 //         handleChange={handleChange}
 //         name={"email"}
 //         placeholder={"Email"}
+//         clearValue={clearIndividualKey}
 //       />
 //       <Button title="Request password reset" onPress={() => null} />
 //       {error && (

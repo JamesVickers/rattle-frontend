@@ -40,11 +40,13 @@ export const useForm = (
   }
 
   function clearIndividualKey(key: string) {
-    console.log("key: ", key);
-    // turn object into array and empty values
-    const arrayWithClearedKey = Object.entries(inputs).map(([k]) => {
-      k === key ? [k, ""] : [k];
-      console.log("k: ", k);
+    // turn object into array and empty individual value of matching key
+    const arrayWithClearedKey = Object.entries(inputs).map((k) => {
+      if (k[0] === key) {
+        return [k[0], ""];
+      } else {
+        return k;
+      }
     });
     // turn array back into an object
     const objectWithClearedKey = Object.fromEntries(arrayWithClearedKey);

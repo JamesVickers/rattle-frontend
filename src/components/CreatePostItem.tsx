@@ -11,7 +11,7 @@ import TextInput from "./TextInput";
 
 export default function CreatePostItem(): JSX.Element {
   // remove initial state in useForm custom hook if want no initial values and not using resetForm function
-  const { inputs, handleChange, clearForm } = useForm({
+  const { inputs, handleChange, clearForm, clearIndividualKey } = useForm({
     title: "",
     body: "",
   });
@@ -42,12 +42,14 @@ export default function CreatePostItem(): JSX.Element {
         handleChange={handleChange}
         name={"title"}
         placeholder={"Add the post title"}
+        clearValue={clearIndividualKey}
       />
       <TextInput
         value={inputs.body}
         handleChange={handleChange}
         name={"body"}
         placeholder={"Add the post body text"}
+        clearValue={clearIndividualKey}
       />
       <Button
         title="Post it!"

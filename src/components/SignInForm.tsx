@@ -92,6 +92,7 @@ export default function SignInForm({
         name={"password"}
         placeholder={"Password"}
         isInvalid={submitted && !inputs.password}
+        clearValue={clearIndividualKey}
       />
       <Spacer />
       {error && (

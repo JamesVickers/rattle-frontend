@@ -28,7 +28,7 @@ export default function TextInput({
 }): JSX.Element {
   const theme = useTheme();
   return (
-    <>
+    <TextInputContainer>
       <RNTextInputStyled
         style={style}
         placeholder={placeholder}
@@ -50,21 +50,25 @@ export default function TextInput({
       ) : (
         <></>
       )}
-    </>
+    </TextInputContainer>
   );
 }
+const TextInputContainer = styled.View`
+  width: 100%;
+`;
 const RNTextInputStyled = styled(RNTextInput)<{ isInvalid?: boolean }>`
   color: ${(props) => props.theme.colors.foreground};
   background-color: ${(props) => props.theme.colors.input};
   border-radius: ${(props) => props.theme.borderRadius.input}px;
-  width: 100%;
   height: ${(props) => props.theme.spacing[8]}px;
-  padding: 0 ${(props) => props.theme.spacing[2]}px;
+  padding: 0 ${(props) => props.theme.spacing[8]}px 0
+    ${(props) => props.theme.spacing[2]}px;
   border-color: ${(props) => props.theme.colors.danger};
   border-width: ${({ isInvalid }) => (isInvalid ? 1 : 0)}px;
 `;
 export const CloseIconContainer = styled.View`
   position: absolute;
-  z-index: 100;
-  right: ${(props) => props.theme.spacing[2]}px;
+  z-index: 10;
+  top: ${(props) => props.theme.spacing[1]}px;
+  right: ${(props) => props.theme.spacing[1]}px;
 `;

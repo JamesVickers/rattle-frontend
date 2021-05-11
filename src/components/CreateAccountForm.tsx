@@ -25,7 +25,7 @@ export default function CreateAccountForm({
   >();
   const theme = useTheme();
 
-  const { inputs, handleChange } = useForm({
+  const { inputs, handleChange, clearIndividualKey } = useForm({
     firstName: "",
     lastName: "",
     email: "",
@@ -91,6 +91,7 @@ export default function CreateAccountForm({
         name={"firstName"}
         placeholder={"First Name"}
         isInvalid={submitted && !inputs.firstName}
+        clearValue={clearIndividualKey}
       />
       <Spacer />
       <TextInput
@@ -99,6 +100,7 @@ export default function CreateAccountForm({
         name={"lastName"}
         placeholder={"Last Name"}
         isInvalid={submitted && !inputs.lastName}
+        clearValue={clearIndividualKey}
       />
       <Spacer />
       <TextInput
@@ -107,6 +109,7 @@ export default function CreateAccountForm({
         name={"email"}
         placeholder={"Email"}
         isInvalid={submitted && !inputs.email}
+        clearValue={clearIndividualKey}
       />
       <Spacer />
       <TextInput
@@ -116,6 +119,7 @@ export default function CreateAccountForm({
         name={"password"}
         placeholder={"Password"}
         isInvalid={submitted && !inputs.password}
+        clearValue={clearIndividualKey}
       />
       <Spacer />
       <Button text="Cancel" onPress={onCancel} />
