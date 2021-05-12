@@ -9,7 +9,7 @@ import {
   TextInputContainer,
 } from "./TextInput";
 
-export default function Searchbar({
+export const SearchBar = ({
   placeholder,
   error,
   searchString,
@@ -19,7 +19,7 @@ export default function Searchbar({
   error?: ApolloError | undefined;
   searchString: string;
   setSearchString: (string: string) => void;
-}): JSX.Element {
+}): JSX.Element => {
   const theme = useTheme();
   return (
     <TextInputContainer>
@@ -42,4 +42,4 @@ export default function Searchbar({
       )}
     </TextInputContainer>
   );
-}
+};

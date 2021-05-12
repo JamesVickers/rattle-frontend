@@ -1,10 +1,10 @@
 import React from "react";
 import { User } from "../state/user.model";
 import { Card } from "./Card";
-import ProfileImage from "./ProfileImage";
-import Text from "./Text";
+import { ProfileImage } from "./ProfileImage";
+import { Text } from "./Text";
 
-export default function UserItem({ user }: { user: User }): JSX.Element {
+export const UserItem = ({ user }: { user: User }): JSX.Element => {
   return (
     <Card>
       <Text>
@@ -13,4 +13,4 @@ export default function UserItem({ user }: { user: User }): JSX.Element {
       <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />
     </Card>
   );
-}
+};

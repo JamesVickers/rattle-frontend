@@ -3,15 +3,15 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Post } from "../state/post.model";
 import { Id } from "../state/types";
 import { CardTouchable } from "./Card";
-import Text from "./Text";
+import { Text } from "./Text";
 
-export default function PostItem({
+export const PostItem = ({
   post,
   onPressPost,
 }: {
   post: Post;
   onPressPost: (selectedPostId: Id) => void;
-}): JSX.Element {
+}): JSX.Element => {
   return (
     <TouchableOpacity onPress={() => onPressPost(post.id)}>
       <CardTouchable>
@@ -24,4 +24,4 @@ export default function PostItem({
       </CardTouchable>
     </TouchableOpacity>
   );
-}
+};

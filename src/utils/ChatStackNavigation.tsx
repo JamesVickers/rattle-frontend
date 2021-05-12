@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import React from "react";
 import { ChatStackParams } from "../routes";
-import ChatTabsNavigation from "../ChatTabsNavigation";
-import SinglePostScreen from "../screens/SinglePostScreen";
+import { ChatTabsNavigation } from "../ChatTabsNavigation";
+import { SinglePostScreen } from "../screens/SinglePostScreen";
 
 const ChatStack = createNativeStackNavigator<ChatStackParams>();
 
-export default function ChatStackNavigation(): JSX.Element {
+export const ChatStackNavigation = (): JSX.Element => {
   return (
     <>
       <ChatStack.Navigator>
@@ -27,4 +27,4 @@ export default function ChatStackNavigation(): JSX.Element {
       {/* <LockScreen /> */}
     </>
   );
-}
+};

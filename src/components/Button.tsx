@@ -3,7 +3,7 @@ import { StyleProp, Text, TextStyle, ViewStyle } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 
-export default function Button({
+export const Button = ({
   touchableStyle,
   textStyle,
   text,
@@ -17,7 +17,7 @@ export default function Button({
   disabled?: boolean;
   onPress?: () => void;
   onLongPress?: () => void;
-}): JSX.Element {
+}): JSX.Element => {
   return (
     <TouchableWithoutFeedbackStyled
       style={touchableStyle}
@@ -27,7 +27,7 @@ export default function Button({
       <TextStyled style={textStyle}>{text}</TextStyled>
     </TouchableWithoutFeedbackStyled>
   );
-}
+};
 const TouchableWithoutFeedbackStyled = styled(TouchableWithoutFeedback)`
   background: ${(props) => props.theme.colors.buttonBackground};
   padding: ${(props) => props.theme.spacing[2]}px;

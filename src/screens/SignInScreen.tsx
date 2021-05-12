@@ -4,12 +4,12 @@ import React, { useCallback } from "react";
 import { RootStackParams } from "../routes";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Outer } from "../components/Outer";
-import SignInForm from "../components/SignInForm";
-import Button from "../components/Button";
-import Spacer from "../components/Spacer";
-import Text from "../components/Text";
+import { SignInForm } from "../components/SignInForm";
+import { Button } from "../components/Button";
+import { Spacer } from "../components/Spacer";
+import { Text } from "../components/Text";
 
-export default function SignInScreen(): JSX.Element {
+export const SignInScreen = (): JSX.Element => {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignIn">
   >();
@@ -30,4 +30,4 @@ export default function SignInScreen(): JSX.Element {
       </Outer>
     </SafeAreaViewDefault>
   );
-}
+};

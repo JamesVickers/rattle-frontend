@@ -11,17 +11,17 @@ import { RootStackParams } from "../routes";
 import { useError } from "../utils/useError";
 import { useForm } from "../utils/useForm";
 import { isValidEmail } from "../utils/validation";
-import Button from "./Button";
-import ErrorBox from "./ErrorBox";
-import Spacer from "./Spacer";
-import TextInput from "./TextInput";
+import { Button } from "./Button";
+import { ErrorBox } from "./ErrorBox";
+import { Spacer } from "./Spacer";
+import { TextInput } from "./TextInput";
 import { useUser } from "./User";
 
-export default function SignInForm({
+export const SignInForm = ({
   style,
 }: {
   style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}): JSX.Element => {
   const navigation = useNavigation<
     StackNavigationProp<RootStackParams, "SignIn">
   >();
@@ -116,7 +116,7 @@ export default function SignInForm({
       )}
     </FormStyled>
   );
-}
+};
 const FormStyled = styled(View)`
   width: 100%;
   align-items: center;

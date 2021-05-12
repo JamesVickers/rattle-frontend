@@ -4,16 +4,16 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { useTheme } from "styled-components/native";
 import CloseSvg from "../images/close.svg";
-import Spacer from "./Spacer";
-import Text from "./Text";
+import { Spacer } from "./Spacer";
+import { Text } from "./Text";
 
-export default function ErrorBox({
+export const ErrorBox = ({
   error,
   clearError,
 }: {
   error: ApolloError | undefined;
   clearError?: () => void;
-}): JSX.Element {
+}): JSX.Element => {
   const theme = useTheme();
 
   return (
@@ -33,7 +33,7 @@ export default function ErrorBox({
     </TouchableOpacityStyled>
     // </Collapse>
   );
-}
+};
 const TouchableOpacityStyled = styled(TouchableOpacity)`
   align-items: center;
   justify-content: space-between;

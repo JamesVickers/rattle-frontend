@@ -2,16 +2,16 @@ import { useLazyQuery } from "@apollo/client";
 import React, { useCallback, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import debounce from "lodash.debounce";
-import SearchBar from "../components/SearchBar";
-import UserItem from "../components/UserItem";
+import { SearchBar } from "../components/SearchBar";
+import { UserItem } from "../components/UserItem";
 import { SEARCH_USERS_QUERY } from "../queries/SearchUsersQuery";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import Text from "../components/Text";
+import { Text } from "../components/Text";
 import { Outer } from "../components/Outer";
-import ErrorBox from "../components/ErrorBox";
-import Spacer from "../components/Spacer";
+import { ErrorBox } from "../components/ErrorBox";
+import { Spacer } from "../components/Spacer";
 
-export default function SearchTab(): JSX.Element {
+export const SearchTab = (): JSX.Element => {
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
 
@@ -75,4 +75,4 @@ export default function SearchTab(): JSX.Element {
       </Outer>
     </SafeAreaViewDefault>
   );
-}
+};

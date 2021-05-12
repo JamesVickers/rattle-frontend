@@ -26,13 +26,13 @@ export const AppContext = createContext<AppContextType>(contextDefaultValues);
 // just use this instead --> const { mode, toggleMode } = useAppContext()
 // export const useAppContext = (): AppContextType => React.useContext(AppContext);
 
-export default function AppProvider({
+export const AppProvider = ({
   children,
   toggleMode,
 }: {
   children?: React.ReactNode;
   toggleMode: () => void;
-}): JSX.Element {
+}): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(contextDefaultValues.isOpen);
 
   // const addItem = (newItem: string) => setItems((items) => [...items, newItem]);
@@ -52,4 +52,4 @@ export default function AppProvider({
       {children}
     </AppContext.Provider>
   );
-}
+};

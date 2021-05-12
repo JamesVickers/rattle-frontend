@@ -9,10 +9,10 @@ export const useDarkMode = (): {
 
   // Fetch the user’s colour theme mode preference from AsyncStorage and setting it to state
   useEffect(() => {
-    async function getTheme() {
+    const getTheme = async () => {
       const stored = await colorThemeStorage.get();
       setTheme(stored || "light");
-    }
+    };
     getTheme();
   }, []);
 

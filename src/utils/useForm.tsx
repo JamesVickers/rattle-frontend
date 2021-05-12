@@ -20,26 +20,26 @@ export const useForm = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues]);
 
-  function handleChange(name: string, value: string) {
+  const handleChange = (name: string, value: string) => {
     setInputs({
       ...inputs,
       [name]: value,
     });
-  }
+  };
 
-  function resetForm() {
+  const resetForm = () => {
     setInputs(initial);
-  }
+  };
 
-  function clearForm() {
+  const clearForm = () => {
     // turn object into array and empty values
     const blankStateArray = Object.entries(inputs).map(([key]) => [key, ""]);
     // turn array back into an object
     const blankStateObject = Object.fromEntries(blankStateArray);
     setInputs(blankStateObject);
-  }
+  };
 
-  function clearIndividualKey(key: string) {
+  const clearIndividualKey = (key: string) => {
     // turn object into array and empty individual value of matching key
     const arrayWithClearedKey = Object.entries(inputs).map((k) => {
       if (k[0] === key) {
@@ -51,7 +51,7 @@ export const useForm = (
     // turn array back into an object
     const objectWithClearedKey = Object.fromEntries(arrayWithClearedKey);
     setInputs(objectWithClearedKey);
-  }
+  };
 
   return {
     inputs,

@@ -12,13 +12,13 @@ const HARD_DELETE_POST_MUTATION = gql`
   }
 `;
 
-function update(cache: SilentAny, payload: SilentAny) {
+const update = (cache: SilentAny, payload: SilentAny) => {
   // console.log(payload);
   // console.log("running update after deletePost mutation");
   cache.evict(cache.identify(payload.data.deletePost));
-}
+};
 
-export default function HardDeletePostItem({ id }: { id: Id }): JSX.Element {
+export const HardDeletePostItem = ({ id }: { id: Id }): JSX.Element => {
   const [deletePost, { loading, error }] = useMutation(
     HARD_DELETE_POST_MUTATION,
     {
@@ -45,4 +45,4 @@ export default function HardDeletePostItem({ id }: { id: Id }): JSX.Element {
       }}
     />
   );
-}
+};

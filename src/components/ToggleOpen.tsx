@@ -3,9 +3,9 @@ import { Button } from "react-native";
 import { AppContext } from "../components/AppContext";
 import { Card } from "./Card";
 import { StyledLikeSvg } from "./LikeSvg";
-import Text from "./Text";
+import { Text } from "./Text";
 
-export default function ToggleOpen(): JSX.Element {
+export const ToggleOpen = (): JSX.Element => {
   const { isOpen, toggleOpen, openExample, closeExample } = useContext(
     AppContext,
   );
@@ -19,4 +19,4 @@ export default function ToggleOpen(): JSX.Element {
       {isOpen && <Text>OPEN</Text>}
     </Card>
   );
-}
+};

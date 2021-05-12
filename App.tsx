@@ -8,16 +8,16 @@ import { ThemeProvider, useTheme } from "styled-components/native";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParams, useStackNavigatorHeaderOptions } from "./src/routes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AppProvider from "./src/components/AppContext";
-import CreateAccountScreen from "./src/screens/CreateAccountScreen";
-import SplashScreen from "./src/screens/SplashScreen";
-import SignInScreen from "./src/screens/SignInScreen";
-import SignOutScreen from "./src/screens/SignOutScreen";
+import { AppProvider } from "./src/components/AppContext";
+import { CreateAccountScreen } from "./src/screens/CreateAccountScreen";
+import { SplashScreen } from "./src/screens/SplashScreen";
+import { SignInScreen } from "./src/screens/SignInScreen";
+import { SignOutScreen } from "./src/screens/SignOutScreen";
 import { useUser } from "./src/components/User";
 import { darkTheme, lightTheme } from "./src/styles/theme";
 import { useDarkMode } from "./src/utils/useDarkMode";
 import { Text } from "react-native";
-import ChatStackNavigation from "./src/utils/ChatStackNavigation";
+import { ChatStackNavigation } from "./src/utils/ChatStackNavigation";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 
@@ -67,7 +67,7 @@ const App = (): JSX.Element => {
   );
 };
 
-function Navigation(): JSX.Element {
+const Navigation = (): JSX.Element => {
   const user = useUser();
   const headerOptions = useStackNavigatorHeaderOptions();
   const theme = useTheme();
@@ -148,6 +148,6 @@ function Navigation(): JSX.Element {
       </NavigationContainer>
     </View>
   );
-}
+};
 
 export default App;

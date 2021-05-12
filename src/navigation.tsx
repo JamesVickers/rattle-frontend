@@ -1,44 +1,44 @@
-// import {NavigationContainerRef} from '@react-navigation/native';
-// import {createRef} from 'react';
+// import { NavigationContainerRef } from "@react-navigation/native";
+// import { createRef } from "react";
 
 // export const navigationContainerRef = createRef<NavigationContainerRef>();
 
 // let navigationIsReady = false;
 
 // let queuedNavigationRequest:
-//   | {routeName: string; params?: Record<string, unknown>}
+//   | { routeName: string; params?: Record<string, unknown> }
 //   | undefined;
 
-// export function rootNavigate(
+// export const rootNavigate = (
 //   routeName: string,
 //   params?: Record<string, unknown>,
-// ): void {
+// ): void => {
 //   if (navigationIsReady) {
 //     queuedNavigationRequest = undefined;
 //     navigationContainerRef.current?.navigate(routeName, params);
 //   } else {
 //     queuedNavigationRequest = {
 //       routeName,
-//       ...(params && {params: {...params}}),
+//       ...(params && { params: { ...params } }),
 //     };
 //   }
-// }
+// };
 
-// export function onNavigationControllerUnmount(): void {
+// export const onNavigationControllerUnmount = (): void => {
 //   navigationIsReady = false;
-// }
+// };
 
-// export function onNavigationControllerReady(): void {
+// export const onNavigationControllerReady = (): void => {
 //   navigationIsReady = true;
 
 //   if (queuedNavigationRequest) {
-//     const {routeName, params} = queuedNavigationRequest;
+//     const { routeName, params } = queuedNavigationRequest;
 //     queuedNavigationRequest = undefined;
 
 //     setImmediate(() => {
 //       rootNavigate(routeName, params);
 //     });
 //   }
-// }
+// };
 
 export {};

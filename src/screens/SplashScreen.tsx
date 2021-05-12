@@ -9,10 +9,10 @@ import { useUser } from "../components/User";
 import { ChatStackParams, RootStackParams } from "../routes";
 import { StyledLikeSvg } from "../components/LikeSvg";
 import styled from "styled-components/native";
-import Spacer from "../components/Spacer";
+import { Spacer } from "../components/Spacer";
 import { TextStyled } from "../components/TextStyled";
 
-export default function SplashScreen(): JSX.Element {
+export const SplashScreen = (): JSX.Element => {
   const navigation = useNavigation<
     CompositeNavigationProp<
       StackNavigationProp<RootStackParams, "Splash">,
@@ -56,7 +56,7 @@ export default function SplashScreen(): JSX.Element {
       <TextStyled>Splash screen</TextStyled>
     </SafeAreaViewStyled>
   );
-}
+};
 const SafeAreaViewStyled = styled(SafeAreaView)`
   flex: 1;
   align-items: center;

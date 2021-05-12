@@ -7,17 +7,17 @@ import React, { useCallback } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { useUser } from "../components/User";
 import { ChatStackParams, ChatTabsParams } from "../routes";
-import CreatePostItem from "../components/CreatePostItem";
-import PostItem from "../components/PostItem";
+import { CreatePostItem } from "../components/CreatePostItem";
+import { PostItem } from "../components/PostItem";
 import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { useQuery } from "@apollo/client";
 import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
 import { Id } from "../state/types";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import Text from "../components/Text";
+import { Text } from "../components/Text";
 import { Outer } from "../components/Outer";
 
-export default function HomeTab(): JSX.Element {
+export const HomeTab = (): JSX.Element => {
   const navigation = useNavigation<
     CompositeNavigationProp<
       StackNavigationProp<ChatTabsParams, "Home">,
@@ -68,4 +68,4 @@ export default function HomeTab(): JSX.Element {
       </Outer>
     </SafeAreaViewDefault>
   );
-}
+};

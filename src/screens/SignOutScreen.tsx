@@ -6,16 +6,16 @@ import {
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { useTheme } from "styled-components/native";
-import Button from "../components/Button";
+import { Button } from "../components/Button";
 import { Outer } from "../components/Outer";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import Spacer from "../components/Spacer";
-import Text from "../components/Text";
+import { Spacer } from "../components/Spacer";
+import { Text } from "../components/Text";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 import { SIGN_OUT_MUTATION } from "../queries/SignOutMutation";
 import { ChatTabsParams, RootStackParams } from "../routes";
 
-export default function SignOutScreen(): JSX.Element {
+export const SignOutScreen = (): JSX.Element => {
   const navigation = useNavigation<
     CompositeNavigationProp<
       StackNavigationProp<RootStackParams, "SignOut">,
@@ -68,4 +68,4 @@ export default function SignOutScreen(): JSX.Element {
       </Outer>
     </SafeAreaViewDefault>
   );
-}
+};

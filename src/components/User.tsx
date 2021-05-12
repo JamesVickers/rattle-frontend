@@ -2,9 +2,9 @@ import { useQuery } from "@apollo/client";
 import { User } from "../state/user.model";
 import { CURRENT_USER_QUERY } from "../queries/CurrentUserQuery";
 
-export function useUser(): {
+export const useUser = (): {
   authenticatedUser: User;
-} {
+} => {
   const {
     data,
     // , loading, error
@@ -14,4 +14,4 @@ export function useUser(): {
 
   // if there is data return the authenticatedItem, if not return undefined
   return data?.authenticatedUser;
-}
+};

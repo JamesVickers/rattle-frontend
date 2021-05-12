@@ -7,13 +7,13 @@ import { ChatTabsParams } from "./routes";
 import HomeSvg from "./images/home-outline.svg";
 import SearchSvg from "./images/search-outline.svg";
 import PersonSvg from "./images/person-circle-outline.svg";
-import HomeScreen from "./screens/HomeTab";
-import ProfileTab from "./screens/ProfileTab";
-import SearchTab from "./screens/SearchTab";
+import { HomeTab } from "./screens/HomeTab";
+import { ProfileTab } from "./screens/ProfileTab";
+import { SearchTab } from "./screens/SearchTab";
 
 const ChatTabs = createBottomTabNavigator<ChatTabsParams>();
 
-export default function ChatTabsNavigation(): JSX.Element {
+export const ChatTabsNavigation = (): JSX.Element => {
   const safeAreaInsets = useSafeAreaInsets();
   const theme = useTheme();
 
@@ -66,7 +66,7 @@ export default function ChatTabsNavigation(): JSX.Element {
         />
         <ChatTabs.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeTab}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
@@ -115,4 +115,4 @@ export default function ChatTabsNavigation(): JSX.Element {
       </ChatTabs.Navigator>
     </>
   );
-}
+};

@@ -2,11 +2,7 @@ import React from "react";
 import { Image } from "react-native";
 import styled from "styled-components/native";
 
-export default function ProfileImage({
-  source,
-}: {
-  source?: string;
-}): JSX.Element {
+export const ProfileImage = ({ source }: { source?: string }): JSX.Element => {
   return (
     <ProfileImageStyled
       source={{
@@ -14,7 +10,7 @@ export default function ProfileImage({
       }}
     />
   );
-}
+};
 
 const ProfileImageStyled = styled(Image)<{
   height?: number;

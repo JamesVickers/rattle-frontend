@@ -8,11 +8,11 @@ import {
 import { ChatTabsParams, RootStackParams } from "../routes";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { useUser } from "../components/User";
-import ToggleThemeSwitch from "../components/ToggleThemeSwitch";
-import ProfileImage from "../components/ProfileImage";
+import { ToggleThemeSwitch } from "../components/ToggleThemeSwitch";
+import { ProfileImage } from "../components/ProfileImage";
 import { Outer } from "../components/Outer";
 
-export default function ProfileTab(): JSX.Element {
+export const ProfileTab = (): JSX.Element => {
   const navigation = useNavigation<
     CompositeNavigationProp<
       StackNavigationProp<RootStackParams, "ChatStack">,
@@ -34,4 +34,4 @@ export default function ProfileTab(): JSX.Element {
       </Outer>
     </SafeAreaViewDefault>
   );
-}
+};

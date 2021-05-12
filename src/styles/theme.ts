@@ -6,9 +6,9 @@ const isSmallScreen = Dimensions.get("screen").height < 700;
 
 const BASE_FONT_SIZE = 17;
 
-function scaleFontSize(points: number): number {
+const scaleFontSize = (points: number): number => {
   return Math.floor((points / BASE_FONT_SIZE) * 16 + 0.5);
-}
+};
 
 const spacing = [0, 5, 10, 15, 20, 25, 30, 35, 40, 60, 80];
 

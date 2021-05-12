@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Switch } from "react-native";
 import { useTheme } from "styled-components/native";
 import { AppContext } from "./AppContext";
-import Text from "./Text";
+import { Text } from "./Text";
 
-export default function ToggleThemeSwitch(): JSX.Element {
+export const ToggleThemeSwitch = (): JSX.Element => {
   const { toggleMode } = useContext(AppContext);
   const theme = useTheme();
 
@@ -27,4 +27,4 @@ export default function ToggleThemeSwitch(): JSX.Element {
       />
     </>
   );
-}
+};

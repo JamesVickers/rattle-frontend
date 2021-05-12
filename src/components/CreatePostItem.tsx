@@ -6,10 +6,10 @@ import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
 import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
 import { useForm } from "../utils/useForm";
 import { Card } from "./Card";
-import Text from "./Text";
-import TextInput from "./TextInput";
+import { Text } from "./Text";
+import { TextInput } from "./TextInput";
 
-export default function CreatePostItem(): JSX.Element {
+export const CreatePostItem = (): JSX.Element => {
   // remove initial state in useForm custom hook if want no initial values and not using resetForm function
   const { inputs, handleChange, clearForm, clearIndividualKey } = useForm({
     title: "",
@@ -66,7 +66,7 @@ export default function CreatePostItem(): JSX.Element {
       <Button title="Clear form" onPress={clearForm} />
     </Card>
   );
-}
+};
 
 export const ProfileIconPlaceholder = styled(Image)<{
   height?: number;

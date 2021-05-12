@@ -6,10 +6,10 @@ import {
 } from "react-native-gesture-handler";
 import styled, { useTheme } from "styled-components/native";
 import CloseSvg from "../images/close.svg";
-import Spacer from "./Spacer";
-import Text from "./Text";
+import { Spacer } from "./Spacer";
+import { Text } from "./Text";
 
-export default function TextInput({
+export const TextInput = ({
   style,
   name,
   placeholder,
@@ -29,7 +29,7 @@ export default function TextInput({
   isInvalidMessage?: string;
   handleChange: (inputName: string, inputValue: string) => void;
   clearValue?: (property: string) => void;
-}): JSX.Element {
+}): JSX.Element => {
   const theme = useTheme();
   return (
     <TextInputContainer>
@@ -62,7 +62,7 @@ export default function TextInput({
       )}
     </TextInputContainer>
   );
-}
+};
 export const TextInputContainer = styled.View`
   width: 100%;
 `;

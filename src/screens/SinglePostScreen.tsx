@@ -5,16 +5,16 @@ import React from "react";
 import { Button } from "react-native";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Card } from "../components/Card";
-import HardDeletePostItem from "../components/HardDeletePostItem";
-import TextInput from "../components/TextInput";
-import Text from "../components/Text";
+import { HardDeletePostItem } from "../components/HardDeletePostItem";
+import { TextInput } from "../components/TextInput";
+import { Text } from "../components/Text";
 import { POST_ITEM_QUERY } from "../queries/PostItemQuery";
 import { UPDATE_POST_MUTATION } from "../queries/UpdatePostMutation";
 import { ChatStackParams } from "../routes";
 import { useForm } from "../utils/useForm";
 import { Outer } from "../components/Outer";
 
-export default function SinglePostcreen(): JSX.Element {
+export const SinglePostScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SinglePost">>();
   const { id } = route.params;
   const navigation = useNavigation<
@@ -89,4 +89,4 @@ export default function SinglePostcreen(): JSX.Element {
       </Outer>
     </SafeAreaViewDefault>
   );
-}
+};

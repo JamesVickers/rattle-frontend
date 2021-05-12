@@ -20,7 +20,7 @@ export type ChatTabsParams = {
   Profile: undefined;
 };
 
-export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationOptions> {
+export const useStackNavigatorHeaderOptions = (): Partial<NativeStackNavigationOptions> => {
   return {
     headerStyle: {
       backgroundColor: "#8f5656",
@@ -31,4 +31,4 @@ export function useStackNavigatorHeaderOptions(): Partial<NativeStackNavigationO
       color: "#f720e9",
     },
   };
-}
+};

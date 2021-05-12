@@ -15,13 +15,13 @@ export const useError = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleError(newError: ApolloError | undefined) {
+  const handleError = (newError: ApolloError | undefined) => {
     setError(newError);
-  }
+  };
 
-  function clearError() {
+  const clearError = () => {
     setError(initial);
-  }
+  };
 
   return {
     error,

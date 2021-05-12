@@ -1,17 +1,18 @@
 // import { useMutation } from "@apollo/client";
 // import React from "react";
 // import { Button, View } from "react-native";
-// import { SIGN_UP_MUTATION } from "../gql/SignUpMutation";
+// import { SIGN_UP_MUTATION } from "../queries/SignUpMutation";
 // import { useForm } from "../utils/useForm";
-// import TextInput from "./TextInput";
+// import { Text } from "./Text";
+// import { TextInput } from "./TextInput";
 
-// export default function RequestPasswordReset(): JSX.Element {
+// export const RequestPasswordReset = (): JSX.Element => {
 //   const {
 //     inputs,
 //     handleChange,
 //     // clearForm,
 //     // resetForm,
-//     // clearIndividualKey
+//     clearIndividualKey,
 //   } = useForm({
 //     email: "",
 //   });
@@ -49,13 +50,9 @@
 //         clearValue={clearIndividualKey}
 //       />
 //       <Button title="Request password reset" onPress={() => null} />
-//       {error && (
-//         <Text>
-//           Password reset request failed, please try again :(
-//         </Text>
-//       )}
+//       {error && <Text>Password reset request failed, please try again :(</Text>}
 //     </View>
 //   );
-// }
+// };
 
 export {};
