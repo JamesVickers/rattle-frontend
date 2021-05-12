@@ -1,71 +1,58 @@
-import {
-  CompositeNavigationProp,
-  useNavigation,
-} from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useCallback } from "react";
-import { FlatList } from "react-native-gesture-handler";
-import { useUser } from "../components/User";
-import { ChatStackParams, ChatTabsParams } from "../routes";
-import { CreatePostItem } from "../components/CreatePostItem";
-import { PostItem } from "../components/PostItem";
-import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
-import { useQuery } from "@apollo/client";
-import { COUNT_POST_QUERY } from "../queries/CountPostsQuery";
-import { Id } from "../state/types";
+import React, { useState } from "react";
+import { Modal } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import { Text } from "../components/Text";
 import { Outer } from "../components/Outer";
+import { Text } from "../components/Text";
+import styled from "styled-components/native";
 
 export const HomeTab = (): JSX.Element => {
-  const navigation = useNavigation<
-    CompositeNavigationProp<
-      StackNavigationProp<ChatTabsParams, "Home">,
-      StackNavigationProp<ChatStackParams>
-    >
-  >();
-  const user = useUser();
-
-  const {
-    data,
-    // , error, loading
-  } = useQuery(ALL_POSTS_QUERY);
-
-  const {
-    data: postCountData,
-    // loading,
-    // error
-  } = useQuery(COUNT_POST_QUERY);
-  const { count: postsCount } = postCountData._allPostsMeta;
-
-  const goToPostItemScreen = useCallback(
-    (selectedPostId: Id) => {
-      navigation.navigate("SinglePost", { id: selectedPostId });
-    },
-    [navigation],
-  );
+  // const navigation = useNavigation<
+  //   CompositeNavigationProp<
+  //     StackNavigationProp<ChatTabsParams, "Home">,
+  //     StackNavigationProp<ChatStackParams>
+  //   >
+  // >();
+  const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <SafeAreaViewDefault>
       <Outer>
-        <Text>{user && `${user.firstName}`}</Text>
-        <Text>
-          Post count: <Text>{postsCount}. </Text>
-          Found using GraphQL meta query!
-        </Text>
-        <FlatList
-          data={data.allPosts}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <PostItem
-              key={item.id}
-              post={item}
-              onPressPost={goToPostItemScreen}
-            />
-          )}
-        />
-        <CreatePostItem />
+        <Text>Home tab</Text>
+        <Text>Flatlist of conversations to go here</Text>
+        <Modal
+          animationType="slide"
+          visible={isModalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+          }}>
+          {/* <BehindModal /> */}
+          <ModalCard>
+            <Text>Hello World!</Text>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Text>Hide Modal</Text>
+            </TouchableOpacity>
+          </ModalCard>
+        </Modal>
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <Text>Show Modal</Text>
+        </TouchableOpacity>
       </Outer>
     </SafeAreaViewDefault>
   );
 };
+const ModalCard = styled.View`
+  margin-top: ${(props) => props.theme.spacing[10]}px;
+  height: 100%;
+  background-color: ${(props) => props.theme.colors.primary};
+  border-top-left-radius: ${(props) => props.theme.borderRadius.modal}px;
+  border-top-right-radius: ${(props) => props.theme.borderRadius.modal}px;
+`;
+// const BehindModal = styled.View`
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: ${(props) => props.theme.colors.secondary};
+// `;

@@ -4,9 +4,11 @@ import { Platform, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
 import { ChatTabsParams } from "./routes";
+import CloseSvg from "./images/close.svg";
 import HomeSvg from "./images/home-outline.svg";
 import SearchSvg from "./images/search-outline.svg";
 import PersonSvg from "./images/person-circle-outline.svg";
+import { HomeTabOld } from "./screens/HomeTabOld";
 import { HomeTab } from "./screens/HomeTab";
 import { ProfileTab } from "./screens/ProfileTab";
 import { SearchTab } from "./screens/SearchTab";
@@ -53,6 +55,33 @@ export const ChatTabsNavigation = (): JSX.Element => {
                     borderRadius: theme.borderRadius.circle,
                   }}>
                   <SearchSvg
+                    width={iconSize}
+                    height={iconSize}
+                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
+                    strokeWidth={iconStrokeWidth}
+                    // fill={theme.colors.primary}
+                  />
+                </View>
+              );
+            },
+          }}
+        />
+        <ChatTabs.Screen
+          /*********************************************************
+           *** TODO: Change this to a settings tab with new icon ***
+           *********************************************************/
+          name="HomeOld"
+          component={HomeTabOld}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <View
+                  style={{
+                    backgroundColor: theme.colors.secondary,
+                    padding: theme.spacing[2],
+                    borderRadius: theme.borderRadius.circle,
+                  }}>
+                  <CloseSvg
                     width={iconSize}
                     height={iconSize}
                     stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
