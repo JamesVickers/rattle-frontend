@@ -10,6 +10,7 @@ import { SIGN_IN_MUTATION } from "../queries/SignInMutation";
 import { RootStackParams } from "../routes";
 import { useError } from "../utils/useError";
 import { useForm } from "../utils/useForm";
+import { isValidEmail } from "../utils/validation";
 import Button from "./Button";
 import ErrorBox from "./ErrorBox";
 import Spacer from "./Spacer";
@@ -77,7 +78,11 @@ export default function SignInForm({
         handleChange={handleChange}
         name={"email"}
         placeholder={"Email"}
-        isInvalid={submitted && !inputs.email}
+        isInvalid={
+          (submitted && !inputs.email) ||
+          (submitted && inputs.email !== "" && !isValidEmail(inputs.email))
+        }
+        isInvalidMessage="Please enter a valid email"
         clearValue={clearIndividualKey}
       />
       <Spacer />

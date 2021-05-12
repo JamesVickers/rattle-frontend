@@ -6,6 +6,8 @@ import {
 } from "react-native-gesture-handler";
 import styled, { useTheme } from "styled-components/native";
 import CloseSvg from "../images/close.svg";
+import Spacer from "./Spacer";
+import Text from "./Text";
 
 export default function TextInput({
   style,
@@ -14,6 +16,7 @@ export default function TextInput({
   value,
   secureTextEntry,
   isInvalid,
+  isInvalidMessage,
   handleChange,
   clearValue,
 }: {
@@ -23,6 +26,7 @@ export default function TextInput({
   value: string;
   secureTextEntry?: boolean;
   isInvalid?: boolean;
+  isInvalidMessage?: string;
   handleChange: (inputName: string, inputValue: string) => void;
   clearValue?: (property: string) => void;
 }): JSX.Element {
@@ -49,6 +53,12 @@ export default function TextInput({
         </CloseIconContainer>
       ) : (
         <></>
+      )}
+      {isInvalid && isInvalidMessage && (
+        <>
+          <Spacer height={1} />
+          <Text colour="danger">{isInvalidMessage}</Text>
+        </>
       )}
     </TextInputContainer>
   );
