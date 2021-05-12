@@ -7,6 +7,7 @@ import { Outer } from "../components/Outer";
 import SignInForm from "../components/SignInForm";
 import Button from "../components/Button";
 import Spacer from "../components/Spacer";
+import Text from "../components/Text";
 
 export default function SignInScreen(): JSX.Element {
   const navigation = useNavigation<
@@ -20,6 +21,8 @@ export default function SignInScreen(): JSX.Element {
   return (
     <SafeAreaViewDefault>
       <Outer style={{ alignItems: "center" }}>
+        <Text>Sign in to your account</Text>
+        <Spacer />
         <SignInForm />
         <Spacer />
         <Button text="Create Account" onPress={onCreateAccount} />

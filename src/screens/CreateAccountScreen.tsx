@@ -10,6 +10,7 @@ export default function CreateAccountScreen(): JSX.Element {
     <SafeAreaViewDefault>
       <Outer style={{ alignItems: "center" }}>
         <Text>Create an account</Text>
+        <Spacer />
         <CreateAccountForm />
         <Spacer />
       </Outer>

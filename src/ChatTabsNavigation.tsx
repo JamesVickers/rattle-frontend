@@ -55,7 +55,7 @@ export default function ChatTabsNavigation(): JSX.Element {
                   <SearchSvg
                     width={iconSize}
                     height={iconSize}
-                    stroke={theme.colors[focused ? "icon" : "background"]}
+                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />
@@ -79,7 +79,7 @@ export default function ChatTabsNavigation(): JSX.Element {
                   <HomeSvg
                     width={iconSize}
                     height={iconSize}
-                    stroke={theme.colors[focused ? "icon" : "background"]}
+                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />
@@ -103,7 +103,7 @@ export default function ChatTabsNavigation(): JSX.Element {
                   <PersonSvg
                     width={iconSize}
                     height={iconSize}
-                    stroke={theme.colors[focused ? "icon" : "background"]}
+                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />

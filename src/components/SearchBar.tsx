@@ -10,10 +10,12 @@ import {
 } from "./TextInput";
 
 export default function Searchbar({
+  placeholder,
   error,
   searchString,
   setSearchString,
 }: {
+  placeholder?: string;
   error?: ApolloError | undefined;
   searchString: string;
   setSearchString: (string: string) => void;
@@ -24,7 +26,8 @@ export default function Searchbar({
       <RNTextInputStyled
         value={searchString}
         onChangeText={(string) => setSearchString(string)}
-        placeholder={"Search"}
+        placeholder={placeholder || "Search"}
+        placeholderTextColor={theme.colors.placeholder}
       />
       {searchString ? (
         <CloseIconContainer>

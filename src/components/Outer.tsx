@@ -14,4 +14,5 @@ export const Outer = ({
 const ViewStyled = styled(View)`
   flex: 1;
   margin: ${(props) => props.theme.spacing[2]}px;
+  background: ${(props) => props.theme.colors.background};
 `;

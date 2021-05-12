@@ -13,7 +13,6 @@ import { useForm } from "../utils/useForm";
 import Button from "./Button";
 import ErrorBox from "./ErrorBox";
 import Spacer from "./Spacer";
-import Text from "./Text";
 import TextInput from "./TextInput";
 import { useUser } from "./User";
 
@@ -73,9 +72,6 @@ export default function SignInForm({
 
   return (
     <FormStyled style={style}>
-      <Spacer />
-      <Text>Sign in to your account</Text>
-      <Spacer />
       <TextInput
         value={inputs.email}
         handleChange={handleChange}

@@ -29,11 +29,11 @@ export default function Button({
   );
 }
 const TouchableWithoutFeedbackStyled = styled(TouchableWithoutFeedback)`
-  background: ${(props) => props.theme.colors.secondary};
+  background: ${(props) => props.theme.colors.buttonBackground};
   padding: ${(props) => props.theme.spacing[2]}px;
   align-self: flex-start;
   border-radius: ${(props) => props.theme.borderRadius.button}px;
 `;
 const TextStyled = styled(Text)`
-  color: ${(props) => props.theme.colors.foreground};
+  color: ${(props) => props.theme.colors.buttonForeground};
 `;

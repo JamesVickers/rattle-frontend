@@ -4,7 +4,11 @@ export interface MyColours {
   card: string;
   icon: string;
   input: string;
-  button: string;
+  placeholder: string;
+  buttonForeground: string;
+  buttonBackground: string;
+  tabActive: string;
+  tabInactive: string;
   midGrey: string;
   border: string;
   primary: string;

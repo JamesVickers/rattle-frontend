@@ -121,8 +121,6 @@ export default function CreateAccountForm({
         isInvalid={submitted && !inputs.password}
         clearValue={clearIndividualKey}
       />
-      <Spacer />
-      <Button text="Cancel" onPress={onCancel} />
       {data?.createUser && (
         <>
           <Spacer />
@@ -139,19 +137,24 @@ export default function CreateAccountForm({
       {error && (
         <>
           <>
-            <ErrorBox error={error} clearError={clearError} />
             <Spacer />
+            <ErrorBox error={error} clearError={clearError} />
           </>
         </>
       )}
       {!loading ? (
-        <Button text="Sign up!" onPress={onSubmit} />
+        <>
+          <Spacer />
+          <Button text="Sign up!" onPress={onSubmit} />
+        </>
       ) : (
         <>
           <Spacer />
           <ActivityIndicator color={theme.colors.foreground} size="large" />
         </>
       )}
+      <Spacer />
+      <Button text="Cancel" onPress={onCancel} />
     </FormStyled>
   );
 }

@@ -32,7 +32,7 @@ export default function TextInput({
       <RNTextInputStyled
         style={style}
         placeholder={placeholder}
-        placeholderTextColor={theme.colors.foreground}
+        placeholderTextColor={theme.colors.placeholder}
         value={value}
         secureTextEntry={secureTextEntry}
         isInvalid={isInvalid}
