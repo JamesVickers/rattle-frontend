@@ -1,9 +1,12 @@
-import { useNavigation } from "@react-navigation/native";
+import {
+  CompositeNavigationProp,
+  useNavigation,
+} from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useEffect } from "react";
 import SafeAreaView from "react-native-safe-area-view";
 import { useUser } from "../components/User";
-import { RootStackParams } from "../routes";
+import { ChatStackParams, RootStackParams } from "../routes";
 import { StyledLikeSvg } from "../components/LikeSvg";
 import styled from "styled-components/native";
 import Spacer from "../components/Spacer";
@@ -11,7 +14,10 @@ import { TextStyled } from "../components/TextStyled";
 
 export default function SplashScreen(): JSX.Element {
   const navigation = useNavigation<
-    StackNavigationProp<RootStackParams, "Splash">
+    CompositeNavigationProp<
+      StackNavigationProp<RootStackParams, "Splash">,
+      StackNavigationProp<ChatStackParams>
+    >
   >();
 
   // if user exists then logged in

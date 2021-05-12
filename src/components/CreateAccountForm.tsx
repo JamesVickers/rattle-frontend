@@ -154,7 +154,13 @@ export default function CreateAccountForm({
         </>
       )}
       <Spacer />
-      <Button text="Cancel" onPress={onCancel} />
+      <Button
+        text="Cancel"
+        touchableStyle={{
+          backgroundColor: theme.colors.danger,
+        }}
+        onPress={onCancel}
+      />
     </FormStyled>
   );
 }

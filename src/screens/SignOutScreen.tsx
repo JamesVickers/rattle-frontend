@@ -50,13 +50,15 @@ export default function SignOutScreen(): JSX.Element {
   return (
     <SafeAreaViewDefault>
       <Outer style={{ alignItems: "center" }}>
-        <Button
-          text="Sign out"
-          touchableStyle={{ backgroundColor: theme.colors.danger }}
-          onPress={onSignOut}
-        />
+        <Button text="Sign out" onPress={onSignOut} />
         <Spacer />
-        <Button text="Cancel" onPress={onCancel} />
+        <Button
+          text="Cancel"
+          touchableStyle={{
+            backgroundColor: theme.colors.danger,
+          }}
+          onPress={onCancel}
+        />
         {error && (
           <>
             <Spacer />
