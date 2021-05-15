@@ -18,10 +18,12 @@ export const Card = ({
 
 export const CardTouchable = ({
   children,
+  onPress,
 }: {
   children?: React.ReactNode;
+  onPress: () => void;
 }): JSX.Element => {
-  return <CardStyled>{children}</CardStyled>;
+  return <CardStyled onPress={onPress}>{children}</CardStyled>;
 };
 const CardStyled = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.colors.card};

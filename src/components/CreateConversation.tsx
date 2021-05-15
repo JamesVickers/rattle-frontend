@@ -1,41 +1,46 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
 import { Button } from "react-native";
-import { ALL_POSTS_QUERY } from "../queries/AllPostsQuery";
-import { CREATE_POST_MUTATION } from "../queries/CreatePostMutation";
+import { CREATE_CONVERSATION_MUTATION } from "../queries/CreateConversationMutation";
+import { ALL_CONVERSATIONS_QUERY } from "./AllConversationsQuery";
 import { useForm } from "../utils/useForm";
 import { Card } from "./Card";
 import { Text } from "./Text";
 import { TextInput } from "./TextInput";
+import { User } from "../state/user.model";
 
-export const CreatePostItem = (): JSX.Element => {
+export const CreateConversation = ({
+  selectedUser,
+}: {
+  selectedUser: User;
+}): JSX.Element => {
   // remove initial state in useForm custom hook if want no initial values and not using resetForm function
   const { inputs, handleChange, clearForm, clearIndividualKey } = useForm({
     title: "",
-    body: "",
   });
   const [
-    createPost,
+    createConversation,
     {
       // data, loading,
       error,
     },
-  ] = useMutation(CREATE_POST_MUTATION, {
-    variables: inputs,
+  ] = useMutation(CREATE_CONVERSATION_MUTATION, {
+    // variables: { ...inputs, member: selectedUser },
+    variables: { ...inputs },
     refetchQueries: [
       {
-        query: ALL_POSTS_QUERY,
+        query: ALL_CONVERSATIONS_QUERY,
         // can pass variables to the refetchQuery here is needed
         // variables: { }
       },
     ],
   });
 
-  const canCreatePost = inputs.title !== "" && inputs.body !== "";
+  console.log(selectedUser);
 
   return (
     <Card>
-      <Text>Create a PostItem</Text>
+      <Text>Start a new conversation</Text>
       <TextInput
         value={inputs.title}
         handleChange={handleChange}
@@ -43,22 +48,16 @@ export const CreatePostItem = (): JSX.Element => {
         placeholder={"Add the post title"}
         clearValue={clearIndividualKey}
       />
-      <TextInput
-        value={inputs.body}
-        handleChange={handleChange}
-        name={"body"}
-        placeholder={"Add the post body text"}
-        clearValue={clearIndividualKey}
-      />
+      <Text>{selectedUser.firstName}</Text>
       <Button
-        title="Post it!"
-        disabled={!canCreatePost}
+        title="Start conversation"
+        // disabled={!canCreatePost}
         onPress={async () => {
           try {
-            await createPost();
+            await createConversation();
             clearForm();
           } catch {
-            console.error("createPost error: ", error);
+            console.error("createConversation error: ", error);
           }
         }}
       />
