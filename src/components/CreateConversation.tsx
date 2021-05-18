@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
 import { Button } from "react-native";
 import { CREATE_CONVERSATION_MUTATION } from "../queries/CreateConversationMutation";
@@ -25,8 +25,7 @@ export const CreateConversation = ({
       error,
     },
   ] = useMutation(CREATE_CONVERSATION_MUTATION, {
-    // variables: { ...inputs, member: selectedUser },
-    variables: { ...inputs },
+    variables: { ...inputs, memberId: selectedUser.id },
     refetchQueries: [
       {
         query: ALL_CONVERSATIONS_QUERY,
@@ -36,7 +35,13 @@ export const CreateConversation = ({
     ],
   });
 
-  console.log(selectedUser);
+  const {
+    data: allConversationsData,
+    loading: allConversationsLoading,
+    error: allConversationsError,
+  } = useQuery(ALL_CONVERSATIONS_QUERY);
+
+  console.log(allConversationsData);
 
   return (
     <Card>
