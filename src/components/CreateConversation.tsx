@@ -8,6 +8,8 @@ import { Card } from "./Card";
 import { Text } from "./Text";
 import { TextInput } from "./TextInput";
 import { User } from "../state/user.model";
+import { FlatList } from "react-native-gesture-handler";
+import { ConversationItem } from "./ConversationItem";
 
 export const CreateConversation = ({
   selectedUser,
@@ -41,8 +43,6 @@ export const CreateConversation = ({
     error: allConversationsError,
   } = useQuery(ALL_CONVERSATIONS_QUERY);
 
-  console.log(allConversationsData);
-
   return (
     <Card>
       <Text>Start a new conversation</Text>
@@ -54,6 +54,16 @@ export const CreateConversation = ({
         clearValue={clearIndividualKey}
       />
       <Text>{selectedUser.firstName}</Text>
+      {allConversationsData && (
+        <FlatList
+          data={allConversationsData.allConversations}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ConversationItem key={item.id} conversation={item} />
+          )}
+          ListEmptyComponent={<Text>No user matched found</Text>}
+        />
+      )}
       <Button
         title="Start conversation"
         // disabled={!canCreatePost}
