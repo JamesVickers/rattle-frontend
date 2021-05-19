@@ -1,15 +1,20 @@
 import React, { useCallback, useState } from "react";
+import { Modal } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useQuery } from "@apollo/client";
+import styled, { useTheme } from "styled-components/native";
+import { User } from "../state/user.model";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Outer } from "../components/Outer";
 import { Text } from "../components/Text";
 import { UserSearch } from "../components/UserSeach";
-import { User } from "../state/user.model";
 import { CreateConversationForm } from "../components/CreateConversationForm";
 import { ALL_CONVERSATIONS_QUERY } from "../components/AllConversationsQuery";
-import { useQuery } from "@apollo/client";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { ConversationItem } from "../components/ConversationItem";
 import { Conversation } from "../state/conversation.model";
+import { CloseIcon } from "../components/CloseIcon";
+import { CreateIcon } from "../components/CreateIcon";
 
 export const HomeTab = (): JSX.Element => {
   // const navigation = useNavigation<
@@ -18,7 +23,10 @@ export const HomeTab = (): JSX.Element => {
   //     StackNavigationProp<ChatStackParams>
   //   >
   // >();
-  // const [isModalVisible, setModalVisible] = useState(false);
+
+  const insets = useSafeAreaInsets();
+
+  const [isModalVisible, setModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User>();
   const [
     selectedConversation,
@@ -39,6 +47,10 @@ export const HomeTab = (): JSX.Element => {
     setSelectedConversation(conversation);
   }, []);
 
+  const modalMarginTopStyle = React.useMemo(() => ({ marginTop: insets.top }), [
+    insets.top,
+  ]);
+
   return (
     <SafeAreaViewDefault>
       <Outer>
@@ -48,7 +60,6 @@ export const HomeTab = (): JSX.Element => {
         {selectedConversation && (
           <Text>{selectedConversation.title || "no title"}</Text>
         )}
-        <UserSearch onSelectUser={onSelectUser} />
         {allConversationsData && (
           <FlatList
             data={allConversationsData.allConversations}
@@ -63,40 +74,34 @@ export const HomeTab = (): JSX.Element => {
             ListEmptyComponent={<Text>No user matched found</Text>}
           />
         )}
-        {selectedUser && <CreateConversationForm selectedUser={selectedUser} />}
-        {/* <Modal
+
+        <Modal
+          presentationStyle="fullScreen"
           animationType="slide"
           visible={isModalVisible}
           onRequestClose={() => {
             setModalVisible(false);
           }}>
-          {/* <BehindModal /> 
-          <ModalCard>
-            <Text>Hello World!</Text>
+          <ModalCard style={{ ...modalMarginTopStyle }}>
             <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text>Hide Modal</Text>
+              <CloseIcon />
             </TouchableOpacity>
+            <UserSearch onSelectUser={onSelectUser} />
+            {selectedUser && (
+              <CreateConversationForm selectedUser={selectedUser} />
+            )}
           </ModalCard>
         </Modal>
         <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text>Show Modal</Text>
-        </TouchableOpacity> */}
+          <CreateIcon />
+        </TouchableOpacity>
       </Outer>
     </SafeAreaViewDefault>
   );
 };
-// const ModalCard = styled.View`
-//   margin-top: ${(props) => props.theme.spacing[10]}px;
-//   height: 100%;
-//   background-color: ${(props) => props.theme.colors.primary};
-//   border-top-left-radius: ${(props) => props.theme.borderRadius.modal}px;
-//   border-top-right-radius: ${(props) => props.theme.borderRadius.modal}px;
-// `;
-// const BehindModal = styled.View`
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   background-color: ${(props) => props.theme.colors.secondary};
-// `;
+const ModalCard = styled.View`
+  flex: 1
+  background-color: ${(props) => props.theme.colors.secondary};
+  border-top-left-radius: ${(props) => props.theme.borderRadius.modal}px;
+  border-top-right-radius: ${(props) => props.theme.borderRadius.modal}px;
+`;

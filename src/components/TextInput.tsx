@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import styled, { useTheme } from "styled-components/native";
-import CloseSvg from "../images/close.svg";
+import { CloseIcon, CloseIconContainer } from "./CloseIcon";
 import { Spacer } from "./Spacer";
 import { Text } from "./Text";
 
@@ -48,7 +48,7 @@ export const TextInput = ({
           <TouchableOpacity
             onPress={() => clearValue(name)}
             activeOpacity={theme.opacity.pressed}>
-            <CloseSvg width={30} height={30} fill={theme.colors.foreground} />
+            <CloseIcon />
           </TouchableOpacity>
         </CloseIconContainer>
       ) : (
@@ -75,10 +75,4 @@ export const RNTextInputStyled = styled(RNTextInput)<{ isInvalid?: boolean }>`
     ${(props) => props.theme.spacing[2]}px;
   border-color: ${(props) => props.theme.colors.danger};
   border-width: ${({ isInvalid }) => (isInvalid ? 1 : 0)}px;
-`;
-export const CloseIconContainer = styled.View`
-  position: absolute;
-  z-index: 10;
-  top: ${(props) => props.theme.spacing[1]}px;
-  right: ${(props) => props.theme.spacing[1]}px;
 `;

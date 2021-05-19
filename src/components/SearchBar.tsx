@@ -2,12 +2,8 @@ import { ApolloError } from "@apollo/client";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useTheme } from "styled-components/native";
-import CloseSvg from "../images/close.svg";
-import {
-  CloseIconContainer,
-  RNTextInputStyled,
-  TextInputContainer,
-} from "./TextInput";
+import { CloseIcon, CloseIconContainer } from "./CloseIcon";
+import { RNTextInputStyled, TextInputContainer } from "./TextInput";
 
 export const SearchBar = ({
   placeholder,
@@ -34,7 +30,7 @@ export const SearchBar = ({
           <TouchableOpacity
             onPress={() => setSearchString("")}
             activeOpacity={theme.opacity.pressed}>
-            <CloseSvg width={30} height={30} fill={theme.colors.foreground} />
+            <CloseIcon />
           </TouchableOpacity>
         </CloseIconContainer>
       ) : (
