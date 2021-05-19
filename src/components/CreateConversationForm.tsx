@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React from "react";
 import { Button } from "react-native";
 import { CREATE_CONVERSATION_MUTATION } from "../queries/CreateConversationMutation";
@@ -8,10 +8,8 @@ import { Card } from "./Card";
 import { Text } from "./Text";
 import { TextInput } from "./TextInput";
 import { User } from "../state/user.model";
-import { FlatList } from "react-native-gesture-handler";
-import { ConversationItem } from "./ConversationItem";
 
-export const CreateConversation = ({
+export const CreateConversationForm = ({
   selectedUser,
 }: {
   selectedUser: User;
@@ -37,12 +35,6 @@ export const CreateConversation = ({
     ],
   });
 
-  const {
-    data: allConversationsData,
-    loading: allConversationsLoading,
-    error: allConversationsError,
-  } = useQuery(ALL_CONVERSATIONS_QUERY);
-
   return (
     <Card>
       <Text>Start a new conversation</Text>
@@ -50,20 +42,10 @@ export const CreateConversation = ({
         value={inputs.title}
         handleChange={handleChange}
         name={"title"}
-        placeholder={"Add the post title"}
+        placeholder={"Add a conversation title"}
         clearValue={clearIndividualKey}
       />
-      <Text>{selectedUser.firstName}</Text>
-      {allConversationsData && (
-        <FlatList
-          data={allConversationsData.allConversations}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <ConversationItem key={item.id} conversation={item} />
-          )}
-          ListEmptyComponent={<Text>No user matched found</Text>}
-        />
-      )}
+      <Text>Selected user: {selectedUser.firstName}</Text>
       <Button
         title="Start conversation"
         // disabled={!canCreatePost}

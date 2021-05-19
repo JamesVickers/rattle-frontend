@@ -4,7 +4,12 @@ import { Outer } from "../components/Outer";
 import { Text } from "../components/Text";
 import { UserSearch } from "../components/UserSeach";
 import { User } from "../state/user.model";
-import { CreateConversation } from "../components/CreateConversation";
+import { CreateConversationForm } from "../components/CreateConversationForm";
+import { ALL_CONVERSATIONS_QUERY } from "../components/AllConversationsQuery";
+import { useQuery } from "@apollo/client";
+import { FlatList } from "react-native-gesture-handler";
+import { ConversationItem } from "../components/ConversationItem";
+import { Conversation } from "../state/conversation.model";
 
 export const HomeTab = (): JSX.Element => {
   // const navigation = useNavigation<
@@ -15,9 +20,23 @@ export const HomeTab = (): JSX.Element => {
   // >();
   // const [isModalVisible, setModalVisible] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User>();
+  const [
+    selectedConversation,
+    setSelectedConversation,
+  ] = useState<Conversation>();
+
+  const {
+    data: allConversationsData,
+    loading: allConversationsLoading,
+    error: allConversationsError,
+  } = useQuery(ALL_CONVERSATIONS_QUERY);
 
   const onSelectUser = useCallback((user: User) => {
     setSelectedUser(user);
+  }, []);
+
+  const onSelectConversation = useCallback((conversation: Conversation) => {
+    setSelectedConversation(conversation);
   }, []);
 
   return (
@@ -26,8 +45,25 @@ export const HomeTab = (): JSX.Element => {
         <Text>Home tab</Text>
         <Text>Flatlist of conversations to go here</Text>
         {selectedUser && <Text>{selectedUser.firstName}</Text>}
+        {selectedConversation && (
+          <Text>{selectedConversation.title || "no title"}</Text>
+        )}
         <UserSearch onSelectUser={onSelectUser} />
-        {selectedUser && <CreateConversation selectedUser={selectedUser} />}
+        {allConversationsData && (
+          <FlatList
+            data={allConversationsData.allConversations}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <ConversationItem
+                key={item.id}
+                conversation={item}
+                onSelectConversation={onSelectConversation}
+              />
+            )}
+            ListEmptyComponent={<Text>No user matched found</Text>}
+          />
+        )}
+        {selectedUser && <CreateConversationForm selectedUser={selectedUser} />}
         {/* <Modal
           animationType="slide"
           visible={isModalVisible}
