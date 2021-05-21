@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "styled-components/native";
 import CreateSvg from "../images/create.svg";
+import { IconCircleBackground } from "./IconCircleBackground";
 
 export const CreateIcon = ({
   width,
@@ -11,12 +12,17 @@ export const CreateIcon = ({
 }): JSX.Element => {
   const theme = useTheme();
   return (
-    <CreateSvg
-      width={width || 30}
-      height={height || 30}
-      fill={theme.colors.foreground}
-      stroke={theme.colors.danger}
-      strokeWidth={20}
-    />
+    <IconCircleBackground
+      style={{
+        alignSelf: "flex-start",
+      }}>
+      <CreateSvg
+        width={width || 40}
+        height={height || 40}
+        fill={theme.colors.foreground}
+        stroke={theme.colors.foreground}
+        strokeWidth={10}
+      />
+    </IconCircleBackground>
   );
 };

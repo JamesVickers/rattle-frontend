@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Platform, View } from "react-native";
+import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
 import { ChatTabsParams } from "./routes";
@@ -12,6 +12,7 @@ import { HomeTabOld } from "./screens/HomeTabOld";
 import { HomeTab } from "./screens/HomeTab";
 import { ProfileTab } from "./screens/ProfileTab";
 import { SearchTab } from "./screens/SearchTab";
+import { IconCircleBackground } from "./components/IconCircleBackground";
 
 const ChatTabs = createBottomTabNavigator<ChatTabsParams>();
 
@@ -21,6 +22,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
 
   const iconSize = 40;
   const iconStrokeWidth = 20;
+  const iconBackgroundColour = "secondary";
 
   return (
     <>
@@ -48,12 +50,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View
-                  style={{
-                    backgroundColor: theme.colors.secondary,
-                    padding: theme.spacing[2],
-                    borderRadius: theme.borderRadius.circle,
-                  }}>
+                <IconCircleBackground background={iconBackgroundColour}>
                   <SearchSvg
                     width={iconSize}
                     height={iconSize}
@@ -61,7 +58,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />
-                </View>
+                </IconCircleBackground>
               );
             },
           }}
@@ -75,12 +72,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View
-                  style={{
-                    backgroundColor: theme.colors.secondary,
-                    padding: theme.spacing[2],
-                    borderRadius: theme.borderRadius.circle,
-                  }}>
+                <IconCircleBackground background={iconBackgroundColour}>
                   <CloseSvg
                     width={iconSize}
                     height={iconSize}
@@ -88,7 +80,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />
-                </View>
+                </IconCircleBackground>
               );
             },
           }}
@@ -99,12 +91,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View
-                  style={{
-                    backgroundColor: theme.colors.secondary,
-                    padding: theme.spacing[2],
-                    borderRadius: theme.borderRadius.circle,
-                  }}>
+                <IconCircleBackground background={iconBackgroundColour}>
                   <HomeSvg
                     width={iconSize}
                     height={iconSize}
@@ -112,7 +99,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />
-                </View>
+                </IconCircleBackground>
               );
             },
           }}
@@ -123,12 +110,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View
-                  style={{
-                    backgroundColor: theme.colors.secondary,
-                    padding: theme.spacing[2],
-                    borderRadius: theme.borderRadius.circle,
-                  }}>
+                <IconCircleBackground background={iconBackgroundColour}>
                   <PersonSvg
                     width={iconSize}
                     height={iconSize}
@@ -136,7 +118,7 @@ export const ChatTabsNavigation = (): JSX.Element => {
                     strokeWidth={iconStrokeWidth}
                     // fill={theme.colors.primary}
                   />
-                </View>
+                </IconCircleBackground>
               );
             },
           }}
