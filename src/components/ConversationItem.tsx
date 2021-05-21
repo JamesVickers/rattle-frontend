@@ -2,16 +2,17 @@ import React, { useMemo } from "react";
 import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Conversation } from "../state/conversation.model";
+import { Id } from "../state/types";
 import { Card } from "./Card";
 import { ProfileImage } from "./ProfileImage";
 import { Text } from "./Text";
 
 export const ConversationItem = ({
   conversation,
-  onSelectConversation,
+  onConversationPress,
 }: {
   conversation: Conversation;
-  onSelectConversation?: (selectedConversation: Conversation) => void;
+  onConversationPress?: (selectedConversationId: Id) => void;
 }): JSX.Element => {
   console.log(conversation.member.profileImage);
   const cardContent = useMemo(
@@ -35,9 +36,9 @@ export const ConversationItem = ({
     [conversation.member.firstName, conversation.member.lastName],
   );
 
-  return onSelectConversation ? (
+  return onConversationPress ? (
     <Card>
-      <TouchableOpacity onPress={() => onSelectConversation(conversation)}>
+      <TouchableOpacity onPress={() => onConversationPress(conversation.id)}>
         {cardContent}
       </TouchableOpacity>
     </Card>

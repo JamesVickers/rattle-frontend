@@ -3,6 +3,7 @@ import React from "react";
 import { ChatStackParams } from "../routes";
 import { ChatTabsNavigation } from "../ChatTabsNavigation";
 import { SinglePostScreen } from "../screens/SinglePostScreen";
+import { SingleConversationScreen } from "../screens/SingleConversationScreen";
 
 const ChatStack = createNativeStackNavigator<ChatStackParams>();
 
@@ -20,6 +21,14 @@ export const ChatStackNavigation = (): JSX.Element => {
           component={SinglePostScreen}
           options={{
             title: "Single Post screen",
+            headerShown: false,
+          }}
+        />
+        <ChatStack.Screen
+          name="SingleConversation"
+          component={SingleConversationScreen}
+          options={{
+            title: "Single Conversation screen",
             headerShown: false,
           }}
         />

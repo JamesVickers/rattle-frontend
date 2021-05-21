@@ -12,6 +12,7 @@ export type RootStackParams = {
 export type ChatStackParams = {
   ChatTabs: undefined;
   SinglePost: { id: Id };
+  SingleConversation: { id: Id };
 };
 
 export type ChatTabsParams = {
