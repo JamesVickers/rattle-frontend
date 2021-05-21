@@ -4,7 +4,7 @@ import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components/native";
 import { ChatTabsParams } from "./routes";
-import CloseSvg from "./images/close.svg";
+import SettingsSvg from "./images/settings.svg";
 import HomeSvg from "./images/home-outline.svg";
 import SearchSvg from "./images/search-outline.svg";
 import PersonSvg from "./images/person-circle-outline.svg";
@@ -45,47 +45,6 @@ export const ChatTabsNavigation = (): JSX.Element => {
           keyboardHidesTabBar: Platform.OS === "android",
         }}>
         <ChatTabs.Screen
-          name="Search"
-          component={SearchTab}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return (
-                <IconCircleBackground background={iconBackgroundColour}>
-                  <SearchSvg
-                    width={iconSize}
-                    height={iconSize}
-                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
-                    strokeWidth={iconStrokeWidth}
-                    // fill={theme.colors.primary}
-                  />
-                </IconCircleBackground>
-              );
-            },
-          }}
-        />
-        <ChatTabs.Screen
-          /*********************************************************
-           *** TODO: Change this to a settings tab with new icon ***
-           *********************************************************/
-          name="HomeOld"
-          component={HomeTabOld}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return (
-                <IconCircleBackground background={iconBackgroundColour}>
-                  <CloseSvg
-                    width={iconSize}
-                    height={iconSize}
-                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
-                    strokeWidth={iconStrokeWidth}
-                    // fill={theme.colors.primary}
-                  />
-                </IconCircleBackground>
-              );
-            },
-          }}
-        />
-        <ChatTabs.Screen
           name="Home"
           component={HomeTab}
           options={{
@@ -105,6 +64,26 @@ export const ChatTabsNavigation = (): JSX.Element => {
           }}
         />
         <ChatTabs.Screen
+          name="Search"
+          component={SearchTab}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <IconCircleBackground background={iconBackgroundColour}>
+                  <SearchSvg
+                    width={iconSize}
+                    height={iconSize}
+                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
+                    strokeWidth={iconStrokeWidth}
+                    // fill={theme.colors.primary}
+                  />
+                </IconCircleBackground>
+              );
+            },
+          }}
+        />
+
+        <ChatTabs.Screen
           name="Profile"
           component={ProfileTab}
           options={{
@@ -112,6 +91,28 @@ export const ChatTabsNavigation = (): JSX.Element => {
               return (
                 <IconCircleBackground background={iconBackgroundColour}>
                   <PersonSvg
+                    width={iconSize}
+                    height={iconSize}
+                    stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
+                    strokeWidth={iconStrokeWidth}
+                    // fill={theme.colors.primary}
+                  />
+                </IconCircleBackground>
+              );
+            },
+          }}
+        />
+        <ChatTabs.Screen
+          /************************************************************
+           *** TODO: Change this to a settings tab with new content ***
+           ***********************************************************/
+          name="HomeOld"
+          component={HomeTabOld}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <IconCircleBackground background={iconBackgroundColour}>
+                  <SettingsSvg
                     width={iconSize}
                     height={iconSize}
                     stroke={theme.colors[focused ? "tabActive" : "tabInactive"]}
