@@ -13,6 +13,7 @@ import { Outer } from "../components/Outer";
 import { CONVERSATION_ITEM_QUERY } from "../queries/ConversationItemQuery";
 import { UPDATE_CONVERSATION_MUTATION } from "../queries/UpdateConversationMutation";
 import { HardDeleteConversationItem } from "../components/HardDeleteConversationItem";
+import { ALL_CONVERSATIONS_QUERY } from "../components/AllConversationsQuery";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -32,7 +33,7 @@ export const SingleConversationScreen = (): JSX.Element => {
   const [
     updateConversation,
     {
-      // data:updateDate,
+      data: updateData,
       error: updateError,
       // loading: updateLoading
     },
@@ -68,6 +69,13 @@ export const SingleConversationScreen = (): JSX.Element => {
                 variables: {
                   id: id,
                   title: inputs.title,
+                  refetchQueries: [
+                    {
+                      query: ALL_CONVERSATIONS_QUERY,
+                      // can pass variables to the refetchQuery here is needed
+                      // variables: { }
+                    },
+                  ],
                 },
               });
               console.log("updateConversation res: ", res);

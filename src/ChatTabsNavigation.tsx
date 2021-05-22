@@ -8,7 +8,7 @@ import SettingsSvg from "./images/settings.svg";
 import HomeSvg from "./images/home-outline.svg";
 import SearchSvg from "./images/search-outline.svg";
 import PersonSvg from "./images/person-circle-outline.svg";
-import { HomeTabOld } from "./screens/HomeTabOld";
+import { SettingsTab } from "./screens/SettingsTab";
 import { HomeTab } from "./screens/HomeTab";
 import { ProfileTab } from "./screens/ProfileTab";
 import { SearchTab } from "./screens/SearchTab";
@@ -103,11 +103,11 @@ export const ChatTabsNavigation = (): JSX.Element => {
           }}
         />
         <ChatTabs.Screen
-          /************************************************************
-           *** TODO: Change this to a settings tab with new content ***
-           ***********************************************************/
-          name="HomeOld"
-          component={HomeTabOld}
+          /******************************************************************
+           *** TODO: Update tab content to Settings as used to be HomeOld ***
+           *****************************************************************/
+          name="Settings"
+          component={SettingsTab}
           options={{
             tabBarIcon: ({ focused }) => {
               return (

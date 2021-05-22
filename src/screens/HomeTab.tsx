@@ -34,6 +34,8 @@ export const HomeTab = (): JSX.Element => {
     error: allConversationsError,
   } = useQuery(ALL_CONVERSATIONS_QUERY);
 
+  console.log("allConversationsData: ", allConversationsData);
+
   const onSelectUser = useCallback((user: User) => {
     setSelectedUser(user);
   }, []);
@@ -52,12 +54,12 @@ export const HomeTab = (): JSX.Element => {
   return (
     <SafeAreaViewDefault>
       <Outer>
-        <Text>Home tab</Text>
-        <Text>Flatlist of conversations to go here</Text>
+        <Text>Home</Text>
         {selectedUser && <Text>{selectedUser.firstName}</Text>}
         {allConversationsData && (
           <FlatList
             data={allConversationsData.allConversations}
+            extraData={allConversationsData.allConversations}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <ConversationItem

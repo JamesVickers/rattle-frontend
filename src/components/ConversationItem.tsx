@@ -14,7 +14,6 @@ export const ConversationItem = ({
   conversation: Conversation;
   onConversationPress?: (selectedConversationId: Id) => void;
 }): JSX.Element => {
-  console.log(conversation.member.profileImage);
   const cardContent = useMemo(
     () => (
       <>

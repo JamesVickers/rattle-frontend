@@ -16,7 +16,7 @@ export type ChatStackParams = {
 };
 
 export type ChatTabsParams = {
-  HomeOld: undefined;
+  Settings: undefined;
   Home: undefined;
   Search: undefined;
   Profile: undefined;

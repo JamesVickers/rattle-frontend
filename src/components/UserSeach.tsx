@@ -45,6 +45,7 @@ export const UserSearch = ({
   return (
     <>
       <SearchBar
+        placeholder={"Search for a User"}
         error={error}
         searchString={searchString}
         setSearchString={onChangeText}

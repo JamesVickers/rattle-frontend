@@ -11,6 +11,7 @@ import { useUser } from "../components/User";
 import { ToggleThemeSwitch } from "../components/ToggleThemeSwitch";
 import { ProfileImage } from "../components/ProfileImage";
 import { Outer } from "../components/Outer";
+import { Text } from "../components/Text";
 
 export const ProfileTab = (): JSX.Element => {
   const navigation = useNavigation<
@@ -28,6 +29,7 @@ export const ProfileTab = (): JSX.Element => {
   return (
     <SafeAreaViewDefault>
       <Outer>
+        <Text>Profile</Text>
         <Button title="Sign Out" onPress={goToSignOutScreen} />
         <ToggleThemeSwitch />
         <ProfileImage source={user.profileImage?.image.publicUrlTransformed} />

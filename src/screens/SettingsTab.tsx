@@ -17,10 +17,10 @@ import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Text } from "../components/Text";
 import { Outer } from "../components/Outer";
 
-export const HomeTabOld = (): JSX.Element => {
+export const SettingsTab = (): JSX.Element => {
   const navigation = useNavigation<
     CompositeNavigationProp<
-      StackNavigationProp<ChatTabsParams, "HomeOld">,
+      StackNavigationProp<ChatTabsParams, "Settings">,
       StackNavigationProp<ChatStackParams>
     >
   >();
@@ -48,6 +48,7 @@ export const HomeTabOld = (): JSX.Element => {
   return (
     <SafeAreaViewDefault>
       <Outer>
+        <Text>Settings</Text>
         <Text>{user && `${user.firstName}`}</Text>
         <Text>
           Post count: <Text>{postsCount}. </Text>
