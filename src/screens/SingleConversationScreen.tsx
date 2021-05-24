@@ -33,7 +33,7 @@ export const SingleConversationScreen = (): JSX.Element => {
   const [
     updateConversation,
     {
-      data: updateData,
+      // data: updateData,
       error: updateError,
       // loading: updateLoading
     },
@@ -50,7 +50,7 @@ export const SingleConversationScreen = (): JSX.Element => {
       <Outer>
         <Text>SingleConversationItemScreen</Text>
         <Button title="goBack" onPress={() => navigation.goBack()} />
-        <Text>Conversation id to update is: {id}</Text>
+        <Text>Conversation id: {id}</Text>
         <Card>
           <TextInput
             value={inputs.title}
