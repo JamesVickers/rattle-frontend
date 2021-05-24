@@ -102,17 +102,17 @@ export const SignInForm = ({
           <Spacer />
         </>
       )}
-      {!loading ? (
+      {loading ? (
+        <>
+          <Spacer />
+          <ActivityIndicator color={theme.colors.foreground} size="large" />
+        </>
+      ) : (
         <Button
           text="Sign in!"
           onPress={onSubmit}
           //  disabled={submitDisabled}
         />
-      ) : (
-        <>
-          <Spacer />
-          <ActivityIndicator color={theme.colors.foreground} size="large" />
-        </>
       )}
     </FormStyled>
   );

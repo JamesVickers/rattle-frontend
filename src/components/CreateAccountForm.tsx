@@ -147,15 +147,15 @@ export const CreateAccountForm = ({
           </>
         </>
       )}
-      {!loading ? (
+      {loading ? (
         <>
           <Spacer />
-          <Button text="Sign up!" onPress={onSubmit} />
+          <ActivityIndicator color={theme.colors.foreground} size="large" />
         </>
       ) : (
         <>
           <Spacer />
-          <ActivityIndicator color={theme.colors.foreground} size="large" />
+          <Button text="Sign up!" onPress={onSubmit} />
         </>
       )}
       <Spacer />

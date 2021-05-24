@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { Button } from "react-native";
 import { Id, SilentAny } from "../state/types";
+import { ALL_CONVERSATIONS_QUERY } from "./AllConversationsQuery";
 
 const HARD_DELETE_CONVERSATION_MUTATION = gql`
   mutation HARD_DELETE_CONVERSATION_MUTATION($id: ID!) {
@@ -30,11 +31,11 @@ export const HardDeleteConversationItem = ({
     {
       variables: { id },
       update,
-      // refetchQueries: [
-      //   {
-      //     query: ALL_CONVERSATIONS_QUERY,
-      //   },
-      // ],
+      refetchQueries: [
+        {
+          query: ALL_CONVERSATIONS_QUERY,
+        },
+      ],
     },
   );
 

@@ -35,7 +35,7 @@ export const HomeTab = (): JSX.Element => {
   const { error, handleError, clearError } = useError();
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User>();
+  const [selectedUser, setSelectedUser] = useState<User | undefined>();
   const [conversations, setConversation] = useState<Conversation[]>();
 
   const {
@@ -44,8 +44,11 @@ export const HomeTab = (): JSX.Element => {
     error: conversationsError,
   } = useQuery(ALL_CONVERSATIONS_QUERY);
 
+  console.log("conversationsData: ", conversationsData);
+
   useEffect(() => {
     // create new conversations array to trigger rerender of FlatList via extraData prop
+    // this is triggered when either creating a new conversation or updating an existing conversation
     setConversation([...conversationsData.allConversations]);
   }, [conversationsData.allConversations]);
 
@@ -61,6 +64,7 @@ export const HomeTab = (): JSX.Element => {
 
   const onCloseModal = useCallback(() => {
     setModalVisible(false);
+    setSelectedUser(undefined);
   }, []);
 
   const goToConversationItemScreen = useCallback(
