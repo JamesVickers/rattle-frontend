@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import { User } from "../state/user.model";
 import { CloseIcon } from "./CloseIcon";
 import { CreateConversationForm } from "./CreateConversationForm";
+import { Text } from "./Text";
 import { UserSearch } from "./UserSeach";
 
 export const CreateConversationModal = ({
@@ -35,6 +36,7 @@ export const CreateConversationModal = ({
         <TouchableOpacity onPress={onClose}>
           <CloseIcon />
         </TouchableOpacity>
+        <Text>Create conversation</Text>
         <UserSearch onSelectUser={onSelectUser} />
         {selectedUser && <CreateConversationForm selectedUser={selectedUser} />}
       </ModalCard>

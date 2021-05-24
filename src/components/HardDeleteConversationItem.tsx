@@ -18,7 +18,13 @@ const update = (cache: SilentAny, payload: SilentAny) => {
   cache.evict(cache.identify(payload.data.deleteConversation));
 };
 
-export const HardDeleteConversationItem = ({ id }: { id: Id }): JSX.Element => {
+export const HardDeleteConversationItem = ({
+  id,
+  disabled,
+}: {
+  id: Id;
+  disabled: boolean;
+}): JSX.Element => {
   const [deleteConversation, { loading, error }] = useMutation(
     HARD_DELETE_CONVERSATION_MUTATION,
     {
@@ -35,7 +41,7 @@ export const HardDeleteConversationItem = ({ id }: { id: Id }): JSX.Element => {
   return (
     <Button
       title="Hard delete"
-      disabled={loading}
+      disabled={loading || disabled}
       onPress={async () => {
         try {
           await deleteConversation();
