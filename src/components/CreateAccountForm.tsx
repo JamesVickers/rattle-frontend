@@ -33,8 +33,6 @@ export const CreateAccountForm = ({
     password: "",
   });
 
-  const { error, handleError, clearError } = useError();
-
   const [submitted, setSubmitted] = useState(false);
 
   // const submitDisabled =
@@ -46,6 +44,14 @@ export const CreateAccountForm = ({
       variables: inputs,
     },
   );
+
+  const { error, handleError, clearError } = useError();
+
+  useEffect(() => {
+    // if graphql error changes, update useError hook
+    handleError(signUpError);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signUpError]);
 
   useEffect(() => {
     // if graphql error changes, update useError hook

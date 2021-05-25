@@ -44,8 +44,6 @@ export const HomeTab = (): JSX.Element => {
     error: conversationsError,
   } = useQuery(ALL_CONVERSATIONS_QUERY);
 
-  console.log("conversationsData: ", conversationsData);
-
   useEffect(() => {
     // create new conversations array to trigger rerender of FlatList via extraData prop
     // this is triggered when either creating a new conversation or updating an existing conversation

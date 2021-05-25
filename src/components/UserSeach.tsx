@@ -11,6 +11,7 @@ import { ErrorBox } from "../components/ErrorBox";
 import { Spacer } from "../components/Spacer";
 import { User } from "../state/user.model";
 import { ActivityIndicator } from "react-native";
+import { useError } from "../utils/useError";
 
 export const UserSearch = ({
   onSelectUser,
@@ -22,10 +23,16 @@ export const UserSearch = ({
   const [searchString, setSearchString] = useState("");
   const [debouncing, setDebouncing] = useState(false);
 
-  const [findUsers, { data, loading, error }] = useLazyQuery(
-    SEARCH_USERS_QUERY,
-    { fetchPolicy: "no-cache" },
-  );
+  const { error, handleError, clearError } = useError();
+
+  const [
+    findUsers,
+    {
+      data: searchUsersData,
+      loading: searchUsersLoading,
+      error: searchUsersError,
+    },
+  ] = useLazyQuery(SEARCH_USERS_QUERY, { fetchPolicy: "no-cache" });
 
   const debounceAndFindUsers = useCallback(
     debounce((searchTerm: string) => {
@@ -50,7 +57,6 @@ export const UserSearch = ({
     <>
       <SearchBar
         placeholder={"Search for a User"}
-        error={error}
         searchString={searchString}
         setSearchString={onChangeText}
       />
@@ -58,28 +64,25 @@ export const UserSearch = ({
         <>
           <>
             <Spacer />
-            <ErrorBox
-              error={error}
-              // clearError={clearError}
-            />
+            <ErrorBox error={error} clearError={clearError} />
             <Spacer />
           </>
         </>
       )}
       {searchString !== "" &&
-        (loading || debouncing ? (
+        (searchUsersLoading || debouncing ? (
           <>
             <Spacer />
             <ActivityIndicator color={theme.colors.foreground} size="large" />
           </>
-        ) : data ? (
+        ) : searchUsersData ? (
           <FlatList
-            data={data.allUsers}
+            data={searchUsersData.allUsers}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <UserItem key={item.id} user={item} onSelectUser={onSelectUser} />
             )}
-            ListEmptyComponent={<Text>No user matched found</Text>}
+            ListEmptyComponent={<Text>No user match found</Text>}
           />
         ) : (
           <></>

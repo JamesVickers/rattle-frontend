@@ -48,7 +48,7 @@ export const CreateConversationForm = ({
       <Text>Selected user: {selectedUser.firstName}</Text>
       <Button
         title="Start conversation"
-        // disabled={!canCreatePost}
+        // disabled={!canCreateConversation}
         onPress={async () => {
           try {
             await createConversation();

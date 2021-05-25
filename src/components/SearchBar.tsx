@@ -1,4 +1,3 @@
-import { ApolloError } from "@apollo/client";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useTheme } from "styled-components/native";
@@ -7,12 +6,10 @@ import { RNTextInputStyled, TextInputContainer } from "./TextInput";
 
 export const SearchBar = ({
   placeholder,
-  error,
   searchString,
   setSearchString,
 }: {
   placeholder?: string;
-  error?: ApolloError | undefined;
   searchString: string;
   setSearchString: (string: string) => void;
 }): JSX.Element => {
