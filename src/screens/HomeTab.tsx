@@ -92,21 +92,21 @@ export const HomeTab = (): JSX.Element => {
             <ActivityIndicator color={theme.colors.foreground} size="large" />
           </>
         ) : (
-          conversations && (
-            <FlatList
-              data={conversations}
-              extraData={conversations}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <ConversationItem
-                  key={item.id}
-                  conversation={item}
-                  onConversationPress={goToConversationItemScreen}
-                />
-              )}
-              ListEmptyComponent={<Text>No user matched found</Text>}
-            />
-          )
+          <FlatList
+            data={conversations}
+            extraData={conversations}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <ConversationItem
+                key={item.id}
+                conversation={item}
+                onConversationPress={goToConversationItemScreen}
+              />
+            )}
+            ListEmptyComponent={
+              <Text>No conversations have been created yet</Text>
+            }
+          />
         )}
         <CreateConversationModal
           isVisible={isModalVisible}

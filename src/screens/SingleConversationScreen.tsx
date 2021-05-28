@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { ActivityIndicator, Button } from "react-native";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Card } from "../components/Card";
@@ -18,6 +18,9 @@ import { useError } from "../utils/useError";
 import { Spacer } from "../components/Spacer";
 import { useTheme } from "styled-components/native";
 import { ErrorBox } from "../components/ErrorBox";
+import { MESSAGE_ITEM_QUERY } from "../queries/MessageItemQuery";
+import { FlatList } from "react-native-gesture-handler";
+import { MessageItem } from "../components/MessageItem";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -28,24 +31,32 @@ export const SingleConversationScreen = (): JSX.Element => {
   const theme = useTheme();
 
   const {
-    data: queryData,
-    loading: queryLoading,
-    error: queryError,
+    data: conversationQueryData,
+    loading: conversationQueryLoading,
+    error: conversationQueryError,
   } = useQuery(CONVERSATION_ITEM_QUERY, {
     variables: { id },
   });
 
   const {
-    error: conversationQueryError,
+    data: messageQueryData,
+    loading: messageQueryLoading,
+    error: messageQueryError,
+  } = useQuery(MESSAGE_ITEM_QUERY, {
+    variables: { conversationId: "60a3e2201d6c192a9058e683" },
+  });
+
+  const {
+    error: conversationconversationQueryError,
     handleError: conversationQueryHandleError,
     clearError: conversationQueryClearError,
   } = useError();
 
   useEffect(() => {
     // if graphql error changes, update useError hook
-    conversationQueryHandleError(queryError);
+    conversationQueryHandleError(conversationQueryError);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryError]);
+  }, [conversationQueryError]);
 
   const [
     updateConversation,
@@ -69,20 +80,24 @@ export const SingleConversationScreen = (): JSX.Element => {
   }, [updateError]);
 
   const { inputs, handleChange, clearIndividualKey } = useForm({
-    title: queryData?.Conversation.title,
+    title: conversationQueryData?.Conversation.title,
   });
+
+  const onMessageLongPress = useCallback(() => {
+    return null;
+  }, []);
 
   return (
     <SafeAreaViewDefault>
       <Outer>
         <Text>SingleConversationItemScreen</Text>
         <Button title="goBack" onPress={() => navigation.goBack()} />
-        {conversationQueryError && (
+        {conversationconversationQueryError && (
           <>
             <>
               <Spacer />
               <ErrorBox
-                error={conversationQueryError}
+                error={conversationconversationQueryError}
                 clearError={conversationQueryClearError}
               />
             </>
@@ -99,7 +114,7 @@ export const SingleConversationScreen = (): JSX.Element => {
             </>
           </>
         )}
-        {queryLoading || updateLoading ? (
+        {conversationQueryLoading || updateLoading ? (
           <>
             <Spacer />
             <ActivityIndicator color={theme.colors.foreground} size="large" />
@@ -120,7 +135,7 @@ export const SingleConversationScreen = (): JSX.Element => {
           </>
         )}
         <Button
-          disabled={queryLoading || updateLoading}
+          disabled={conversationQueryLoading || updateLoading}
           title="Update"
           onPress={async () => {
             try {
@@ -146,8 +161,30 @@ export const SingleConversationScreen = (): JSX.Element => {
         />
         <HardDeleteConversationItem
           id={id}
-          disabled={queryLoading || updateLoading}
+          disabled={conversationQueryLoading || updateLoading}
         />
+        {messageQueryLoading ? (
+          <>
+            <Spacer />
+            <ActivityIndicator color={theme.colors.foreground} size="large" />
+          </>
+        ) : (
+          <FlatList
+            data={messageQueryData.allMessages}
+            extraData={messageQueryData.allMessages}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <MessageItem
+                key={item.id}
+                message={item}
+                onLongPress={onMessageLongPress}
+              />
+            )}
+            ListEmptyComponent={
+              <Text>There are no messages in this conversation yet</Text>
+            }
+          />
+        )}
       </Outer>
     </SafeAreaViewDefault>
   );
