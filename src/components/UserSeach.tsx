@@ -80,7 +80,7 @@ export const UserSearch = ({
             data={searchUsersData.allUsers}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <UserItem key={item.id} user={item} onSelectUser={onSelectUser} />
+              <UserItem user={item} onSelectUser={onSelectUser} />
             )}
             ListEmptyComponent={<Text>No user match found</Text>}
           />

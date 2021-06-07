@@ -4,7 +4,7 @@ export const CREATE_MESSAGE_MUTATION = gql`
   mutation CREATE_MESSAGE_MUTATION(
     $conversationId: ID!
     $userId: ID!
-    $text: string
+    $text: String
   ) {
     createMessage(
       data: {
@@ -13,8 +13,7 @@ export const CREATE_MESSAGE_MUTATION = gql`
         text: $text
       }
     ) {
-      conversation
-      body
+      text
     }
   }
 `;

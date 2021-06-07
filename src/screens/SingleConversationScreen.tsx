@@ -21,6 +21,7 @@ import { ErrorBox } from "../components/ErrorBox";
 import { MESSAGE_ITEM_QUERY } from "../queries/MessageItemQuery";
 import { FlatList } from "react-native-gesture-handler";
 import { MessageItem } from "../components/MessageItem";
+import { CreateMessageForm } from "../components/CreateMessageForm";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -43,7 +44,7 @@ export const SingleConversationScreen = (): JSX.Element => {
     loading: messageQueryLoading,
     error: messageQueryError,
   } = useQuery(MESSAGE_ITEM_QUERY, {
-    variables: { conversationId: "60a3e2201d6c192a9058e683" },
+    variables: { conversationId: id },
   });
 
   const {
@@ -174,17 +175,14 @@ export const SingleConversationScreen = (): JSX.Element => {
             extraData={messageQueryData.allMessages}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <MessageItem
-                key={item.id}
-                message={item}
-                onLongPress={onMessageLongPress}
-              />
+              <MessageItem message={item} onLongPress={onMessageLongPress} />
             )}
             ListEmptyComponent={
               <Text>There are no messages in this conversation yet</Text>
             }
           />
         )}
+        <CreateMessageForm conversationId={id} />
       </Outer>
     </SafeAreaViewDefault>
   );
