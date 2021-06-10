@@ -1,9 +1,8 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
-import EllipsisSvg from "../images/ellipsis.svg";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Card } from "../components/Card";
 import { TextInput } from "../components/TextInput";
@@ -12,22 +11,20 @@ import { ChatStackParams } from "../routes";
 import { useForm } from "../utils/useForm";
 import { Outer } from "../components/Outer";
 import { CONVERSATION_ITEM_QUERY } from "../queries/ConversationItemQuery";
+import { UPDATE_CONVERSATION_MUTATION } from "../queries/UpdateConversationMutation";
+import { HardDeleteConversationItem } from "../components/HardDeleteConversationItem";
+import { ALL_CONVERSATIONS_QUERY } from "../components/AllConversationsQuery";
 import { useError } from "../utils/useError";
 import { Spacer } from "../components/Spacer";
 import { useTheme } from "styled-components/native";
 import { ErrorBox } from "../components/ErrorBox";
-import { MESSAGE_ITEM_QUERY } from "../queries/MessageItemQuery";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { MessageItem } from "../components/MessageItem";
-import { CreateMessageForm } from "../components/CreateMessageForm";
-import { Id } from "../state/types";
 import { Button } from "../components/Button";
 
-export const SingleConversationScreen = (): JSX.Element => {
-  const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
+export const EditConversationScreen = (): JSX.Element => {
+  const route = useRoute<RouteProp<ChatStackParams, "EditConversation">>();
   const { id } = route.params;
   const navigation = useNavigation<
-    StackNavigationProp<ChatStackParams, "SingleConversation">
+    StackNavigationProp<ChatStackParams, "EditConversation">
   >();
   const theme = useTheme();
 
@@ -37,14 +34,6 @@ export const SingleConversationScreen = (): JSX.Element => {
     error: conversationQueryError,
   } = useQuery(CONVERSATION_ITEM_QUERY, {
     variables: { id },
-  });
-
-  const {
-    data: messageQueryData,
-    loading: messageQueryLoading,
-    error: messageQueryError,
-  } = useQuery(MESSAGE_ITEM_QUERY, {
-    variables: { conversationId: id },
   });
 
   const {
@@ -59,20 +48,30 @@ export const SingleConversationScreen = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conversationQueryError]);
 
+  const [
+    updateConversation,
+    {
+      // data: updateData,
+      error: updateError,
+      loading: updateLoading,
+    },
+  ] = useMutation(UPDATE_CONVERSATION_MUTATION);
+
+  const {
+    error: conversationUpdateError,
+    handleError: conversationUpdateHandleError,
+    clearError: conversationUpdateClearError,
+  } = useError();
+
+  useEffect(() => {
+    // if graphql error changes, update useError hook
+    conversationUpdateHandleError(updateError);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateError]);
+
   const { inputs, handleChange, clearIndividualKey } = useForm({
     title: conversationQueryData?.Conversation.title,
   });
-
-  const onMessageLongPress = useCallback(() => {
-    return null;
-  }, []);
-
-  const onPressEditTitle = useCallback(
-    (selectedConversationId: Id) => {
-      navigation.navigate("EditConversation", { id });
-    },
-    [id, navigation],
-  );
 
   return (
     <SafeAreaViewDefault>
@@ -89,7 +88,18 @@ export const SingleConversationScreen = (): JSX.Element => {
             </>
           </>
         )}
-        {conversationQueryLoading ? (
+        {conversationUpdateError && (
+          <>
+            <>
+              <Spacer />
+              <ErrorBox
+                error={conversationUpdateError}
+                clearError={conversationUpdateClearError}
+              />
+            </>
+          </>
+        )}
+        {conversationQueryLoading || updateLoading ? (
           <>
             <Spacer />
             <ActivityIndicator color={theme.colors.foreground} size="large" />
@@ -97,15 +107,7 @@ export const SingleConversationScreen = (): JSX.Element => {
         ) : (
           <>
             <Spacer />
-            <Text>{conversationQueryData?.Conversation.title}</Text>
-            <TouchableOpacity onPress={onPressEditTitle}>
-              <EllipsisSvg
-                // style={s.alignSelfEnd}
-                width={theme.spacing[6]}
-                height={theme.spacing[6]}
-                fill={theme.colors.icon}
-              />
-            </TouchableOpacity>
+            <Text>Update the conversation title</Text>
             <Card>
               <TextInput
                 value={inputs.title}
@@ -117,25 +119,35 @@ export const SingleConversationScreen = (): JSX.Element => {
             </Card>
           </>
         )}
-        {messageQueryLoading ? (
-          <>
-            <Spacer />
-            <ActivityIndicator color={theme.colors.foreground} size="large" />
-          </>
-        ) : (
-          <FlatList
-            data={messageQueryData.allMessages}
-            extraData={messageQueryData.allMessages}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <MessageItem message={item} onLongPress={onMessageLongPress} />
-            )}
-            ListEmptyComponent={
-              <Text>There are no messages in this conversation yet</Text>
+        <Button
+          text="Update"
+          disabled={conversationQueryLoading || updateLoading}
+          onPress={async () => {
+            try {
+              // const res =
+              const res = await updateConversation({
+                variables: {
+                  id: id,
+                  title: inputs.title,
+                  refetchQueries: [
+                    {
+                      query: ALL_CONVERSATIONS_QUERY,
+                      // can pass variables to the refetchQuery here is needed
+                      // variables: { }
+                    },
+                  ],
+                },
+              });
+              console.log("updateConversation res: ", res);
+            } catch {
+              conversationUpdateHandleError(updateError);
             }
-          />
-        )}
-        <CreateMessageForm conversationId={id} />
+          }}
+        />
+        <HardDeleteConversationItem
+          id={id}
+          disabled={conversationQueryLoading || updateLoading}
+        />
       </Outer>
     </SafeAreaViewDefault>
   );

@@ -1,8 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import React from "react";
-import { Button } from "react-native";
+import { useTheme } from "styled-components/native";
 import { Id, SilentAny } from "../state/types";
 import { ALL_CONVERSATIONS_QUERY } from "./AllConversationsQuery";
+import { Button } from "./Button";
 
 const HARD_DELETE_CONVERSATION_MUTATION = gql`
   mutation HARD_DELETE_CONVERSATION_MUTATION($id: ID!) {
@@ -26,6 +27,8 @@ export const HardDeleteConversationItem = ({
   id: Id;
   disabled: boolean;
 }): JSX.Element => {
+  const theme = useTheme();
+
   const [deleteConversation, { loading, error }] = useMutation(
     HARD_DELETE_CONVERSATION_MUTATION,
     {
@@ -41,7 +44,10 @@ export const HardDeleteConversationItem = ({
 
   return (
     <Button
-      title="Hard delete"
+      text="Delete conversation"
+      touchableStyle={{
+        backgroundColor: theme.colors.danger,
+      }}
       disabled={loading || disabled}
       onPress={async () => {
         try {
