@@ -4,7 +4,7 @@ export const UPDATE_MESSAGE_MUTATION = gql`
   mutation UPDATE_MESSAGE_MUTATION(
     $conversationId: ID!
     $userId: ID!
-    $text: string
+    $text: String
   ) {
     updateMessage(
       id: $id

@@ -39,11 +39,6 @@ export const CreateMessageForm = ({
     ],
   });
 
-  console.log("variables: ", { conversationId, userId: user.id, ...inputs });
-  // console.log("createMessageData: ", createMessageData);
-  // console.log("createMessageLoading: ", createMessageLoading);
-  // console.log("creatteMessageError: ", creatteMessageError);
-
   return (
     <Card>
       <Text>Create a new message</Text>
