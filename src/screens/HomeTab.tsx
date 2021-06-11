@@ -60,6 +60,10 @@ export const HomeTab = (): JSX.Element => {
     setSelectedUser(user);
   }, []);
 
+  const onOpenModal = useCallback(() => {
+    setModalVisible(true);
+  }, []);
+
   const onCloseModal = useCallback(() => {
     setModalVisible(false);
     setSelectedUser(undefined);
@@ -107,16 +111,16 @@ export const HomeTab = (): JSX.Element => {
             }
           />
         )}
-        <CreateConversationModal
-          isVisible={isModalVisible}
-          onClose={onCloseModal}
-          selectedUser={selectedUser}
-          onSelectUser={onSelectUser}
-        />
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <TouchableOpacity onPress={onOpenModal}>
           <CreateIcon />
         </TouchableOpacity>
       </Outer>
+      <CreateConversationModal
+        visible={isModalVisible}
+        onClose={onCloseModal}
+        selectedUser={selectedUser}
+        onSelectUser={onSelectUser}
+      />
     </SafeAreaViewDefault>
   );
 };

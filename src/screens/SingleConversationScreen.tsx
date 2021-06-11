@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import EllipsisSvg from "../images/ellipsis.svg";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
@@ -20,8 +20,8 @@ import { MESSAGE_ITEM_QUERY } from "../queries/MessageItemQuery";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { MessageItem } from "../components/MessageItem";
 import { CreateMessageForm } from "../components/CreateMessageForm";
-import { Id } from "../state/types";
 import { Button } from "../components/Button";
+import { EditConversationModal } from "../components/EditConversationModal";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -30,6 +30,16 @@ export const SingleConversationScreen = (): JSX.Element => {
     StackNavigationProp<ChatStackParams, "SingleConversation">
   >();
   const theme = useTheme();
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const onOpenModal = useCallback(() => {
+    setModalVisible(true);
+  }, []);
+
+  const onCloseModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
 
   const {
     data: conversationQueryData,
@@ -67,13 +77,6 @@ export const SingleConversationScreen = (): JSX.Element => {
     return null;
   }, []);
 
-  const onPressEditTitle = useCallback(
-    (selectedConversationId: Id) => {
-      navigation.navigate("EditConversation", { id });
-    },
-    [id, navigation],
-  );
-
   return (
     <SafeAreaViewDefault>
       <Outer>
@@ -98,7 +101,7 @@ export const SingleConversationScreen = (): JSX.Element => {
           <>
             <Spacer />
             <Text>{conversationQueryData?.Conversation.title}</Text>
-            <TouchableOpacity onPress={onPressEditTitle}>
+            <TouchableOpacity onPress={onOpenModal}>
               <EllipsisSvg
                 // style={s.alignSelfEnd}
                 width={theme.spacing[6]}
@@ -137,6 +140,11 @@ export const SingleConversationScreen = (): JSX.Element => {
         )}
         <CreateMessageForm conversationId={id} />
       </Outer>
+      <EditConversationModal
+        visible={isModalVisible}
+        onClose={onCloseModal}
+        conversationId={id}
+      />
     </SafeAreaViewDefault>
   );
 };

@@ -12,3 +12,11 @@ export interface ModelBase {
   createdAt?: ApiDate;
   deletedAt?: ApiDate;
 }
+
+export type ModalAnimationType = "none" | "slide" | "fade";
+
+export type ModalPresentationStyle =
+  | "fullScreen"
+  | "pageSheet"
+  | "formSheet"
+  | "overFullScreen";
