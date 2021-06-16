@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 export const Button = ({
   touchableStyle,
   textStyle,
+  children,
   text,
   disabled,
   onPress,
@@ -13,6 +14,7 @@ export const Button = ({
 }: {
   touchableStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  children?: React.ReactNode;
   text?: string;
   disabled?: boolean;
   onPress?: () => void;
@@ -24,7 +26,13 @@ export const Button = ({
       disabled={disabled || (!onPress && !onLongPress)}
       onPress={onPress}
       onLongPress={onLongPress}>
-      <TextStyled style={textStyle}>{text}</TextStyled>
+      {children ? (
+        children
+      ) : text ? (
+        <TextStyled style={textStyle}>{text}</TextStyled>
+      ) : (
+        <></>
+      )}
     </TouchableWithoutFeedbackStyled>
   );
 };

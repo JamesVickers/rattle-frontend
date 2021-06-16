@@ -22,6 +22,7 @@ import { ActivityIndicator } from "react-native";
 import { Conversation } from "../state/conversation.model";
 import { ErrorBox } from "../components/ErrorBox";
 import { useError } from "../utils/useError";
+import { RowSeparatorWithSpacers } from "../components/ItemSeparators";
 
 export const HomeTab = (): JSX.Element => {
   const navigation = useNavigation<
@@ -106,6 +107,7 @@ export const HomeTab = (): JSX.Element => {
                 onConversationPress={goToConversationItemScreen}
               />
             )}
+            ItemSeparatorComponent={RowSeparatorWithSpacers}
             ListEmptyComponent={
               <Text>No conversations have been created yet</Text>
             }

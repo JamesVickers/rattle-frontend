@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import EllipsisSvg from "../images/ellipsis.svg";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Text } from "../components/Text";
@@ -17,10 +17,10 @@ import { MESSAGE_ITEM_QUERY } from "../queries/MessageItemQuery";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { MessageItem } from "../components/MessageItem";
 import { CreateMessageForm } from "../components/CreateMessageForm";
-import { Button } from "../components/Button";
 import { EditConversationModal } from "../components/EditConversationModal";
 import styled from "styled-components/native";
-import { ItemTopSeparator } from "../components/ItemSeparators";
+import { RowSeparatorWithSpacers } from "../components/ItemSeparators";
+import { ChevronBackIcon } from "../components/ChevronBackIcon";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -39,6 +39,10 @@ export const SingleConversationScreen = (): JSX.Element => {
   const onCloseModal = useCallback(() => {
     setModalVisible(false);
   }, []);
+
+  const onGoBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
 
   const {
     data: conversationQueryData,
@@ -75,7 +79,9 @@ export const SingleConversationScreen = (): JSX.Element => {
   return (
     <SafeAreaViewDefault>
       <Outer>
-        <Button text="goBack" onPress={() => navigation.goBack()} />
+        <View style={{ alignSelf: "flex-start" }}>
+          <ChevronBackIcon onPress={onGoBack} />
+        </View>
         {conversationconversationQueryError && (
           <>
             <>
@@ -101,7 +107,6 @@ export const SingleConversationScreen = (): JSX.Element => {
               </ConversationTitle>
               <TouchableOpacity onPress={onOpenModal}>
                 <EllipsisSvg
-                  // style={s.alignSelfEnd}
                   width={theme.spacing[6]}
                   height={theme.spacing[6]}
                   fill={theme.colors.icon}
@@ -123,13 +128,7 @@ export const SingleConversationScreen = (): JSX.Element => {
             renderItem={({ item }) => (
               <MessageItem message={item} onLongPress={onMessageLongPress} />
             )}
-            ItemSeparatorComponent={() => (
-              <>
-                <Spacer />
-                <ItemTopSeparator />
-                <Spacer />
-              </>
-            )}
+            ItemSeparatorComponent={RowSeparatorWithSpacers}
             ListEmptyComponent={
               <Text>There are no messages in this conversation yet</Text>
             }

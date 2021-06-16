@@ -12,6 +12,7 @@ import { Spacer } from "../components/Spacer";
 import { User } from "../state/user.model";
 import { ActivityIndicator } from "react-native";
 import { useError } from "../utils/useError";
+import { RowSeparatorWithSpacers } from "./ItemSeparators";
 
 export const UserSearch = ({
   onSelectUser,
@@ -82,6 +83,7 @@ export const UserSearch = ({
             renderItem={({ item }) => (
               <UserItem user={item} onSelectUser={onSelectUser} />
             )}
+            ItemSeparatorComponent={RowSeparatorWithSpacers}
             ListEmptyComponent={<Text>No user match found</Text>}
           />
         ) : (
