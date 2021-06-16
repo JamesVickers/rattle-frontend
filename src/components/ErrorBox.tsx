@@ -26,7 +26,7 @@ export const ErrorBox = ({
         height={theme.spacing[5]}
         fill={theme.colors.background}
       />
-      <Spacer height={1} />
+      <Spacer />
       <Text colour="background" style={{ display: "flex" }}>
         {error?.message || "Oh no! Something went wrong, please try again."}
       </Text>

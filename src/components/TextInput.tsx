@@ -56,7 +56,7 @@ export const TextInput = ({
       )}
       {isInvalid && isInvalidMessage && (
         <>
-          <Spacer height={1} />
+          <Spacer />
           <Text colour="danger">{isInvalidMessage}</Text>
         </>
       )}

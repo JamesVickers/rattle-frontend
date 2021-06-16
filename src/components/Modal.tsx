@@ -37,7 +37,7 @@ export const Modal = ({
 };
 const ModalCardStyled = styled.View`
   flex: 1
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.midGrey};
   border-top-left-radius: ${(props) => props.theme.borderRadius.modal}px;
   border-top-right-radius: ${(props) => props.theme.borderRadius.modal}px;
 `;

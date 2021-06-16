@@ -1,11 +1,10 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useEffect } from "react";
 import { ActivityIndicator } from "react-native";
 import { Card } from "../components/Card";
 import { TextInput } from "../components/TextInput";
 import { Text } from "../components/Text";
 import { useForm } from "../utils/useForm";
-import { CONVERSATION_ITEM_QUERY } from "../queries/ConversationItemQuery";
 import { UPDATE_CONVERSATION_MUTATION } from "../queries/UpdateConversationMutation";
 import { HardDeleteConversationItem } from "../components/HardDeleteConversationItem";
 import { ALL_CONVERSATIONS_QUERY } from "../components/AllConversationsQuery";
@@ -14,46 +13,23 @@ import { Spacer } from "../components/Spacer";
 import { useTheme } from "styled-components/native";
 import { ErrorBox } from "../components/ErrorBox";
 import { Button } from "../components/Button";
-import { Id } from "../state/types";
 import { Modal } from "./Modal";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { CloseIcon } from "./CloseIcon";
+import { Conversation } from "../state/conversation.model";
 
 export const EditConversationModal = ({
   visible,
   onClose,
-  conversationId,
+  conversation,
 }: {
   visible: boolean;
   onClose?: () => void;
-  conversationId: Id;
+  conversation: Conversation;
 }): JSX.Element => {
   const theme = useTheme();
 
-  const {
-    data: conversationQueryData,
-    loading: conversationQueryLoading,
-    error: conversationQueryError,
-  } = useQuery(CONVERSATION_ITEM_QUERY, {
-    variables: { conversationId },
-  });
-
-  console.log("conversationId: ", conversationId);
-  console.log("conversationQueryData: ", conversationQueryData);
-  console.log("conversationQueryLoading: ", conversationQueryLoading);
-  console.log("conversationQueryError: ", conversationQueryError);
-
-  const {
-    error: error,
-    handleError: conversationQueryHandleError,
-    clearError: conversationQueryClearError,
-  } = useError();
-
-  useEffect(() => {
-    // if graphql error changes, update useError hook
-    conversationQueryHandleError(conversationQueryError);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [conversationQueryError]);
+  console.log("conversation: ", conversation);
 
   const [
     updateConversation,
@@ -77,7 +53,7 @@ export const EditConversationModal = ({
   }, [updateError]);
 
   const { inputs, handleChange, clearIndividualKey } = useForm({
-    title: conversationQueryData?.Conversation.title,
+    title: conversation.title,
   });
   return (
     <Modal
@@ -88,15 +64,7 @@ export const EditConversationModal = ({
       <TouchableOpacity onPress={onClose}>
         <CloseIcon />
       </TouchableOpacity>
-      <Text>Edit conversation: {conversationId}</Text>
-      {error && (
-        <>
-          <>
-            <Spacer />
-            <ErrorBox error={error} clearError={conversationQueryClearError} />
-          </>
-        </>
-      )}
+      <Text>Edit conversation: {conversation.id}</Text>
       {conversationUpdateError && (
         <>
           <>
@@ -108,7 +76,7 @@ export const EditConversationModal = ({
           </>
         </>
       )}
-      {conversationQueryLoading || updateLoading ? (
+      {updateLoading ? (
         <>
           <Spacer />
           <ActivityIndicator color={theme.colors.foreground} size="large" />
@@ -130,13 +98,13 @@ export const EditConversationModal = ({
       )}
       <Button
         text="Update"
-        disabled={conversationQueryLoading || updateLoading}
+        disabled={updateLoading}
         onPress={async () => {
           try {
             // const res =
             const res = await updateConversation({
               variables: {
-                id: conversationId,
+                id: conversation.id,
                 title: inputs.title,
                 refetchQueries: [
                   {
@@ -154,8 +122,8 @@ export const EditConversationModal = ({
         }}
       />
       <HardDeleteConversationItem
-        id={conversationId}
-        disabled={conversationQueryLoading || updateLoading}
+        id={conversation.id}
+        disabled={updateLoading}
       />
     </Modal>
   );

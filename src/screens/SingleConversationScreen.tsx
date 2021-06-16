@@ -5,11 +5,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import EllipsisSvg from "../images/ellipsis.svg";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
-import { Card } from "../components/Card";
-import { TextInput } from "../components/TextInput";
 import { Text } from "../components/Text";
 import { ChatStackParams } from "../routes";
-import { useForm } from "../utils/useForm";
 import { Outer } from "../components/Outer";
 import { CONVERSATION_ITEM_QUERY } from "../queries/ConversationItemQuery";
 import { useError } from "../utils/useError";
@@ -22,6 +19,8 @@ import { MessageItem } from "../components/MessageItem";
 import { CreateMessageForm } from "../components/CreateMessageForm";
 import { Button } from "../components/Button";
 import { EditConversationModal } from "../components/EditConversationModal";
+import styled from "styled-components/native";
+import { ItemTopSeparator } from "../components/ItemSeparators";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -69,10 +68,6 @@ export const SingleConversationScreen = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conversationQueryError]);
 
-  const { inputs, handleChange, clearIndividualKey } = useForm({
-    title: conversationQueryData?.Conversation.title,
-  });
-
   const onMessageLongPress = useCallback(() => {
     return null;
   }, []);
@@ -100,24 +95,19 @@ export const SingleConversationScreen = (): JSX.Element => {
         ) : (
           <>
             <Spacer />
-            <Text>{conversationQueryData?.Conversation.title}</Text>
-            <TouchableOpacity onPress={onOpenModal}>
-              <EllipsisSvg
-                // style={s.alignSelfEnd}
-                width={theme.spacing[6]}
-                height={theme.spacing[6]}
-                fill={theme.colors.icon}
-              />
-            </TouchableOpacity>
-            <Card>
-              <TextInput
-                value={inputs.title}
-                handleChange={handleChange}
-                name={"title"}
-                placeholder={"Add the conversation title"}
-                clearValue={clearIndividualKey}
-              />
-            </Card>
+            <ConversationTitleRow>
+              <ConversationTitle>
+                {conversationQueryData?.Conversation.title}
+              </ConversationTitle>
+              <TouchableOpacity onPress={onOpenModal}>
+                <EllipsisSvg
+                  // style={s.alignSelfEnd}
+                  width={theme.spacing[6]}
+                  height={theme.spacing[6]}
+                  fill={theme.colors.icon}
+                />
+              </TouchableOpacity>
+            </ConversationTitleRow>
           </>
         )}
         {messageQueryLoading ? (
@@ -133,6 +123,13 @@ export const SingleConversationScreen = (): JSX.Element => {
             renderItem={({ item }) => (
               <MessageItem message={item} onLongPress={onMessageLongPress} />
             )}
+            ItemSeparatorComponent={() => (
+              <>
+                <Spacer />
+                <ItemTopSeparator />
+                <Spacer />
+              </>
+            )}
             ListEmptyComponent={
               <Text>There are no messages in this conversation yet</Text>
             }
@@ -143,8 +140,18 @@ export const SingleConversationScreen = (): JSX.Element => {
       <EditConversationModal
         visible={isModalVisible}
         onClose={onCloseModal}
-        conversationId={id}
+        conversation={conversationQueryData?.Conversation}
       />
     </SafeAreaViewDefault>
   );
 };
+const ConversationTitleRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+const ConversationTitle = styled(Text)`
+  padding-right: ${(props) => props.theme.spacing[1]};
+  flex-wrap: wrap;
+  flex: 1;
+`;
