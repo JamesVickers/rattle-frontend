@@ -2,8 +2,7 @@ import { useQuery } from "@apollo/client";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
-import EllipsisSvg from "../images/ellipsis.svg";
+import { ActivityIndicator } from "react-native";
 import { SafeAreaViewDefault } from "../components/SafeAreaViewDefault";
 import { Text } from "../components/Text";
 import { ChatStackParams } from "../routes";
@@ -14,13 +13,14 @@ import { Spacer } from "../components/Spacer";
 import { useTheme } from "styled-components/native";
 import { ErrorBox } from "../components/ErrorBox";
 import { MESSAGE_ITEM_QUERY } from "../queries/MessageItemQuery";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import { MessageItem } from "../components/MessageItem";
 import { CreateMessageForm } from "../components/CreateMessageForm";
 import { EditConversationModal } from "../components/EditConversationModal";
 import styled from "styled-components/native";
 import { RowSeparatorWithSpacers } from "../components/ItemSeparators";
 import { ChevronBackIcon } from "../components/ChevronBackIcon";
+import { EllipsisIcon } from "../components/EllipsisIcon";
 
 export const SingleConversationScreen = (): JSX.Element => {
   const route = useRoute<RouteProp<ChatStackParams, "SingleConversation">>();
@@ -79,9 +79,23 @@ export const SingleConversationScreen = (): JSX.Element => {
   return (
     <SafeAreaViewDefault>
       <Outer>
-        <View style={{ alignSelf: "flex-start" }}>
+        <HeaderRow>
           <ChevronBackIcon onPress={onGoBack} />
-        </View>
+          {conversationQueryLoading ? (
+            <>
+              <Spacer />
+              <ActivityIndicator color={theme.colors.foreground} size="large" />
+            </>
+          ) : (
+            <>
+              <ConversationTitle>
+                {conversationQueryData?.Conversation.title}
+              </ConversationTitle>
+              <EllipsisIcon onPress={onOpenModal} />
+              {/* </ConversationTitleRow> */}
+            </>
+          )}
+        </HeaderRow>
         {conversationconversationQueryError && (
           <>
             <>
@@ -91,28 +105,6 @@ export const SingleConversationScreen = (): JSX.Element => {
                 clearError={conversationQueryClearError}
               />
             </>
-          </>
-        )}
-        {conversationQueryLoading ? (
-          <>
-            <Spacer />
-            <ActivityIndicator color={theme.colors.foreground} size="large" />
-          </>
-        ) : (
-          <>
-            <Spacer />
-            <ConversationTitleRow>
-              <ConversationTitle>
-                {conversationQueryData?.Conversation.title}
-              </ConversationTitle>
-              <TouchableOpacity onPress={onOpenModal}>
-                <EllipsisSvg
-                  width={theme.spacing[6]}
-                  height={theme.spacing[6]}
-                  fill={theme.colors.icon}
-                />
-              </TouchableOpacity>
-            </ConversationTitleRow>
           </>
         )}
         {messageQueryLoading ? (
@@ -144,13 +136,15 @@ export const SingleConversationScreen = (): JSX.Element => {
     </SafeAreaViewDefault>
   );
 };
-const ConversationTitleRow = styled.View`
+const HeaderRow = styled.View`
+  flex-direction: row;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 const ConversationTitle = styled(Text)`
-  padding-right: ${(props) => props.theme.spacing[1]};
+  padding: 0 ${(props) => props.theme.spacing[1]}px;
   flex-wrap: wrap;
   flex: 1;
+  text-align: center;
 `;

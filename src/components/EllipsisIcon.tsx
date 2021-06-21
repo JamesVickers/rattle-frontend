@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { useTheme } from "styled-components/native";
-import ChevronBack from "../images/chevron-back.svg";
+import EllipsisSvg from "../images/ellipsis.svg";
 import { IconTouchableContainer } from "./IconTouchableContainer";
 
-export const ChevronBackIcon = ({
+export const EllipsisIcon = ({
   style,
   disabled,
   onPress,
@@ -19,11 +19,10 @@ export const ChevronBackIcon = ({
       style={style}
       disabled={disabled || !onPress}
       onPress={onPress}>
-      <ChevronBack
+      <EllipsisSvg
         width={theme.spacing[6]}
         height={theme.spacing[6]}
-        stroke={theme.colors.foreground}
-        strokeWidth={theme.spacing[6]}
+        fill={theme.colors.icon}
       />
     </IconTouchableContainer>
   );
